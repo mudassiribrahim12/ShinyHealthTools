@@ -3,924 +3,872 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
-    <title>shinyhealthtools – interactive web apps for data analysis (R/Shiny + HTML tools)</title>
-    
-    <!-- PRIMARY META DESCRIPTION (highlights both R/Shiny and HTML tools) -->
-    <meta name="description" content="Free, intuitive web applications for sample size, ROC curves, survival analysis, factor analysis, data conversion & more. Includes R/Shiny apps + standalone HTML calculators. Built for health researchers—no coding required. 21+ interactive tools.">
-    
-    <!-- KEYWORDS cover both types -->
-    <meta name="keywords" content="R Shiny, HTML web apps, data analysis, statistical software, sample size calculator, ROC curve, survival analysis, factor analysis, SPSS converter, mediation analysis, health research tools, free statistics apps, online statistical calculators">
-    
-    <!-- OPEN GRAPH / SOCIAL PREVIEW -->
-    <meta property="og:title" content="shinyhealthtools – free interactive data analysis apps (R/Shiny + HTML)">
-    <meta property="og:description" content="21+ R/Shiny applications plus standalone HTML tools for health research: sample size, ROC curves, survival plots, factor analysis, data conversion, and more. No installation, free forever.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://shinyhealthtools.com">
-    <meta property="og:image" content="https://raw.githubusercontent.com/mudassiribrahim12/me/main/og-preview.jpg">
-    <meta property="og:image:alt" content="shinyhealthtools dashboard preview with R/Shiny and HTML apps">
-    
-    <!-- TWITTER CARD -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="shinyhealthtools – interactive web apps for data analysis (R/Shiny + HTML)">
-    <meta name="twitter:description" content="Free R/Shiny apps and standalone HTML tools for sample size, ROC, survival, factor analysis, data conversion & more. Built by a health researcher.">
-    <meta name="twitter:image" content="https://raw.githubusercontent.com/mudassiribrahim12/me/main/og-preview.jpg">
-    
+    <title>shinyhealthtools – interactive web apps for data analysis</title>
     <!-- fonts & icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* ---------- reset & base – crisp, glass inspired ---------- */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #ffffff;
-            color: #1e1e1e;
-            line-height: 1.5;
-            font-weight: 500;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            text-rendering: optimizeLegibility;
-            transition: background 0.2s, color 0.2s;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-        body.dark-mode {
-            background: #121212;
-            color: #f0f0f0;
-        }
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 0 24px;
-            width: 100%;
-        }
-        @media (max-width: 600px) {
-            .container { padding: 0 20px; }
-        }
-        /* ---------- glass header ---------- */
-        .site-header {
-            padding: 1.5rem 0 0.8rem;
-            border-bottom: 1px solid rgba(0,0,0,0.08);
-            background: rgba(255,255,255,0.7);
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
-        body.dark-mode .site-header {
-            background: rgba(18,18,18,0.7);
-            border-bottom-color: rgba(255,255,255,0.08);
-        }
-        .header-inner {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 0.8rem 1.5rem;
-        }
-        .logo a {
-            font-size: 1.6rem;
-            font-weight: 600;
-            letter-spacing: -0.02em;
-            text-decoration: none;
-            color: inherit;
-            background: linear-gradient(145deg, #1e3c3a, #2a5f5a);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            transition: opacity 0.2s;
-        }
-        .logo a:hover { opacity: 0.8; }
-        body.dark-mode .logo a {
-            background: linear-gradient(145deg, #b0e0d6, #ffffff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 2.5rem;
-        }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: #0c0b14;
+        font-family: "Inter", system-ui, -apple-system, sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        margin: 0;
+        padding: 1.5rem;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      #root {
+        width: 100%;
+        max-width: 1400px;
+        border-radius: 3rem;
+        background: rgba(20, 18, 30, 0.7);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.03) inset;
+        overflow: hidden;
+      }
+      /* modal styles */
+      .modal-overlay {
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(0,0,0,0.7);
+        backdrop-filter: blur(5px);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .modal-content {
+        background: #1e1a30;
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 2rem;
+        padding: 2.5rem;
+        max-width: 500px;
+        width: 90%;
+        color: #eaeefb;
+        box-shadow: 0 30px 60px -20px black;
+        margin: auto;
+      }
+      .modal-content h3 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+        background: linear-gradient(135deg, #fff, #c0b7ff);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      .modal-content p {
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+        color: #c7c2e6;
+      }
+      .modal-close {
+        background: rgba(160, 140, 255, 0.2);
+        border: 1px solid #9f8eff;
+        padding: 0.7rem 1.5rem;
+        border-radius: 50px;
+        color: white;
+        cursor: pointer;
+        font-weight: 500;
+        transition: all 0.2s;
+      }
+      .modal-close:hover {
+        background: rgba(160, 140, 255, 0.4);
+      }
+      body.modal-open {
+        overflow: hidden;
+      }
+      /* mobile menu */
+      .mobile-menu-btn {
+        display: none;
+        background: none;
+        border: none;
+        color: #ddd9ff;
+        font-size: 1.8rem;
+        cursor: pointer;
+        z-index: 30;
+      }
+      .mobile-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(10, 8, 22, 0.95);
+        backdrop-filter: blur(10px);
+        padding: 1.5rem;
+        flex-direction: column;
+        gap: 1rem;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+        z-index: 25;
+      }
+      .mobile-menu a {
+        color: #ddd9ff;
+        text-decoration: none;
+        font-size: 1.2rem;
+        padding: 0.8rem;
+        border-radius: 12px;
+        transition: background 0.2s;
+      }
+      .mobile-menu a:hover {
+        background: rgba(160, 140, 255, 0.15);
+      }
+
+      /* responsive breakpoints */
+      @media (max-width: 700px) {
         .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
+          display: none !important;
         }
-        .nav-links a {
-            text-decoration: none;
-            color: inherit;
-            font-size: 1rem;
-            font-weight: 500;
-            opacity: 0.8;
-            transition: all 0.15s ease;
-            border-bottom: 2px solid transparent;
-            padding-bottom: 4px;
+        .mobile-menu-btn {
+          display: block !important;
         }
-        .nav-links a:hover {
-            opacity: 1;
-            border-bottom-color: #2a5f5a;
+        .mobile-menu.open {
+          display: flex !important;
         }
-        .nav-links a.active {
-            opacity: 1;
-            font-weight: 600;
-            border-bottom-color: #2a5f5a;
+        .navbar {
+          flex-wrap: wrap;
+          position: relative;
         }
-        .theme-toggle {
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 1.3rem;
-            color: inherit;
-            opacity: 0.8;
-            padding: 0 4px;
-            transition: opacity 0.15s, transform 0.1s;
+        .hero, .showcase, .testimonial, .footer {
+          padding-left: 1.5rem !important;
+          padding-right: 1.5rem !important;
         }
-        .theme-toggle:hover { 
-            opacity: 1; 
-            transform: scale(1.1);
+        .card-grid {
+          grid-template-columns: 1fr !important;
         }
-        .mobile-menu-btn { display: none; }
-        @media (max-width: 600px) {
-            .nav-links { display: none; }
-            .mobile-menu-btn {
-                display: inline-block;
-                background: none;
-                border: none;
-                font-size: 1.6rem;
-                color: inherit;
-                cursor: pointer;
-                transition: opacity 0.15s;
-            }
-            .mobile-menu-btn:hover { opacity: 0.7; }
+        .hero-title {
+          font-size: clamp(2.5rem, 10vw, 3.5rem) !important;
         }
-        /* main */
-        main { flex: 1; padding: 2.8rem 0 4rem; }
-        /* ---------- home page ---------- */
-        .intro-block { margin-bottom: 2rem; }
-        .intro-block h1 {
-            font-size: 2.4rem;
-            font-weight: 650;
-            letter-spacing: -0.02em;
-            line-height: 1.2;
-            margin-bottom: 1.8rem;
+        .hero-sub {
+          font-size: 1.1rem !important;
         }
-        .intro-block h1 span {
-            background: #f0f0f0;
-            padding: 0.2rem 0.8rem;
-            border-radius: 30px;
-            font-size: 1.1rem;
-            font-weight: 500;
-            margin-left: 1rem;
-            vertical-align: middle;
+        .hero-metrics {
+          flex-direction: column;
+          gap: 1rem;
         }
-        body.dark-mode .intro-block h1 span { background: #2a2a2a; }
-        .intro-text {
-            font-size: 1.1rem;
-            max-width: 700px;
-            margin-bottom: 2.2rem;
-            opacity: 0.9;
-            font-weight: 500;
+        /* ensure why tools cards stack properly */
+        .why-tools-grid {
+          grid-template-columns: 1fr !important;
         }
-        .intro-text p + p { margin-top: 1.2rem; }
-        .feature-list {
-            list-style: none;
-            margin: 2rem 0 2.5rem;
-        }
-        .feature-list li {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 0.9rem;
-            font-weight: 500;
-        }
-        .feature-list i { width: 1.6rem; color: #2a5f5a; font-size: 1.2rem; }
-        .privacy-note {
-            background: rgba(42,95,90,0.05);
-            border-left: 4px solid #2a5f5a;
-            padding: 1rem 1.5rem;
-            border-radius: 12px;
-            margin: 2rem 0 0;
-            font-size: 0.95rem;
-            font-weight: 500;
-        }
-        body.dark-mode .privacy-note {
-            background: rgba(255,255,255,0.03);
-            border-left-color: #5fb0a5;
-        }
-        .cta-row {
-            display: flex;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-            margin: 2.2rem 0 1rem;
-        }
-        .mini-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.6rem;
-            background: rgba(42,95,90,0.1);
-            border: 1px solid rgba(42,95,90,0.2);
-            border-radius: 36px;
-            padding: 0.7rem 1.8rem;
-            text-decoration: none;
-            color: inherit;
-            font-weight: 550;
-            font-size: 1rem;
-            transition: all 0.2s ease;
-            backdrop-filter: blur(2px);
-        }
-        .mini-link:hover {
-            background: rgba(42,95,90,0.2);
-            border-color: #2a5f5a;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(42,95,90,0.1);
-        }
-        body.dark-mode .mini-link {
-            background: rgba(255,255,255,0.05);
-            border-color: rgba(255,255,255,0.15);
-        }
-        body.dark-mode .mini-link:hover {
-            background: rgba(255,255,255,0.1);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
-        }
-        /* ---------- software page – alphabet filter + ranking ---------- */
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin: 2.5rem 0 1.5rem;
-        }
-        .section-header h2 {
-            font-weight: 600;
-            font-size: 1.8rem;
-            letter-spacing: -0.02em;
-        }
-        .stats-badge {
-            display: flex;
-            gap: 1.5rem;
-            font-size: 0.95rem;
-            opacity: 0.7;
-            font-weight: 500;
-        }
-        /* A–Z filter bar – all letters active */
-        .alphabet-filter {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.4rem;
-            justify-content: center;
-            margin: 1.5rem 0 1rem;
-            background: rgba(255,255,255,0.5);
-            padding: 1rem 0.5rem;
-            border-radius: 48px;
-            backdrop-filter: blur(4px);
-            border: 1px solid rgba(0,0,0,0.05);
-        }
-        body.dark-mode .alphabet-filter {
-            background: rgba(30,30,30,0.5);
-            border-color: rgba(255,255,255,0.05);
-        }
-        .letter-btn {
-            width: 2.5rem;
-            height: 2.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid transparent;
-            border-radius: 50%;
-            background: rgba(42,95,90,0.1);
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.15s;
-            color: inherit;
-            font-size: 1rem;
-        }
-        .letter-btn:hover {
-            background: rgba(42,95,90,0.3);
-            transform: scale(1.1);
-        }
-        .letter-btn.active {
-            background: #2a5f5a;
-            color: white;
-            border-color: #ffffff80;
-        }
-        /* "all apps" reset button */
-        .reset-filter {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: rgba(42,95,90,0.1);
-            border: 1px solid rgba(42,95,90,0.2);
-            border-radius: 30px;
-            padding: 0.5rem 1.5rem;
-            margin: 0 0 1.5rem 0;
-            cursor: pointer;
-            font-weight: 500;
-            transition: all 0.15s;
-            width: fit-content;
-        }
-        .reset-filter:hover {
-            background: rgba(42,95,90,0.2);
-            border-color: #2a5f5a;
-        }
-        .filter-row {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 1rem;
-            margin: 1rem 0 2rem;
-        }
-        .keyword-filter {
-            flex: 1;
-            min-width: 250px;
-        }
-        .keyword-filter input {
-            width: 100%;
-            padding: 0.9rem 1.4rem;
-            background: rgba(255,255,255,0.8);
-            border: 2px solid rgba(0,0,0,0.1);
-            border-radius: 48px;
-            font-family: inherit;
-            font-size: 1rem;
-            color: inherit;
-            font-weight: 500;
-            transition: border 0.15s;
-            backdrop-filter: blur(2px);
-        }
-        body.dark-mode .keyword-filter input {
-            background: rgba(30,30,30,0.8);
-            border-color: rgba(255,255,255,0.15);
-        }
-        .keyword-filter input:focus {
-            outline: none;
-            border-color: #2a5f5a;
-        }
-        /* cards */
-        .apps-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-            gap: 1.8rem;
-            margin: 1.5rem 0 2rem;
-        }
-        .app-card {
-            background: rgba(255,255,255,0.75);
-            backdrop-filter: blur(8px);
-            border: 2px solid rgba(0,0,0,0.08);
-            border-radius: 24px;
-            padding: 1.4rem 1.4rem 1.6rem;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.02);
-            transition: all 0.2s ease;
-            display: flex;
-            flex-direction: column;
-        }
-        body.dark-mode .app-card {
-            background: rgba(30,30,30,0.7);
-            border-color: rgba(255,255,255,0.12);
-        }
-        .app-card:hover {
-            transform: translateY(-4px);
-            border-color: #2a5f5a;
-            box-shadow: 0 16px 30px rgba(42,95,90,0.15);
-        }
-        .card-header {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-        .app-logo {
-            width: 52px;
-            height: 52px;
-            border-radius: 14px;
-            background: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            overflow: hidden;
-            border: 1px solid rgba(0,0,0,0.08);
-        }
-        body.dark-mode .app-logo {
-            background: #2a2a2a;
-            border-color: rgba(255,255,255,0.1);
-        }
-        .app-logo img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }
-        .title-views {
-            flex: 1;
-        }
-        .app-name {
-            font-size: 1.25rem;
-            font-weight: 600;
-            line-height: 1.3;
-            margin-bottom: 0.2rem;
-        }
-        .view-badge {
-            font-size: 0.8rem;
-            font-weight: 500;
-            opacity: 0.7;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-        .app-description {
-            font-size: 0.9rem;
-            line-height: 1.5;
-            margin: 0.5rem 0 1.2rem;
-            opacity: 0.85;
-            font-weight: 500;
-            flex: 1;
-        }
-        .app-actions {
-            display: flex;
-            gap: 1.2rem;
-            margin-top: auto;
-            border-top: 1px solid rgba(0,0,0,0.08);
-            padding-top: 1rem;
-        }
-        body.dark-mode .app-actions {
-            border-top-color: rgba(255,255,255,0.08);
-        }
-        .app-actions a {
-            text-decoration: none;
-            color: inherit;
-            font-size: 0.9rem;
-            font-weight: 550;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            opacity: 0.8;
-            transition: all 0.15s ease;
-            padding: 4px 8px;
-            border-radius: 20px;
-        }
-        .app-actions a:hover {
-            opacity: 1;
-            background: rgba(42,95,90,0.1);
-            transform: translateY(-1px);
-        }
-        body.dark-mode .app-actions a:hover {
-            background: rgba(255,255,255,0.1);
-        }
-        .html-app-card .view-badge { display: none; }
-        .html-section { margin-top: 3.5rem; }
-        .views-mini {
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 2px solid rgba(0,0,0,0.08);
-            font-size: 0.95rem;
-            font-weight: 500;
-        }
-        body.dark-mode .views-mini {
-            border-top-color: rgba(255,255,255,0.08);
-        }
-        .top-views {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.8rem 2.5rem;
-            margin: 1rem 0 0.5rem;
-        }
-        .top-views span {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            transition: transform 0.1s;
-        }
-        .top-views span:hover {
-            transform: scale(1.02);
-            color: #2a5f5a;
-        }
-        .top-views i { color: #2a5f5a; }
-        .empty-state {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 4rem 0;
-            opacity: 0.6;
-        }
-        .empty-state button {
-            background: none;
-            border: 2px solid rgba(0,0,0,0.1);
-            border-radius: 30px;
-            padding: 0.6rem 1.5rem;
-            margin-top: 1rem;
-            cursor: pointer;
-            color: inherit;
-            font-weight: 500;
-            transition: all 0.15s;
-        }
-        .empty-state button:hover {
-            border-color: #2a5f5a;
-            background: rgba(42,95,90,0.1);
-        }
-        /* footer */
-        .site-footer {
-            border-top: 2px solid rgba(0,0,0,0.08);
-            padding: 2rem 0;
-            font-size: 0.9rem;
-            font-weight: 500;
-            opacity: 0.8;
-            background: rgba(255,255,255,0.5);
-            backdrop-filter: blur(4px);
-        }
-        body.dark-mode .site-footer {
-            background: rgba(18,18,18,0.5);
-            border-top-color: rgba(255,255,255,0.08);
-        }
-        .footer-inner {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-        .footer-inner a {
-            color: inherit;
-            text-decoration: none;
-            transition: opacity 0.15s;
-            padding: 4px 8px;
-            border-radius: 20px;
-        }
-        .footer-inner a:hover {
-            opacity: 1;
-            background: rgba(42,95,90,0.1);
-        }
-        /* smooth scroll */
-        html {
-            scroll-behavior: smooth;
-        }
+      }
     </style>
 </head>
 <body>
     <div id="root"></div>
 
-    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
     <script type="text/babel">
-        const { useState, useEffect } = React;
+      const { useState, useEffect, useRef } = React;
 
-        const ShinyHealthTools = () => {
-            // dark mode
-            const [darkMode, setDarkMode] = useState(() => {
-                const saved = localStorage.getItem('theme');
-                if (saved === 'dark') {
-                    document.body.classList.add('dark-mode');
-                    return true;
-                }
-                if (saved === 'light') {
-                    document.body.classList.remove('dark-mode');
-                    return false;
-                }
-                const prefers = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                if (prefers) document.body.classList.add('dark-mode');
-                return prefers;
-            });
+      // ---------- ALL APP DATA ----------
+      const shinyApps = [
+        { id:1, name:"FactorGuard", desc:"A factor-retention decision tool for EFA", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/FactorGuard.png", run:"https://mudassiribrahim2026.shinyapps.io/FactorGuard/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/FactorGuard.R" },
+        { id:2, name:"CalcuStats", desc:"Tool for sample size calculation, power analysis, and descriptive statistics", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/CalcuStats.png", run:"https://mudassiribrahim2025.shinyapps.io/CalcuStats/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/CalcuStats.R" },
+        { id:3, name:"CATrend Analyzer", desc:"Cochran-Armitage test for trend tool", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/CAtrend.png", run:"https://newappstesting.shinyapps.io/CATrendAnalyzer/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/CATrendAnalyzer.R" },
+        { id:4, name:"ROC Curve Builder", desc:"ROC curve analysis and diagnostic test evaluation", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/ROC.png", run:"https://mudassiribrahim30.shinyapps.io/ROC_CURVE/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/ROC%20Curve%20Builder.R" },
+        { id:5, name:"Data2SPSS", desc:"Convert datasets to SPSS (.sav) files", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/Data2SPSS.png", run:"https://newappstesting.shinyapps.io/Data2SPSS/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/Data2SPSS" },
+        { id:6, name:"MedModr", desc:"Mediation and moderation analysis tool", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/MedModr.png", run:"https://mudassiribrahim30.shinyapps.io/MedModr/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/MedModr.R" },
+        { id:7, name:"EpiDem Suite", desc:"Epidemiological data analysis suite", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/EpiDem.png", run:"https://mudassiribrahim2025.shinyapps.io/EpiDemSuite/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/EpiDem%20Suite.R" },
+        { id:8, name:"ggPubPlot", desc:"Publication-ready ggplot2 visualizations", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/ggLogo.png", run:"https://mudassiribrahim2025.shinyapps.io/ggPubPlot/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/ggPubPlot.R" },
+        { id:9, name:"APA Table Generator", desc:"Generate APA formatted tables", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/APA%20logo.png", run:"https://newappstesting.shinyapps.io/APATableGenerator/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/APA%20Table%20Generator%20Pro.R" },
+        { id:10, name:"SysSampler", desc:"Systematic sampling tool", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/Sys%20Sampler.png", run:"https://mudassiribrahim2025b.shinyapps.io/SysSampler/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/SysSampler" },
+        { id:11, name:"CMH Analyzer", desc:"Cochran-Mantel-Haenszel analysis", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/CMH.png", run:"https://newappstesting.shinyapps.io/CMHAnalyzer/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/CMHAnalyzer.R" },
+        { id:12, name:"TNMTC DataLab", desc:"Comprehensive data analysis", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/TNMTC.png", run:"https://newappstesting.shinyapps.io/NMTCDataLab/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/NMTC%20APP.R" },
+        { id:13, name:"PharmaCalc Pro", desc:"Pharmaceutical calculations", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/Pharma.png", run:"https://mudassiribrahim2025b.shinyapps.io/PharmaCalcPro/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/PharmaCalcPro.R" },
+        { id:14, name:"RegEffect Xplorer", desc:"Explore regression effects visually", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/RegEf.png", run:"https://mudassiribrahim2025b.shinyapps.io/RegEffectXplorer/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/RegEffectXplorer.R" },
+        { id:15, name:"Data TransformR", desc:"Data transformation and preprocessing", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/DataTrans.png", run:"https://mudassiribrahim2025b.shinyapps.io/DataTransformR/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/DataTransformR.R" },
+        { id:16, name:"CleanMyData", desc:"Data screening and cleaning", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/CleanMyData.png", run:"https://mudassiribrahim2025b.shinyapps.io/CleanMyData/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/CleanMyData.R" },
+        { id:17, name:"KMPlot Genie", desc:"Kaplan-Meier survival plot generator", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/KMPlot.png", run:"https://mudassiribrahim30.shinyapps.io/KMPlotGenie/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/KMPlotGenie.R" },
+        { id:18, name:"QuickStatsGen", desc:"Custom Data Generator for education", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/QuickStats.png", run:"https://mudassiribrahim2025.shinyapps.io/QuickStatsGen/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/QuickStatsGen.R" },
+        { id:19, name:"Robust Regressor", desc:"Robust regression analysis", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/Robust.png", run:"https://mudassiribrahim2025.shinyapps.io/Robustregression/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/Robust%20%20Regressor.R" },
+        { id:20, name:"TagSelect", desc:"Participant selection tool", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/TagSelect.png", run:"https://mudassiribrahim30.shinyapps.io/Tagselect/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/TagSelect.R" },
+        { id:21, name:"FAnalyzr", desc:"Factor analysis and dimensionality reduction", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/FA.png", run:"https://mudassiribrahim30.shinyapps.io/fanalyzr/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/FAnalyzr.R" }
+      ];
 
-            const toggleTheme = () => {
-                const newMode = !darkMode;
-                setDarkMode(newMode);
-                document.body.classList.toggle('dark-mode', newMode);
-                localStorage.setItem('theme', newMode ? 'dark' : 'light');
-            };
+      // Featured apps (6 for home)
+      const featuredApps = shinyApps.slice(0, 6);
 
-            const [activeTab, setActiveTab] = useState('home');
-            const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+      // ---------- COMPONENTS ----------
+      const FloatingParticles = () => {
+        const containerRef = useRef(null);
+        useEffect(() => {
+          if (!containerRef.current) return;
+          const container = containerRef.current;
+          const particleCount = 42;
+          for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement("span");
+            particle.className = "particle";
+            const size = Math.random() * 6 + 2;
+            particle.style.width = size + "px";
+            particle.style.height = size + "px";
+            particle.style.left = Math.random() * 100 + "%";
+            particle.style.top = Math.random() * 100 + "%";
+            particle.style.animationDelay = Math.random() * 8 + "s";
+            particle.style.animationDuration = Math.random() * 10 + 12 + "s";
+            particle.style.background = `rgba(${160 + Math.random() * 80}, ${180 + Math.random() * 70}, 255, ${Math.random() * 0.3 + 0.1})`;
+            particle.style.boxShadow = `0 0 ${Math.random() * 12 + 4}px currentColor`;
+            container.appendChild(particle);
+          }
+          return () => { container.innerHTML = ""; };
+        }, []);
+        return <div ref={containerRef} className="particle-field" />;
+      };
 
-            // view counts
-            const [appViews, setAppViews] = useState({
-                FactorGuard: 16,
-                CalcuStats: 16677,
-                "CATrend Analyzer": 7598,
-                "ROC Curve Builder": 16010,
-                Data2SPSS: 12849,
-                MedModr: 16068,
-                "EpiDem Suite": 17089,
-                ggPubPlot: 14552,
-                "APA Table Generator": 3329,
-                SysSampler: 3609,
-                "CMH Analyzer": 6853,
-                "TNMTC DataLab": 14408,
-                "PharmaCalc Pro": 15510,
-                "RegEffect Xplorer": 15381,
-                "Data TransformR": 16859,
-                CleanMyData: 14660,
-                "KMPlot Genie": 16874,
-                QuickStatsGen: 15106,
-                "Robust Regressor": 15586,
-                TagSelect: 16725,
-                FAnalyzr: 16885
-            });
-
-            const totalViews = Object.values(appViews).reduce((a, b) => a + b, 0);
-
-            // ----- ORIGINAL APP DESCRIPTIONS (restored) -----
-            const shinyApps = [
-                { id:1, name:"FactorGuard", desc:"A factor-retention decision tool for EFA", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/FactorGuard.png", run:"https://mudassiribrahim2026.shinyapps.io/FactorGuard/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/FactorGuard.R" },
-                { id:2, name:"CalcuStats", desc:"Tool for sample size calculation, power analysis, and descriptive statistics", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/CalcuStats.png", run:"https://mudassiribrahim2025.shinyapps.io/CalcuStats/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/CalcuStats.R" },
-                { id:3, name:"CATrend Analyzer", desc:"Cochran-Armitage test for trend tool", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/CAtrend.png", run:"https://newappstesting.shinyapps.io/CATrendAnalyzer/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/CATrendAnalyzer.R" },
-                { id:4, name:"ROC Curve Builder", desc:"ROC curve analysis and diagnostic test evaluation", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/ROC.png", run:"https://mudassiribrahim30.shinyapps.io/ROC_CURVE/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/ROC%20Curve%20Builder.R" },
-                { id:5, name:"Data2SPSS", desc:"Convert datasets in CSV, Excel, Rdata, Stata, or SAS format into SPSS (.sav) files", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/Data2SPSS.png", run:"https://newappstesting.shinyapps.io/Data2SPSS/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/Data2SPSS" },
-                { id:6, name:"MedModr", desc:"Mediation and moderation analysis tool for research studies", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/MedModr.png", run:"https://mudassiribrahim30.shinyapps.io/MedModr/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/MedModr.R" },
-                { id:7, name:"EpiDem Suite", desc:"Epidemiological data analysis suite for public health research", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/EpiDem.png", run:"https://mudassiribrahim2025.shinyapps.io/EpiDemSuite/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/EpiDem%20Suite.R" },
-                { id:8, name:"ggPubPlot", desc:"Publication-ready ggplot2 visualizations with customization", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/ggLogo.png", run:"https://mudassiribrahim2025.shinyapps.io/ggPubPlot/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/ggPubPlot.R" },
-                { id:9, name:"APA Table Generator", desc:"Generate APA formatted tables for research papers and publications", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/APA%20logo.png", run:"https://newappstesting.shinyapps.io/APATableGenerator/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/APA%20Table%20Generator%20Pro.R" },
-                { id:10, name:"SysSampler", desc:"Systematic sampling tool for research studies with custom random start", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/Sys%20Sampler.png", run:"https://mudassiribrahim2025b.shinyapps.io/SysSampler/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/SysSampler" },
-                { id:11, name:"CMH Analyzer", desc:"Cochran-Mantel-Haenszel analysis tool for stratified data", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/CMH.png", run:"https://newappstesting.shinyapps.io/CMHAnalyzer/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/CMHAnalyzer.R" },
-                { id:12, name:"TNMTC DataLab", desc:"Comprehensive data analysis software", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/TNMTC.png", run:"https://newappstesting.shinyapps.io/NMTCDataLab/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/NMTC%20APP.R" },
-                { id:13, name:"PharmaCalc Pro", desc:"Pharmaceutical calculations for dosage", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/Pharma.png", run:"https://mudassiribrahim2025b.shinyapps.io/PharmaCalcPro/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/PharmaCalcPro.R" },
-                { id:14, name:"RegEffect Xplorer", desc:"Explore regression effects visually with interactive plots", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/RegEf.png", run:"https://mudassiribrahim2025b.shinyapps.io/RegEffectXplorer/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/RegEffectXplorer.R" },
-                { id:15, name:"Data TransformR", desc:"Data transformation and preprocessing tool for analytics", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/DataTrans.png", run:"https://mudassiribrahim2025b.shinyapps.io/DataTransformR/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/DataTransformR.R" },
-                { id:16, name:"CleanMyData", desc:"Data screening and cleaning tool with visualization", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/CleanMyData.png", run:"https://mudassiribrahim2025b.shinyapps.io/CleanMyData/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/CleanMyData.R" },
-                { id:17, name:"KMPlot Genie", desc:"Kaplan-Meier survival plot generator for clinical studies", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/KMPlot.png", run:"https://mudassiribrahim30.shinyapps.io/KMPlotGenie/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/KMPlotGenie.R" },
-                { id:18, name:"QuickStatsGen", desc:"Custom Data Generator for Statistical Practice and Education", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/QuickStats.png", run:"https://mudassiribrahim2025.shinyapps.io/QuickStatsGen/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/QuickStatsGen.R" },
-                { id:19, name:"Robust Regressor", desc:"Robust regression analysis for outlier-resistant modeling", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/Robust.png", run:"https://mudassiribrahim2025.shinyapps.io/Robustregression/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/Robust%20%20Regressor.R" },
-                { id:20, name:"TagSelect", desc:"Participant selection tool for research studies", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/TagSelect.png", run:"https://mudassiribrahim30.shinyapps.io/Tagselect/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/TagSelect.R" },
-                { id:21, name:"FAnalyzr", desc:"Factor analysis and dimensionality reduction tool", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/FA.png", run:"https://mudassiribrahim30.shinyapps.io/fanalyzr/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/FAnalyzr.R" }
-            ];
-
-            const htmlApps = [
-                { id:'h1', name:"CATrend Analyzer (HTML)", desc:"Cochran‑Armitage trend test calculator for dose‑response and ordinal trends. Instant p‑values.", url:"https://catrendanalyzer.mudasiribrahim.com" },
-                { id:'h2', name:"Transpose Table", desc:"Convert cross‑tabulation data into column format for logistic regression or frequency analysis.", url:"https://transposetable.mudasiribrahim.com" },
-                { id:'h3', name:"CalcuStats Lite", desc:"Sample size calculator (Taro Yamane, Cochran) with proportional allocation for multi‑stage surveys.", url:"https://calcustats.lite.mudasiribrahim.com" },
-                { id:'h4', name:"Systematic Sampling Calculator", desc:"Compute sampling interval k with precision and confidence level options for survey research.", url:"https://systematic.sampling.mudasiribrahim.com" }
-            ];
-
-            const shinyWithViews = shinyApps.map(a => ({ ...a, views: appViews[a.name] || 0, type: 'shiny' }));
-
-            // Alphabet filter – all letters active
-            const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-            const [selectedLetter, setSelectedLetter] = useState('');
-
-            // Keyword search
-            const [keyword, setKeyword] = useState('');
-
-            // Apps starting with a letter (used to determine which letters have apps – all active anyway)
-            const appsStartingWith = (letter) => {
-                return shinyWithViews.filter(app => app.name.toUpperCase().startsWith(letter));
-            };
-
-            // Main filtered list
-            const getFilteredApps = () => {
-                let filtered = shinyWithViews;
-                if (selectedLetter) {
-                    filtered = filtered.filter(app => app.name.toUpperCase().startsWith(selectedLetter));
-                }
-                if (keyword.trim() !== '') {
-                    const terms = keyword.toLowerCase().split(/\s+/);
-                    const scored = filtered.map(app => {
-                        const nameLower = app.name.toLowerCase();
-                        const descLower = app.desc.toLowerCase();
-                        let score = 0;
-                        terms.forEach(term => {
-                            if (nameLower.includes(term)) score += 3;
-                            if (descLower.includes(term)) score += 1;
-                        });
-                        return { ...app, score };
-                    });
-                    filtered = scored.filter(a => a.score > 0).sort((a,b) => b.score - a.score);
-                } else {
-                    filtered = filtered.sort((a,b) => a.name.localeCompare(b.name));
-                }
-                return filtered;
-            };
-
-            const filteredApps = getFilteredApps();
-            const topApps = [...shinyWithViews].sort((a,b)=>b.views-a.views).slice(0,5);
-
-            // all links open in same tab
-            const handleLinkClick = (e, url) => {
-                e.preventDefault();
-                window.location.href = url;
-            };
-
-            // about me link
-            const handleAboutClick = (e) => {
-                e.preventDefault();
-                window.location.href = 'https://www.mudasiribrahim.com';
-            };
-
-            const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
-            const switchTab = (tab) => {
-                setActiveTab(tab);
-                setMobileMenuOpen(false);
-                scrollToTop();
-                setSelectedLetter('');
-                setKeyword('');
-            };
-
-            const currentYear = new Date().getFullYear();
-
-            const Home = () => (
-                <div className="intro-block">
-                    <h1>introduction<span>v2</span></h1>
-                    <div className="intro-text">
-                        <p>While analysing health data daily, from sample size justifications to ROC curves and converting messy exports, I kept hitting the same walls: either the tool didn't exist, required coding, or was paywalled. That friction pushed me to build these focused Shiny apps. I use them in my own research almost every day.</p>
-                        <p>All apps are built entirely in <strong>R</strong> using the <strong>Shiny</strong> framework, hosted on <strong>shinyapps.io</strong>. Behind the scenes they rely on the <strong>tidyverse</strong> (dplyr, tidyr, ggplot2), <strong>recipes</strong> for preprocessing, <strong>broom</strong> for tidy outputs, <strong>survival</strong> for KM plots, <strong>psych</strong> for factor analysis, and many more specialised packages. Every tool is open source and free.</p>
-                           <p>💡 100% open-source. 100% free. Built for researchers, by a researcher</p>
-                        
-                    </div>
-                    
-                    <ul className="feature-list">
-                        <li><i className="fas fa-cube"></i> 21 R/Shiny apps + 4 HTML web tools</li>
-                        <li><i className="fas fa-code-branch"></i> Backend: R, Shiny, tidyverse, and friends</li>
-                        <li><i className="fas fa-cloud-upload-alt"></i> Hosted on shinyapps.io – no installation needed</li>
-                        <li><i className="fas fa-heart"></i> Zero cost, forever – because research tools should be accessible</li>
-                    </ul>
-                    <div className="cta-row">
-                        <a href="#" className="mini-link" onClick={(e)=>{ e.preventDefault(); switchTab('software'); }}>
-                            <i className="fas fa-arrow-right"></i> explore apps
-                        </a>
-                    </div>
-
-                    <div className="privacy-note">
-                        <i className="fas fa-shield-alt" style={{ marginRight: '0.8rem', color: '#2a5f5a' }}></i>
-                        <strong>Your privacy:</strong> This site stores only your theme preference (light/dark mode) locally on your browser. The apps themselves do not collect, store, or share any user data. No tracking, no cookies.
-                    </div>
-
-                    <p style={{ fontSize:'0.95rem', opacity:0.7, marginTop:'2rem', fontWeight:500 }}>
-                        {shinyApps.length} R/Shiny tools · {totalViews.toLocaleString()} total views
-                    </p>
-                </div>
-            );
-
-            const Software = () => (
-                <>
-                    <div className="section-header">
-                        <h2>R/shiny applications</h2>
-                        <div className="stats-badge">
-                            <span>{filteredApps.length} apps</span>
-                            <span>{totalViews.toLocaleString()} views</span>
-                        </div>
-                    </div>
-
-                    <div className="filter-row">
-                        <div className="keyword-filter">
-                            <input 
-                                type="text" 
-                                placeholder="filter by analysis type (e.g., survival, factor, sample size)..." 
-                                value={keyword} 
-                                onChange={e => { setKeyword(e.target.value); setSelectedLetter(''); }}
-                            />
-                        </div>
-                        {(selectedLetter || keyword) && (
-                            <div className="reset-filter" onClick={() => { setSelectedLetter(''); setKeyword(''); }}>
-                                <i className="fas fa-times"></i> clear filters
-                            </div>
-                        )}
-                    </div>
-
-                    {/* A–Z filter – all letters active */}
-                    <div className="alphabet-filter">
-                        {alphabet.map(letter => {
-                            const isActive = selectedLetter === letter;
-                            return (
-                                <button
-                                    key={letter}
-                                    className={`letter-btn ${isActive ? 'active' : ''}`}
-                                    onClick={() => {
-                                        setSelectedLetter(isActive ? '' : letter);
-                                        setKeyword('');
-                                    }}
-                                >
-                                    {letter}
-                                </button>
-                            );
-                        })}
-                    </div>
-
-                    <div className="apps-grid">
-                        {filteredApps.length > 0 ? filteredApps.map(app => (
-                            <div key={app.id} className="app-card">
-                                <div className="card-header">
-                                    <div className="app-logo">
-                                        <img src={app.logo} alt={app.name} onError={(e)=> e.target.style.display='none'} />
-                                    </div>
-                                    <div className="title-views">
-                                        <div className="app-name">{app.name}</div>
-                                        <div className="view-badge">
-                                            <i className="far fa-eye"></i> {app.views.toLocaleString()}
-                                        </div>
-                                    </div>
-                                </div>
-                                <p className="app-description">{app.desc}</p>
-                                <div className="app-actions">
-                                    <a href={app.run} onClick={(e) => handleLinkClick(e, app.run)}><i className="fas fa-play"></i> launch</a>
-                                    <a href={app.code} onClick={(e) => handleLinkClick(e, app.code)}><i className="fab fa-github"></i> code</a>
-                                </div>
-                            </div>
-                        )) : (
-                            <div className="empty-state">
-                                <i className="fas fa-filter" style={{fontSize:'2rem', marginBottom:'1rem', opacity:0.4}}></i>
-                                <p>no apps match your criteria</p>
-                                <button onClick={()=>{ setSelectedLetter(''); setKeyword(''); }}>clear filters</button>
-                            </div>
-                        )}
-                    </div>
-
-                    {/* HTML section */}
-                    <div className="html-section">
-                        <div className="section-header" style={{marginTop:'1rem'}}>
-                            <h2>HTML web apps</h2>
-                            <div className="stats-badge">
-                                <span>{htmlApps.length} tools</span>
-                            </div>
-                        </div>
-                        <div className="apps-grid">
-                            {htmlApps.map(app => (
-                                <div key={app.id} className="app-card html-app-card">
-                                    <div className="card-header">
-                                        <div className="app-logo">
-                                            <i className="fas fa-code" style={{fontSize:'1.8rem', color:'#2a5f5a'}}></i>
-                                        </div>
-                                        <div className="title-views">
-                                            <div className="app-name">{app.name}</div>
-                                        </div>
-                                    </div>
-                                    <p className="app-description">{app.desc}</p>
-                                    <div className="app-actions">
-                                        <a href={app.url} onClick={(e) => handleLinkClick(e, app.url)}><i className="fas fa-external-link-alt"></i> open</a>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
-                    <div className="views-mini">
-                        <div style={{marginBottom:'1rem', fontWeight:600}}>most viewed shiny apps</div>
-                        <div className="top-views">
-                            {topApps.map(a => (
-                                <span key={a.id}><i className="fas fa-chart-line"></i> {a.name} {a.views.toLocaleString()}</span>
-                            ))}
-                        </div>
-                        <div style={{marginTop:'1.5rem', fontSize:'0.85rem', opacity:0.6}}>
-                            view counts sourced from <a href="https://shinyappstore.com/search/user/1732" target="_blank" rel="noopener" style={{color:'inherit', textDecoration:'underline'}}>shiny app store</a>
-                        </div>
-                    </div>
-                </>
-            );
-
-            return (
-                <div style={{display:'flex', flexDirection:'column', minHeight:'100vh'}}>
-                    <header className="site-header">
-                        <div className="container">
-                            <div className="header-inner">
-                                <div className="logo">
-                                    <a href="#" onClick={(e)=>{ e.preventDefault(); switchTab('home'); }}>shinyhealthtools</a>
-                                </div>
-                                <div className="nav-right">
-                                    <ul className="nav-links">
-                                        <li><a href="#" onClick={(e)=>{ e.preventDefault(); switchTab('home'); }} className={activeTab==='home'?'active':''}>home</a></li>
-                                        <li><a href="#" onClick={(e)=>{ e.preventDefault(); switchTab('software'); }} className={activeTab==='software'?'active':''}>software</a></li>
-                                        <li><a href="#" onClick={handleAboutClick} className={activeTab==='about'?'active':''}>about me</a></li>
-                                    </ul>
-                                    <button className="theme-toggle" onClick={toggleTheme} title={darkMode?'light mode':'dark mode'}>
-                                        <i className={darkMode ? 'fas fa-sun' : 'fas fa-moon'}></i>
-                                    </button>
-                                    <button className="mobile-menu-btn" onClick={()=>setMobileMenuOpen(!mobileMenuOpen)}>
-                                        <i className="fas fa-bars"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            {mobileMenuOpen && (
-                                <div style={{marginTop:'1.2rem', display:'flex', flexDirection:'column', gap:'0.8rem'}}>
-                                    <a href="#" onClick={(e)=>{ e.preventDefault(); switchTab('home'); }} style={{color:'inherit', textDecoration:'none', fontSize:'1.1rem', padding:'0.3rem 0'}} onMouseEnter={(e)=>e.target.style.opacity='0.8'} onMouseLeave={(e)=>e.target.style.opacity='1'}>home</a>
-                                    <a href="#" onClick={(e)=>{ e.preventDefault(); switchTab('software'); }} style={{color:'inherit', textDecoration:'none', fontSize:'1.1rem', padding:'0.3rem 0'}} onMouseEnter={(e)=>e.target.style.opacity='0.8'} onMouseLeave={(e)=>e.target.style.opacity='1'}>software</a>
-                                    <a href="#" onClick={handleAboutClick} style={{color:'inherit', textDecoration:'none', fontSize:'1.1rem', padding:'0.3rem 0'}} onMouseEnter={(e)=>e.target.style.opacity='0.8'} onMouseLeave={(e)=>e.target.style.opacity='1'}>about me</a>
-                                </div>
-                            )}
-                        </div>
-                    </header>
-
-                    <main>
-                        <div className="container">
-                            {activeTab === 'home' ? <Home /> : <Software />}
-                        </div>
-                    </main>
-
-                    <footer className="site-footer">
-                        <div className="container">
-                            <div className="footer-inner">
-                                <span>Copyright © {currentYear} shinyhealthtools – Mudasir Mohammed Ibrahim</span>
-                                <span style={{display:'flex', gap:'1.5rem'}}>
-                                    <a href="#" onClick={scrollToTop} style={{color:'inherit', textDecoration:'none'}}>↑ back to top</a>
-                                    <a href="https://github.com/mudassiribrahim30" target="_blank" rel="noopener" style={{color:'inherit'}}><i className="fab fa-github"></i></a>
-                                </span>
-                            </div>
-                        </div>
-                    </footer>
-                </div>
-            );
+      const Navbar = ({ activeTab, setActiveTab, setShowPrivacy }) => {
+        const [scrolled, setScrolled] = useState(false);
+        const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+        
+        useEffect(() => {
+          const handleScroll = () => setScrolled(window.scrollY > 20);
+          window.addEventListener("scroll", handleScroll);
+          return () => window.removeEventListener("scroll", handleScroll);
+        }, []);
+        
+        const handleLogoClick = (e) => {
+          e.preventDefault();
+          setActiveTab('home');
+          setMobileMenuOpen(false);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
         };
 
-        ReactDOM.render(<ShinyHealthTools />, document.getElementById('root'));
+        const handleNavClick = (tab) => {
+          setActiveTab(tab);
+          setMobileMenuOpen(false);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+
+        const handleAboutClick = (e) => {
+          e.preventDefault();
+          window.location.href = 'https://www.mudasiribrahim.com';
+          setMobileMenuOpen(false);
+        };
+
+        return (
+          <nav className={`navbar ${scrolled ? "navbar-blur" : ""}`}>
+            <div className="nav-logo">
+              <a href="#" onClick={handleLogoClick} style={{ textDecoration: 'none' }}>
+                <span className="logo-glow">✦ shinyhealthtools</span>
+              </a>
+            </div>
+            
+            {/* Desktop Navigation */}
+            <div className="nav-links">
+              <a href="#" onClick={(e) => { e.preventDefault(); handleNavClick('home'); }}>home</a>
+              <a href="#" onClick={(e) => { e.preventDefault(); handleNavClick('apps'); }}>apps</a>
+              <a href="#" onClick={handleAboutClick}>about me</a>
+            </div>
+
+            {/* Mobile Hamburger */}
+            <button className="mobile-menu-btn" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+              <i className={`fas fa-${mobileMenuOpen ? 'times' : 'bars'}`}></i>
+            </button>
+
+            {/* Mobile Menu */}
+            <div className={`mobile-menu ${mobileMenuOpen ? 'open' : ''}`}>
+              <a href="#" onClick={(e) => { e.preventDefault(); handleNavClick('home'); }}>home</a>
+              <a href="#" onClick={(e) => { e.preventDefault(); handleNavClick('apps'); }}>apps</a>
+              <a href="#" onClick={handleAboutClick}>about me</a>
+              <a href="#" onClick={(e) => { e.preventDefault(); setShowPrivacy(true); setMobileMenuOpen(false); }}>privacy</a>
+              <a href="#" onClick={(e) => { e.preventDefault(); window.location.href = 'https://github.com/mudassiribrahim30'; setMobileMenuOpen(false); }}>github</a>
+              <a href="#" onClick={(e) => { e.preventDefault(); window.location.href = 'https://www.buymeacoffee.com/yourusername'; setMobileMenuOpen(false); }}>
+                <i className="fas fa-coffee"></i> buy me a coffee
+              </a>
+            </div>
+          </nav>
+        );
+      };
+
+      const PrivacyModal = ({ onClose }) => {
+        useEffect(() => {
+          document.body.classList.add('modal-open');
+          return () => document.body.classList.remove('modal-open');
+        }, []);
+
+        return (
+          <div className="modal-overlay" onClick={onClose}>
+            <div className="modal-content" onClick={e => e.stopPropagation()}>
+              <h3>🔒 privacy notice</h3>
+              <p>This site stores only your theme preference (light/dark mode) locally on your browser. The apps themselves do not collect, store, or share any user data. No tracking, no cookies. Your data stays on your device.</p>
+              <button className="modal-close" onClick={onClose}>close</button>
+            </div>
+          </div>
+        );
+      };
+
+      const Home = ({ setActiveTab }) => {
+        const featuredRefs = useRef([]);
+        const whyToolsRefs = useRef([]);
+        
+        // Initialize refs arrays
+        if (featuredRefs.current.length !== featuredApps.length) {
+          featuredRefs.current = Array(featuredApps.length).fill().map((_, i) => featuredRefs.current[i] || React.createRef());
+        }
+        if (whyToolsRefs.current.length !== 4) {
+          whyToolsRefs.current = Array(4).fill().map((_, i) => whyToolsRefs.current[i] || React.createRef());
+        }
+
+        useEffect(() => {
+          const observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                  entry.target.style.opacity = '1';
+                  entry.target.style.transform = 'translateY(0)';
+                }
+              });
+            },
+            { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+          );
+          
+          featuredRefs.current.forEach(ref => {
+            if (ref.current) observer.observe(ref.current);
+          });
+          whyToolsRefs.current.forEach(ref => {
+            if (ref.current) observer.observe(ref.current);
+          });
+          
+          return () => observer.disconnect();
+        }, []);
+
+        const whyToolsData = [
+          {
+            icon: "fas fa-flask",
+            title: "built for research",
+            desc: "Every tool addresses a real need in health data analysis: sample size justification, ROC curves, survival plots, factor analysis, and more."
+          },
+          {
+            icon: "fas fa-code-branch",
+            title: "100% open source",
+            desc: "All code is available on GitHub. Built with R, Shiny, tidyverse, survival, psych, and more. Inspect, modify, or adapt them to your needs—no restrictions."
+          },
+          {
+            icon: "fas fa-cloud-upload-alt",
+            title: "no installation",
+            desc: "Hosted on shinyapps.io. Just click and run in your browser. No R setup, no packages to install—works on any device."
+          },
+          {
+            icon: "fas fa-heart",
+            title: "forever free",
+            desc: "No paywalls, no subscriptions. Research tools should be accessible to everyone, everywhere."
+          }
+        ];
+
+        return (
+          <>
+            <section className="hero">
+              <div className="hero-badge">✨ R/Shiny • free • open source</div>
+              <h1 className="hero-title">
+                <span className="title-line">interactive web apps</span>
+                <span className="title-line"><span className="gradient-text">for health research</span></span>
+              </h1>
+              <p className="hero-sub">
+                Free, intuitive applications for sample size, ROC curves, survival analysis, factor analysis, 
+                data conversion and more. Web tools built by a researcher for researchers—no coding required.
+              </p>
+              <div className="hero-metrics">
+                <div className="metric-item"><span className="metric-number">10+</span><span className="metric-label">R/Shiny tools</span></div>
+                <div className="metric-item"><span className="metric-number">100%</span><span className="metric-label">open source</span></div>
+                <div className="metric-item"><span className="metric-number">∞</span><span className="metric-label">free forever</span></div>
+              </div>
+            </section>
+
+            <section className="showcase" style={{ paddingTop: '1rem' }}>
+              <h2 className="showcase-title"><span>/ / </span> featured applications</h2>
+              <div className="card-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
+                {featuredApps.map((app, index) => (
+                  <div
+                    key={app.id}
+                    ref={featuredRefs.current[index]}
+                    style={{
+                      opacity: 0,
+                      transform: 'translateY(30px)',
+                      transition: 'opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1)',
+                      transitionDelay: `${index * 0.15}s`
+                    }}
+                  >
+                    <AppCard app={app} />
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            <section className="showcase" style={{ paddingTop: 0 }}>
+              <h2 className="showcase-title"><span>/ / </span> why these tools?</h2>
+              <div className="why-tools-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '2rem', marginTop: '1rem' }}>
+                {whyToolsData.map((tool, index) => (
+                  <div
+                    key={index}
+                    ref={whyToolsRefs.current[index]}
+                    style={{
+                      opacity: 0,
+                      transform: 'translateY(30px)',
+                      transition: 'opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1)',
+                      transitionDelay: `${index * 0.15}s`
+                    }}
+                  >
+                    <div className="card" style={{ background: 'rgba(30,26,48,0.6)', padding: '2rem', height: '100%' }}>
+                      <i className={tool.icon} style={{ fontSize: '2.5rem', color: '#a388ff', marginBottom: '1rem' }}></i>
+                      <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>{tool.title}</h3>
+                      <p style={{ color: '#b1a9da' }}>{tool.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            <Testimonial />
+          </>
+        );
+      };
+
+      const AppCard = ({ app }) => {
+        const handleClick = (e, url) => {
+          e.preventDefault();
+          window.location.href = url;
+        };
+
+        return (
+          <div className="card" style={{ animationDelay: '0s', height: '100%' }}>
+            <div className="card-glow" />
+            <div className="card-content">
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
+                {app.logo ? (
+                  <img src={app.logo} alt={app.name} style={{ width: '48px', height: '48px', borderRadius: '12px', objectFit: 'contain', background: '#fff' }} />
+                ) : (
+                  <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: '#2a2a4a', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <i className="fas fa-cube" style={{ fontSize: '1.5rem', color: '#a99cff' }}></i>
+                  </div>
+                )}
+                <h3 style={{ fontSize: '1.4rem', margin: 0 }}>{app.name}</h3>
+              </div>
+              <p style={{ color: '#b1a9da', fontSize: '0.95rem', marginBottom: '1.5rem', minHeight: '60px' }}>{app.desc}</p>
+              <div className="card-footer" style={{ borderTop: '1px dashed rgba(255,255,255,0.1)', paddingTop: '1rem', display: 'flex', justifyContent: 'space-between' }}>
+                <a href="#" onClick={(e) => handleClick(e, app.run)} style={{ color: '#cbc3ff', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+                  <i className="fas fa-play"></i> launch
+                </a>
+                <a href="#" onClick={(e) => handleClick(e, app.code)} style={{ color: '#cbc3ff', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+                  <i className="fab fa-github"></i> code
+                </a>
+              </div>
+            </div>
+          </div>
+        );
+      };
+
+      const AppsTab = () => {
+        const appRefs = useRef([]);
+        
+        if (appRefs.current.length !== shinyApps.length) {
+          appRefs.current = Array(shinyApps.length).fill().map((_, i) => appRefs.current[i] || React.createRef());
+        }
+
+        useEffect(() => {
+          const observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                  entry.target.style.opacity = '1';
+                  entry.target.style.transform = 'translateY(0)';
+                }
+              });
+            },
+            { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+          );
+          
+          appRefs.current.forEach(ref => {
+            if (ref.current) observer.observe(ref.current);
+          });
+          
+          return () => observer.disconnect();
+        }, []);
+
+        return (
+          <section className="showcase">
+            <h2 className="showcase-title"><span>/ / </span> all R/Shiny applications (21 tools)</h2>
+            <div className="card-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
+              {shinyApps.map((app, index) => (
+                <div
+                  key={app.id}
+                  ref={appRefs.current[index]}
+                  style={{
+                    opacity: 0,
+                    transform: 'translateY(30px)',
+                    transition: 'opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1)',
+                    transitionDelay: `${index * 0.05}s`
+                  }}
+                >
+                  <AppCard app={app} />
+                </div>
+              ))}
+            </div>
+          </section>
+        );
+      };
+
+      const Testimonial = () => (
+        <section className="testimonial">
+          <div className="testimonial-inner">
+            <span className="quote-mark">"</span>
+            <p className="quote-text">
+              These tools saved me hours of coding. The ROC curve builder and survival plot generator 
+              are incredibly intuitive. Perfect for health researchers without a stats background.
+            </p>
+            <div className="quote-author">
+              <div className="author-avatar" />
+              <div><strong>Anonymous </strong><span>health researcher</span></div>
+            </div>
+          </div>
+        </section>
+      );
+
+      const Footer = ({ setShowPrivacy }) => {
+        const currentYear = new Date().getFullYear();
+        
+        return (
+          <footer className="footer">
+            <div className="footer-main">
+              <div className="footer-brand">
+                <span className="logo-glow">✦ shinyhealthtools</span>
+                <p>free tools for health research</p>
+              </div>
+              <div className="footer-links">
+                <a href="#" onClick={(e) => { e.preventDefault(); setShowPrivacy(true); }}>privacy</a>
+                <a href="#" onClick={(e) => { e.preventDefault(); window.location.href = 'https://github.com/mudassiribrahim30'; }}>github</a>
+                <a href="#" onClick={(e) => { e.preventDefault(); window.location.href = 'https://buymeacoffee.com/mudasiribrahim30'; }}>
+                  <i className="fas fa-coffee"></i> buy me a coffee
+                </a>
+              </div>
+            </div>
+            <div className="footer-copyright">
+              <span>Copyright © 2025-{currentYear} shinyhealthtools</span>
+              <span className="footer-extra">open source • forever free</span>
+            </div>
+          </footer>
+        );
+      };
+
+      // Main App
+      const App = () => {
+        const [activeTab, setActiveTab] = useState('home');
+        const [showPrivacy, setShowPrivacy] = useState(false);
+
+        useEffect(() => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, [activeTab]);
+
+        return (
+          <div className="app-container">
+            <FloatingParticles />
+            <Navbar activeTab={activeTab} setActiveTab={setActiveTab} setShowPrivacy={setShowPrivacy} />
+            <main style={{ position: 'relative', zIndex: 5 }}>
+              {activeTab === 'home' && <Home setActiveTab={setActiveTab} />}
+              {activeTab === 'apps' && <AppsTab />}
+            </main>
+            <Footer setShowPrivacy={setShowPrivacy} />
+            {showPrivacy && <PrivacyModal onClose={() => setShowPrivacy(false)} />}
+
+            {/* ORIGINAL NEBULA CSS (plus mobile adjustments above) */}
+            <style>{`
+              .app-container {
+                position: relative;
+                background: radial-gradient(circle at 30% 20%, #1e1a36, #0a0814 80%);
+                color: #eaeefb;
+                overflow: hidden;
+                isolation: isolate;
+              }
+              .particle-field {
+                position: absolute;
+                inset: 0;
+                pointer-events: none;
+                z-index: 0;
+              }
+              .particle {
+                position: absolute;
+                border-radius: 50%;
+                background: rgba(180, 190, 255, 0.4);
+                filter: blur(0.6px);
+                animation: floatParticle 18s infinite alternate ease-in-out;
+                opacity: 0.6;
+                color: #a8bfff;
+                will-change: transform;
+              }
+              @keyframes floatParticle {
+                0% { transform: translate(0, 0) scale(1); opacity: 0.2; }
+                50% { transform: translate(20px, -25px) scale(1.5); opacity: 0.5; }
+                100% { transform: translate(-15px, 30px) scale(0.8); opacity: 0.3; }
+              }
+              .navbar {
+                position: sticky;
+                top: 0;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 1.6rem 3rem;
+                z-index: 20;
+                transition: background 0.2s, backdrop-filter 0.2s;
+              }
+              .navbar-blur {
+                background: rgba(10, 8, 22, 0.7);
+                backdrop-filter: blur(8px);
+                border-bottom: 1px solid rgba(255,255,255,0.05);
+              }
+              .nav-logo {
+                font-weight: 600;
+                font-size: 1.6rem;
+                letter-spacing: -0.02em;
+              }
+              .nav-logo a {
+                color: inherit;
+              }
+              .logo-glow {
+                background: linear-gradient(135deg, #fff, #c0b7ff);
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+                text-shadow: 0 0 12px rgba(160, 140, 255, 0.6);
+              }
+              .nav-links {
+                display: flex;
+                gap: 3rem;
+                align-items: center;
+              }
+              .nav-links a {
+                text-decoration: none;
+                color: #ddd9ff;
+                font-weight: 400;
+                font-size: 1rem;
+                letter-spacing: 0.3px;
+                transition: color 0.2s, text-shadow 0.2s;
+                position: relative;
+              }
+              .nav-links a:hover {
+                color: white;
+                text-shadow: 0 0 8px #a99cff;
+              }
+              .hero {
+                padding: 3rem 4rem 5rem 4rem;
+                position: relative;
+                z-index: 5;
+                max-width: 900px;
+              }
+              .hero-badge {
+                display: inline-block;
+                background: rgba(150, 130, 255, 0.1);
+                backdrop-filter: blur(4px);
+                border-radius: 50px;
+                padding: 0.4rem 1.2rem;
+                margin-bottom: 2rem;
+                font-size: 0.85rem;
+                border: 1px solid rgba(255,215,255,0.15);
+                color: #cdc5ff;
+                animation: fadeSlideUp 0.8s ease-out;
+              }
+              .hero-title {
+                font-size: clamp(3rem, 8vw, 5.2rem);
+                font-weight: 600;
+                line-height: 1.1;
+                letter-spacing: -0.02em;
+                margin-bottom: 1.8rem;
+              }
+              .title-line {
+                display: block;
+                animation: slideUp 0.7s ease-out;
+                animation-fill-mode: both;
+              }
+              .title-line:nth-child(1) { animation-delay: 0.1s; }
+              .title-line:nth-child(2) { animation-delay: 0.2s; }
+              .gradient-text {
+                background: linear-gradient(120deg, #b9adff, #a3d0ff, #c3b2ff);
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+                text-shadow: 0 0 20px #9d8cff;
+              }
+              .hero-sub {
+                font-size: 1.3rem;
+                max-width: 600px;
+                color: #c7c2e6;
+                margin-bottom: 2.5rem;
+                animation: fadeSlideUp 0.9s 0.2s ease-out both;
+                line-height: 1.5;
+              }
+              .hero-metrics {
+                display: flex;
+                gap: 3rem;
+                animation: fadeSlideUp 1s 0.4s both;
+              }
+              .metric-item {
+                display: flex;
+                flex-direction: column;
+              }
+              .metric-number {
+                font-size: 2rem;
+                font-weight: 500;
+                background: linear-gradient(135deg, #fff, #d4cbff);
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+              }
+              .metric-label {
+                font-size: 0.8rem;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                color: #9990cc;
+              }
+              .showcase {
+                padding: 3rem 4rem;
+                z-index: 5;
+                position: relative;
+              }
+              .showcase-title {
+                font-size: 1.2rem;
+                font-weight: 400;
+                text-transform: uppercase;
+                letter-spacing: 3px;
+                color: #a79dcf;
+                margin-bottom: 2.5rem;
+              }
+              .card-grid {
+                display: grid;
+                gap: 1.8rem;
+              }
+              .card {
+                background: rgba(30, 26, 48, 0.6);
+                backdrop-filter: blur(8px);
+                border-radius: 2rem;
+                border: 1px solid rgba(255,255,255,0.03);
+                padding: 1.8rem 1.5rem;
+                transition: transform 0.2s, border-color 0.3s;
+                position: relative;
+                overflow: hidden;
+                box-shadow: 0 15px 30px -20px black;
+              }
+              .card:hover {
+                border-color: #7f9cf5;
+                transform: translateY(-6px) scale(1.01);
+              }
+              .card-glow {
+                position: absolute;
+                inset: 0;
+                background: radial-gradient(circle at 50% 0%, #7f9cf5, transparent 70%);
+                opacity: 0;
+                transition: opacity 0.4s;
+                pointer-events: none;
+              }
+              .card:hover .card-glow {
+                opacity: 0.25;
+              }
+              .card-content {
+                position: relative;
+                z-index: 2;
+              }
+              .card-footer a:hover {
+                color: white;
+                text-shadow: 0 0 8px #a99cff;
+              }
+              .testimonial {
+                padding: 4rem 4rem 5rem;
+                position: relative;
+              }
+              .testimonial-inner {
+                background: rgba(40, 30, 64, 0.4);
+                backdrop-filter: blur(8px);
+                border-radius: 3rem;
+                padding: 3.5rem 4rem;
+                border: 1px solid rgba(215, 195, 255, 0.1);
+                max-width: 850px;
+                margin: 0 auto;
+                animation: appear 1s ease-out;
+              }
+              .quote-mark {
+                font-size: 6rem;
+                line-height: 0.7;
+                color: #9380ff;
+                opacity: 0.4;
+                font-family: serif;
+              }
+              .quote-text {
+                font-size: 1.8rem;
+                font-weight: 300;
+                margin-bottom: 2rem;
+                color: #f0eaff;
+              }
+              .quote-author {
+                display: flex;
+                align-items: center;
+                gap: 1.2rem;
+              }
+              .author-avatar {
+                width: 48px;
+                height: 48px;
+                background: linear-gradient(145deg, #a388ff, #6d4fcf);
+                border-radius: 50%;
+                box-shadow: 0 0 0 2px rgba(255,255,255,0.2);
+              }
+              .footer {
+                padding: 2.5rem 4rem 1.5rem;
+                border-top: 1px solid rgba(255,255,255,0.02);
+                background: rgba(0,0,0,0.2);
+                position: relative;
+                z-index: 5;
+              }
+              .footer-main {
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                margin-bottom: 3rem;
+              }
+              .footer-brand p {
+                color: #a69cc9;
+                margin-top: 0.5rem;
+              }
+              .footer-links {
+                display: flex;
+                gap: 2.5rem;
+              }
+              .footer-links a {
+                text-decoration: none;
+                color: #cfc6ff;
+              }
+              .footer-copyright {
+                display: flex;
+                justify-content: space-between;
+                color: #736b99;
+                font-size: 0.85rem;
+                border-top: 1px solid rgba(255,255,255,0.02);
+                padding-top: 1.5rem;
+              }
+              @keyframes fadeSlideUp {
+                0% { opacity: 0; transform: translateY(20px); }
+                100% { opacity: 1; transform: translateY(0); }
+              }
+              @keyframes slideUp {
+                0% { opacity: 0; transform: translateY(60px); }
+                100% { opacity: 1; transform: translateY(0); }
+              }
+              @keyframes appear {
+                0% { opacity: 0; }
+                100% { opacity: 1; }
+              }
+            `}</style>
+          </div>
+        );
+      };
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<App />);
     </script>
 </body>
 </html>
