@@ -24,22 +24,22 @@
         justify-content: center;
         min-height: 100vh;
         margin: 0;
-        padding: 0; /* Removed padding for full screen fit */
+        padding: 0;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         overflow-x: hidden;
       }
       #root {
         width: 100%;
-        max-width: 100%; /* Full width */
-        border-radius: 0; /* No border radius for full screen */
+        max-width: 100%;
+        border-radius: 0;
         background: rgba(20, 18, 30, 0.7);
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
         box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.03) inset;
         overflow: hidden;
       }
-      /* modal styles */
+      /* modal styles – scrolls into view */
       .modal-overlay {
         position: fixed;
         top: 0; left: 0; right: 0; bottom: 0;
@@ -152,7 +152,7 @@
 
       /* responsive breakpoints */
       @media (max-width: 700px) {
-        body { padding: 0; } /* Full screen on mobile */
+        body { padding: 0; }
         
         .nav-links {
           display: none !important;
@@ -195,7 +195,6 @@
           grid-template-columns: 1fr !important;
           gap: 1.2rem !important;
         }
-        /* testimonial card font size same as other cards */
         .testimonial-inner {
           padding: 2rem 1.8rem !important;
           border-radius: 2rem !important;
@@ -210,7 +209,6 @@
         .quote-author {
           font-size: 0.95rem !important;
         }
-        /* footer professional placement */
         .footer {
           padding: 2rem 1.5rem 1.2rem !important;
         }
@@ -269,33 +267,13 @@
       // Featured apps (6 for home)
       const featuredApps = shinyApps.slice(0, 6);
 
-      // Testimonials data (5 items, no personal details)
+      // Testimonials data (5 items)
       const testimonials = [
-        {
-          id: 1,
-          text: "These tools saved me hours of coding. The ROC curve builder and survival plot generator are incredibly intuitive. Perfect for health researchers without a stats background.",
-          role: "health researcher"
-        },
-        {
-          id: 2,
-          text: "The sample size calculator and power analysis tools are spot-on. I use them for all my grant proposals now. Clean interface and reliable results.",
-          role: "clinical researcher"
-        },
-        {
-          id: 3,
-          text: "Finally, free tools that actually work! The factor analysis app helped me validate my survey instrument in minutes instead of days.",
-          role: "phd candidate"
-        },
-        {
-          id: 4,
-          text: "I've recommended these tools to my entire department. The data conversion and SPSS export features are lifesavers for collaboration.",
-          role: "data analyst"
-        },
-        {
-          id: 5,
-          text: "The mediation and moderation analysis tool is brilliant. It makes complex statistical concepts accessible and visual.",
-          role: "research methodologist"
-        }
+        { id:1, text:"These tools saved me hours of coding. The ROC curve builder and survival plot generator are incredibly intuitive. Perfect for health researchers without a stats background.", role:"health researcher" },
+        { id:2, text:"The sample size calculator and power analysis tools are spot-on. I use them for all my research proposals now. Clean interface and reliable results.", role:"clinical researcher" },
+        { id:3, text:"Finally, free tools that actually work! The factor analysis app helped me validate my survey instrument in minutes instead of days.", role:"phd candidate" },
+        { id:4, text:"I've recommended these tools to my colleagues. The data conversion and SPSS export features are lifesavers.", role:"data analyst" },
+        { id:5, text:"The MedModr tool is brilliant. It makes complex statistical concepts accessible and visual.", role:"research methodologist" }
       ];
 
       // ---------- COMPONENTS ----------
@@ -304,6 +282,7 @@
         useEffect(() => {
           if (!containerRef.current) return;
           const container = containerRef.current;
+          container.innerHTML = '';
           const particleCount = 42;
           for (let i = 0; i < particleCount; i++) {
             const particle = document.createElement("span");
@@ -319,7 +298,6 @@
             particle.style.boxShadow = `0 0 ${Math.random() * 12 + 4}px currentColor`;
             container.appendChild(particle);
           }
-          return () => { container.innerHTML = ""; };
         }, []);
         return <div ref={containerRef} className="particle-field" />;
       };
@@ -335,7 +313,7 @@
         }, []);
         
         const handleLogoClick = (e) => {
-          e.preventDefault();
+          e.preventDefault();           // stay on same page
           setActiveTab('home');
           setMobileMenuOpen(false);
           window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -353,28 +331,25 @@
           setMobileMenuOpen(false);
         };
 
-        // Only the same tabs as desktop for mobile menu
         return (
           <nav className={`navbar ${scrolled ? "navbar-blur" : ""}`}>
             <div className="nav-logo">
-              <a href="#" onClick={handleLogoClick} style={{ textDecoration: 'none' }}>
+              <a href="#" onClick={handleLogoClick}>
                 <span className="logo-glow">✦ shinyhealthtools</span>
               </a>
             </div>
             
-            {/* Desktop Navigation */}
+            {/* Desktop Navigation - no theme toggle */}
             <div className="nav-links">
               <a href="#" onClick={(e) => { e.preventDefault(); handleNavClick('home'); }}>home</a>
               <a href="#" onClick={(e) => { e.preventDefault(); handleNavClick('apps'); }}>apps</a>
               <a href="#" onClick={handleAboutClick}>about me</a>
             </div>
 
-            {/* Mobile Hamburger */}
             <button className="mobile-menu-btn" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
               <i className={`fas fa-${mobileMenuOpen ? 'times' : 'bars'}`}></i>
             </button>
 
-            {/* Mobile Menu - Only desktop tabs (no extra items) */}
             <div className={`mobile-menu ${mobileMenuOpen ? 'open' : ''}`}>
               <a href="#" onClick={(e) => { e.preventDefault(); handleNavClick('home'); }}>home</a>
               <a href="#" onClick={(e) => { e.preventDefault(); handleNavClick('apps'); }}>apps</a>
@@ -385,16 +360,23 @@
       };
 
       const PrivacyModal = ({ onClose }) => {
+        const modalRef = useRef(null);
         useEffect(() => {
           document.body.classList.add('modal-open');
+          // Scroll the modal into view smoothly after it mounts
+          if (modalRef.current) {
+            setTimeout(() => {
+              modalRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
+          }
           return () => document.body.classList.remove('modal-open');
         }, []);
 
         return (
           <div className="modal-overlay" onClick={onClose}>
-            <div className="modal-content" onClick={e => e.stopPropagation()}>
+            <div className="modal-content" ref={modalRef} onClick={e => e.stopPropagation()}>
               <h3>🔒 privacy notice</h3>
-              <p>This site stores only your theme preference (light/dark mode) locally on your browser. The apps themselves do not collect, store, or share any user data. No tracking, no cookies. Your data stays on your device.</p>
+              <p>The apps themselves do not collect, store, or share any user data. No tracking, no cookies. Your data stays on your device.</p>
               <button className="modal-close" onClick={onClose}>close</button>
             </div>
           </div>
@@ -403,25 +385,19 @@
 
       const TestimonialCarousel = () => {
         const [activeIndex, setActiveIndex] = useState(0);
-
         useEffect(() => {
           const interval = setInterval(() => {
             setActiveIndex((current) => (current + 1) % testimonials.length);
-          }, 5000); // Change every 5 seconds
-
+          }, 5000);
           return () => clearInterval(interval);
         }, []);
-
         return (
           <section className="testimonial">
             <div className="testimonial-inner">
               <span className="quote-mark">"</span>
               <div className="testimonial-carousel">
                 {testimonials.map((testimonial, index) => (
-                  <div
-                    key={testimonial.id}
-                    className={`testimonial-slide ${index === activeIndex ? 'active' : ''}`}
-                  >
+                  <div key={testimonial.id} className={`testimonial-slide ${index === activeIndex ? 'active' : ''}`}>
                     <p className="quote-text">{testimonial.text}</p>
                     <div className="quote-author">
                       <div className="author-avatar" />
@@ -439,7 +415,6 @@
         const featuredRefs = useRef([]);
         const whyToolsRefs = useRef([]);
         
-        // Initialize refs arrays
         if (featuredRefs.current.length !== featuredApps.length) {
           featuredRefs.current = Array(featuredApps.length).fill().map((_, i) => featuredRefs.current[i] || React.createRef());
         }
@@ -460,37 +435,17 @@
             { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
           );
           
-          featuredRefs.current.forEach(ref => {
-            if (ref.current) observer.observe(ref.current);
-          });
-          whyToolsRefs.current.forEach(ref => {
-            if (ref.current) observer.observe(ref.current);
-          });
+          featuredRefs.current.forEach(ref => { if (ref.current) observer.observe(ref.current); });
+          whyToolsRefs.current.forEach(ref => { if (ref.current) observer.observe(ref.current); });
           
           return () => observer.disconnect();
         }, []);
 
         const whyToolsData = [
-          {
-            icon: "fas fa-flask",
-            title: "built for research",
-            desc: "Every tool addresses a real need in health data analysis: sample size justification, ROC curves, survival plots, factor analysis, and more."
-          },
-          {
-            icon: "fas fa-code-branch",
-            title: "100% open source",
-            desc: "All code is available on GitHub. Built with R, Shiny, tidyverse, survival, psych, and more. Inspect, modify, or adapt them to your needs—no restrictions."
-          },
-          {
-            icon: "fas fa-cloud-upload-alt",
-            title: "no installation",
-            desc: "Hosted on shinyapps.io. Just click and run in your browser. No R setup, no packages to install—works on any device."
-          },
-          {
-            icon: "fas fa-heart",
-            title: "forever free",
-            desc: "No paywalls, no subscriptions. Research tools should be accessible to everyone, everywhere."
-          }
+          { icon:"fas fa-flask", title:"built for research", desc:"Every tool addresses a real need in health data analysis: sample size justification, ROC curves, survival plots, factor analysis, and more." },
+          { icon:"fas fa-code-branch", title:"100% open source", desc:"All code is available on GitHub. Built with R, Shiny, tidyverse, survival, psych, and more. Inspect, modify, or adapt them to your needs—no restrictions." },
+          { icon:"fas fa-cloud-upload-alt", title:"no installation", desc:"Hosted on shinyapps.io. Just click and run in your browser. No R setup, no packages to install—works on any device." },
+          { icon:"fas fa-heart", title:"forever free", desc:"No paywalls, no subscriptions. Research tools should be accessible to everyone, everywhere." }
         ];
 
         return (
@@ -516,16 +471,7 @@
               <h2 className="showcase-title"><span>/ / </span> featured applications</h2>
               <div className="card-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
                 {featuredApps.map((app, index) => (
-                  <div
-                    key={app.id}
-                    ref={featuredRefs.current[index]}
-                    style={{
-                      opacity: 0,
-                      transform: 'translateY(30px)',
-                      transition: 'opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1)',
-                      transitionDelay: `${index * 0.15}s`
-                    }}
-                  >
+                  <div key={app.id} ref={featuredRefs.current[index]} style={{ opacity:0, transform:'translateY(30px)', transition:'opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1)', transitionDelay:`${index * 0.15}s` }}>
                     <AppCard app={app} />
                   </div>
                 ))}
@@ -536,16 +482,7 @@
               <h2 className="showcase-title"><span>/ / </span> why these tools?</h2>
               <div className="why-tools-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '2rem', marginTop: '1rem' }}>
                 {whyToolsData.map((tool, index) => (
-                  <div
-                    key={index}
-                    ref={whyToolsRefs.current[index]}
-                    style={{
-                      opacity: 0,
-                      transform: 'translateY(30px)',
-                      transition: 'opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1)',
-                      transitionDelay: `${index * 0.15}s`
-                    }}
-                  >
+                  <div key={index} ref={whyToolsRefs.current[index]} style={{ opacity:0, transform:'translateY(30px)', transition:'opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1)', transitionDelay:`${index * 0.15}s` }}>
                     <div className="card" style={{ background: 'rgba(30,26,48,0.6)', padding: '2rem', height: '100%' }}>
                       <i className={tool.icon} style={{ fontSize: '2.5rem', color: '#a388ff', marginBottom: '1rem' }}></i>
                       <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>{tool.title}</h3>
@@ -555,25 +492,20 @@
                 ))}
               </div>
             </section>
-
             <TestimonialCarousel />
           </>
         );
       };
 
       const AppCard = ({ app }) => {
-        const handleClick = (e, url) => {
-          e.preventDefault();
-          window.location.href = url;
-        };
-
+        const [imgLoaded, setImgLoaded] = useState(false);
         return (
           <div className="card" style={{ animationDelay: '0s', height: '100%' }}>
             <div className="card-glow" />
             <div className="card-content">
               <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
                 {app.logo ? (
-                  <img src={app.logo} alt={app.name} style={{ width: '48px', height: '48px', borderRadius: '12px', objectFit: 'contain', background: '#fff' }} />
+                  <img src={app.logo} alt={app.name} style={{ width: '48px', height: '48px', borderRadius: '12px', objectFit: 'contain', background: '#fff', opacity: imgLoaded ? 1 : 0.6 }} onLoad={() => setImgLoaded(true)} />
                 ) : (
                   <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: '#2a2a4a', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <i className="fas fa-cube" style={{ fontSize: '1.5rem', color: '#a99cff' }}></i>
@@ -583,12 +515,8 @@
               </div>
               <p style={{ color: '#b1a9da', fontSize: '0.95rem', marginBottom: '1.5rem', minHeight: '60px' }}>{app.desc}</p>
               <div className="card-footer" style={{ borderTop: '1px dashed rgba(255,255,255,0.1)', paddingTop: '1rem', display: 'flex', justifyContent: 'space-between' }}>
-                <a href="#" onClick={(e) => handleClick(e, app.run)} style={{ color: '#cbc3ff', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-                  <i className="fas fa-play"></i> launch
-                </a>
-                <a href="#" onClick={(e) => handleClick(e, app.code)} style={{ color: '#cbc3ff', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-                  <i className="fab fa-github"></i> code
-                </a>
+                <a href={app.run} target="_blank" rel="noopener noreferrer" style={{ color: '#cbc3ff', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.3rem' }}><i className="fas fa-play"></i> launch</a>
+                <a href={app.code} target="_blank" rel="noopener noreferrer" style={{ color: '#cbc3ff', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.3rem' }}><i className="fab fa-github"></i> code</a>
               </div>
             </div>
           </div>
@@ -597,7 +525,6 @@
 
       const AppsTab = () => {
         const appRefs = useRef([]);
-        
         if (appRefs.current.length !== shinyApps.length) {
           appRefs.current = Array(shinyApps.length).fill().map((_, i) => appRefs.current[i] || React.createRef());
         }
@@ -615,10 +542,7 @@
             { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
           );
           
-          appRefs.current.forEach(ref => {
-            if (ref.current) observer.observe(ref.current);
-          });
-          
+          appRefs.current.forEach(ref => { if (ref.current) observer.observe(ref.current); });
           return () => observer.disconnect();
         }, []);
 
@@ -627,16 +551,7 @@
             <h2 className="showcase-title"><span>/ / </span> all R/Shiny applications (21 tools)</h2>
             <div className="card-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
               {shinyApps.map((app, index) => (
-                <div
-                  key={app.id}
-                  ref={appRefs.current[index]}
-                  style={{
-                    opacity: 0,
-                    transform: 'translateY(30px)',
-                    transition: 'opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1)',
-                    transitionDelay: `${index * 0.05}s`
-                  }}
-                >
+                <div key={app.id} ref={appRefs.current[index]} style={{ opacity:0, transform:'translateY(30px)', transition:'opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1)', transitionDelay:`${index * 0.05}s` }}>
                   <AppCard app={app} />
                 </div>
               ))}
@@ -647,7 +562,6 @@
 
       const Footer = ({ setShowPrivacy }) => {
         const currentYear = new Date().getFullYear();
-        
         return (
           <footer className="footer">
             <div className="footer-main">
@@ -658,9 +572,7 @@
               <div className="footer-links">
                 <a href="#" onClick={(e) => { e.preventDefault(); setShowPrivacy(true); }}>privacy</a>
                 <a href="#" onClick={(e) => { e.preventDefault(); window.location.href = 'https://github.com/mudassiribrahim30'; }}>github</a>
-                <a href="#" onClick={(e) => { e.preventDefault(); window.location.href = 'https://buymeacoffee.com/mudasiribrahim30'; }}>
-                  <i className="fas fa-coffee"></i> buy me a coffee
-                </a>
+                <a href="#" onClick={(e) => { e.preventDefault(); window.location.href = 'https://buymeacoffee.com/mudasiribrahim30'; }}><i className="fas fa-coffee"></i> buy me a coffee</a>
               </div>
             </div>
             <div className="footer-copyright">
@@ -691,7 +603,6 @@
             <Footer setShowPrivacy={setShowPrivacy} />
             {showPrivacy && <PrivacyModal onClose={() => setShowPrivacy(false)} />}
 
-            {/* ORIGINAL NEBULA CSS (plus mobile adjustments above) */}
             <style>{`
               .app-container {
                 position: relative;
@@ -743,6 +654,7 @@
               }
               .nav-logo a {
                 color: inherit;
+                text-decoration: none;
               }
               .logo-glow {
                 background: linear-gradient(135deg, #fff, #c0b7ff);
@@ -753,7 +665,7 @@
               }
               .nav-links {
                 display: flex;
-                gap: 3rem;
+                gap: 2rem;
                 align-items: center;
               }
               .nav-links a {
@@ -763,7 +675,6 @@
                 font-size: 1rem;
                 letter-spacing: 0.3px;
                 transition: color 0.2s, text-shadow 0.2s;
-                position: relative;
               }
               .nav-links a:hover {
                 color: white;
@@ -903,24 +814,6 @@
                 max-width: 850px;
                 margin: 0 auto;
                 animation: appear 1s ease-out;
-              }
-              .testimonial-carousel {
-                position: relative;
-                min-height: 200px;
-              }
-              .testimonial-slide {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                opacity: 0;
-                transition: opacity 0.8s ease-in-out;
-                pointer-events: none;
-              }
-              .testimonial-slide.active {
-                opacity: 1;
-                position: relative;
-                pointer-events: auto;
               }
               .quote-mark {
                 font-size: 6rem;
