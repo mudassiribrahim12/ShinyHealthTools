@@ -3,43 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
-    <title>shinyhealthtools – interactive web apps for data analysis</title>
+    <title>ShinyHealthTools – enterprise statistical tools</title>
     
-    <!-- PRIMARY META DESCRIPTION (highlights both R/Shiny and HTML tools) -->
-    <meta name="description" content="Free, intuitive R/Shiny web applications for sample size, ROC curves, survival analysis, factor analysis, data conversion & more. Built for health researchers—no coding required. 10+ interactive tools.">
+    <!-- PRIMARY META DESCRIPTION – enterprise tone, SPSS style -->
+    <meta name="description" content="ShinyHealthTools delivers validated R/Shiny applications for sample size, ROC, survival, factor analysis & data conversion. Trusted by academic medical centers. No coding, open-source, ISO 27001 aligned processes.">
     
-    <!-- KEYWORDS cover both types -->
-    <meta name="keywords" content="R Shiny, data analysis, statistical software, sample size calculator, ROC curve, survival analysis, factor analysis, SPSS converter, mediation analysis, health research tools, free statistics apps, online statistical calculators">
+    <!-- KEYWORDS – institutional audience -->
+    <meta name="keywords" content="statistical software, enterprise data analysis, R Shiny, SPSS alternative, sample size calculator, survival analysis, factor analysis, health research tools, ROC curve, clinical trial design, open source statistics">
     
-    <!-- OPEN GRAPH / SOCIAL PREVIEW -->
-    <meta property="og:title" content="shinyhealthtools – free interactive data analysis apps (R/Shiny)">
-    <meta property="og:description" content="10+ R/Shiny applications for health research: sample size, ROC curves, survival plots, factor analysis, data conversion, and more. No installation, free forever.">
+    <!-- OPEN GRAPH / SOCIAL PREVIEW – professional -->
+    <meta property="og:title" content="ShinyHealthTools – enterprise-grade interactive tools">
+    <meta property="og:description" content="21 validated statistical applications used by global health institutions. Sample size, survival, ROC, factor analysis, data conversion. Free forever.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://shinyhealthtools.com">
+    <meta property="og:url" content="https://ShinyHealthTools.org">
     <meta property="og:image" content="https://raw.githubusercontent.com/mudassiribrahim12/me/main/og-preview.jpg">
-    <meta property="og:image:alt" content="shinyhealthtools dashboard preview with R/Shiny apps">
+    <meta property="og:image:alt" content="ShinyHealthTools dashboard – institutional suite">
     
     <!-- TWITTER CARD -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="shinyhealthtools – interactive web apps for data analysis (R/Shiny)">
-    <meta name="twitter:description" content="Free R/Shiny apps for sample size, ROC, survival, factor analysis, data conversion & more. Built by a health researcher.">
+    <meta name="twitter:title" content="ShinyHealthTools – enterprise statistical tools">
+    <meta name="twitter:description" content="Validated R/Shiny apps for sample size, ROC, survival, factor analysis & data conversion. Trusted by researchers worldwide.">
     <meta name="twitter:image" content="https://raw.githubusercontent.com/mudassiribrahim12/me/main/og-preview.jpg">
     
-    <!-- fonts & icons -->
+    <!-- fonts & icons – Montserrat for bold clarity, plus fallback -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Fira Code for VS Code style animation -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <style>
       * { margin: 0; padding: 0; box-sizing: border-box; }
       html {
         scroll-behavior: smooth;
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
+        font-size: 15px;
       }
       body {
-        background: #0c0b14;
-        font-family: "Inter", system-ui, -apple-system, sans-serif;
+        background: #f2f5f9;
+        font-family: "Montserrat", system-ui, -apple-system, sans-serif;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -49,77 +52,105 @@
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         overflow-x: hidden;
+        color: #1e2a3a;
+        transition: background 0.3s, color 0.3s;
+      }
+      body.dark-theme {
+        background: #121a24;
+        color: #e3eaf2;
       }
       #root {
         width: 100%;
         max-width: 100%;
         border-radius: 0;
-        background: rgba(20, 18, 30, 0.7);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.03) inset;
+        background: #ffffff;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
         overflow: hidden;
+        transition: background 0.3s;
       }
-      /* modal styles – scrolls into view */
+      body.dark-theme #root {
+        background: #1e2a3a;
+      }
+      /* modal styles */
       .modal-overlay {
         position: fixed;
         top: 0; left: 0; right: 0; bottom: 0;
-        background: rgba(0,0,0,0.7);
-        backdrop-filter: blur(5px);
+        background: rgba(0,20,40,0.6);
+        backdrop-filter: blur(3px);
         z-index: 1000;
         display: flex;
         align-items: center;
         justify-content: center;
       }
       .modal-content {
-        background: #1e1a30;
-        border: 1px solid rgba(255,255,255,0.1);
-        border-radius: 2rem;
-        padding: 2.5rem;
-        max-width: 500px;
+        background: #ffffff;
+        border: 1px solid #e1e6f0;
+        border-radius: 1rem;
+        padding: 2rem;
+        max-width: 600px;
         width: 90%;
-        color: #eaeefb;
-        box-shadow: 0 30px 60px -20px black;
+        color: #1e2a3a;
+        box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
         margin: auto;
+        max-height: 80vh;
+        overflow-y: auto;
+      }
+      body.dark-theme .modal-content {
+        background: #253544;
+        border-color: #3a4b5e;
+        color: #eef4fa;
       }
       .modal-content h3 {
-        font-size: 1.8rem;
-        margin-bottom: 1rem;
-        background: linear-gradient(135deg, #fff, #c0b7ff);
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
+        font-size: 1.6rem;
+        margin-bottom: 0.8rem;
+        color: #0b1c2e;
+        font-weight: 700;
+      }
+      body.dark-theme .modal-content h3 {
+        color: #cfdeff;
       }
       .modal-content p {
-        margin-bottom: 1.5rem;
-        line-height: 1.6;
-        color: #c7c2e6;
+        margin-bottom: 1.2rem;
+        line-height: 1.5;
+        color: #2d3a4f;
+        font-weight: 500;
+        font-size: 0.95rem;
+      }
+      body.dark-theme .modal-content p {
+        color: #cbd5e1;
       }
       .modal-close {
-        background: rgba(160, 140, 255, 0.2);
-        border: 1px solid #9f8eff;
-        padding: 0.7rem 1.5rem;
-        border-radius: 50px;
+        background: #0b3b5c;
+        border: none;
+        padding: 0.6rem 1.5rem;
+        border-radius: 4px;
         color: white;
         cursor: pointer;
-        font-weight: 500;
-        transition: all 0.2s;
+        font-weight: 600;
+        transition: background 0.2s;
+        font-size: 0.9rem;
+        margin-top: 0.5rem;
       }
       .modal-close:hover {
-        background: rgba(160, 140, 255, 0.4);
+        background: #0f4a73;
       }
       body.modal-open {
         overflow: hidden;
       }
+      
+ 
       /* mobile menu */
       .mobile-menu-btn {
         display: none;
         background: none;
         border: none;
-        color: #ddd9ff;
-        font-size: 1.8rem;
+        color: #0b3b5c;
+        font-size: 1.6rem;
         cursor: pointer;
         z-index: 30;
+      }
+      body.dark-theme .mobile-menu-btn {
+        color: #9bb8e0;
       }
       .mobile-menu {
         display: none;
@@ -127,126 +158,456 @@
         top: 100%;
         left: 0;
         right: 0;
-        background: rgba(10, 8, 22, 0.95);
-        backdrop-filter: blur(10px);
-        padding: 1rem 1.5rem;
+        background: #ffffff;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.04);
+        padding: 0.8rem 1.5rem;
         flex-direction: column;
-        gap: 0.5rem;
-        border-bottom: 1px solid rgba(255,255,255,0.05);
+        gap: 0.3rem;
+        border-bottom: 1px solid #e6eefc;
         z-index: 25;
       }
+      body.dark-theme .mobile-menu {
+        background: #26333f;
+        border-bottom: 1px solid #3d5067;
+      }
       .mobile-menu a {
-        color: #ddd9ff;
+        color: #1e2a3a;
         text-decoration: none;
-        font-size: 1rem;
-        padding: 0.8rem 1rem;
-        border-radius: 12px;
+        font-size: 0.95rem;
+        padding: 0.6rem 1rem;
+        border-radius: 6px;
         transition: background 0.2s;
-        font-weight: 400;
+        font-weight: 600;
+      }
+      body.dark-theme .mobile-menu a {
+        color: #d1dceb;
       }
       .mobile-menu a:hover {
-        background: rgba(160, 140, 255, 0.15);
+        background: #f0f5ff;
+      }
+      body.dark-theme .mobile-menu a:hover {
+        background: #34495f;
       }
       .mobile-menu a i {
         margin-right: 8px;
       }
       
-      /* Testimonial carousel */
-      .testimonial-carousel {
-        position: relative;
-        min-height: 250px;
+  .testimonial-carousel {
+  position: relative;
+  min-height: 300px; /* Increased fixed minimum height */
+  height: auto;
+}
+
+.testimonial-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+  pointer-events: none;
+  min-height: 250px; /* Fixed minimum height for each slide */
+}
+
+.testimonial-slide.active {
+  opacity: 1;
+  position: relative;
+  pointer-events: auto;
+}
+
+/* Add this new class for the testimonial inner container */
+.testimonial-inner {
+  background: #f8fbfe;
+  border-radius: 1.5rem;
+  padding: 2.5rem 3rem;
+  border: 2px solid #0b3b5c30;
+  max-width: 950px;
+  margin: 0 auto;
+  animation: appear 1s ease-out;
+  min-height: 350px; /* Fixed height for the entire testimonial box */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+  
+      /* chatbot */
+      .chatbot-button {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        background: #0b3b5c;
+        color: white;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        cursor: pointer;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        border: none;
+        z-index: 200;
+        transition: transform 0.2s;
       }
-      .testimonial-slide {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        opacity: 0;
-        transition: opacity 0.8s ease-in-out;
-        pointer-events: none;
+      .chatbot-button:hover {
+        transform: scale(1.1);
       }
-      .testimonial-slide.active {
-        opacity: 1;
-        position: relative;
-        pointer-events: auto;
+      .chatbot-panel {
+        position: fixed;
+        bottom: 90px;
+        right: 24px;
+        width: 360px;
+        height: 500px;
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        z-index: 199;
+        border: 1px solid #e0e8f2;
+      }
+      body.dark-theme .chatbot-panel {
+        background: #26333f;
+        border-color: #3d5067;
+      }
+      .chatbot-header {
+        background: #0b3b5c;
+        color: white;
+        padding: 1rem;
+        font-weight: 600;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .chatbot-header button {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.2rem;
+        cursor: pointer;
+      }
+      .chatbot-messages {
+        flex: 1;
+        padding: 1rem;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+      }
+      .message {
+        max-width: 85%;
+        padding: 0.6rem 1rem;
+        border-radius: 18px;
+        font-size: 0.9rem;
+        line-height: 1.4;
+        word-break: break-word;
+      }
+      .user-message {
+        background: #0b3b5c;
+        color: white;
+        align-self: flex-end;
+        border-bottom-right-radius: 4px;
+      }
+      .bot-message {
+        background: #f0f5ff;
+        color: #1e2a3a;
+        align-self: flex-start;
+        border-bottom-left-radius: 4px;
+      }
+      body.dark-theme .bot-message {
+        background: #34495f;
+        color: #eef4fa;
+      }
+      .suggested-questions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem 1rem;
+        border-top: 1px solid #e0e8f2;
+      }
+      .suggested-question {
+        background: #eaf0fa;
+        border: 1px solid #b8cde0;
+        border-radius: 30px;
+        padding: 0.4rem 1rem;
+        font-size: 0.8rem;
+        cursor: pointer;
+        transition: background 0.2s;
+        color: #0b3b5c;
+        font-weight: 500;
+      }
+      body.dark-theme .suggested-question {
+        background: #2f4055;
+        border-color: #57708f;
+        color: #c6dcff;
+      }
+      .suggested-question:hover {
+        background: #d0e0f5;
+      }
+      .chatbot-input-area {
+        display: flex;
+        padding: 0.8rem;
+        border-top: 1px solid #e0e8f2;
+        background: white;
+      }
+      body.dark-theme .chatbot-input-area {
+        background: #26333f;
+        border-top-color: #3d5067;
+      }
+      .chatbot-input-area input {
+        flex: 1;
+        padding: 0.6rem 1rem;
+        border: 1px solid #ccc;
+        border-radius: 30px;
+        outline: none;
+        font-size: 0.9rem;
+      }
+      .chatbot-input-area button {
+        background: #0b3b5c;
+        border: none;
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-left: 0.5rem;
+        cursor: pointer;
       }
 
-      /* responsive breakpoints */
+      /* Footer vertical columns */
+      .footer-columns {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 2rem;
+        margin-bottom: 2rem;
+      }
+      .footer-col {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+.footer-col h4 {
+  color: #ffffff;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.footer-col a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+  cursor: pointer;
+}
+.footer-col a:hover {
+  color: #cccccc;
+  text-decoration: underline;
+}
+
+       /* VS Code animation box - Professional fixed size with syntax highlighting */
+      .code-animation-box {
+        font-family: 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+        background: #1e1e1e;
+        color: #d4d4d4;
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 20px 30px -10px rgba(0,0,0,0.5);
+        width: 100%;
+        max-width: 500px;
+        min-width: 500px;
+        height: 380px;
+        border-left: 6px solid #007acc;
+        font-size: 0.9rem;
+        line-height: 1.6;
+        overflow-y: auto;
+        position: relative;
+        border: 1px solid #3c3c3c;
+      }
+
+      /* VS Code syntax highlighting colors */
+      .code-animation-box .keyword { 
+        color: #569cd6;
+        font-weight: 500;
+      }
+      .code-animation-box .function { 
+        color: #dcdcaa;
+      }
+      .code-animation-box .string { 
+        color: #ce9178;
+      }
+      .code-animation-box .comment { 
+        color: #6a9955;
+      }
+      .code-animation-box .number { 
+        color: #b5cea8;
+      }
+      .code-animation-box .operator { 
+        color: #d4d4d4;
+      }
+      .code-animation-box .variable { 
+        color: #9cdcfe;
+      }
+      .code-animation-box .bracket { 
+        color: #ffd700;
+      }
+
+      /* VS Code cursor animation */
+      .code-animation-box .cursor {
+        display: inline-block;
+        width: 8px;
+        height: 1.2em;
+        background-color: #007acc;
+        vertical-align: middle;
+        animation: blink 1s infinite;
+        margin-left: 2px;
+      }
+
+      @keyframes blink {
+        0%, 50% { opacity: 1; }
+        51%, 100% { opacity: 0; }
+      }
+
+      /* VS Code scrollbar styling */
+      .code-animation-box pre {
+        margin: 0;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        height: 100%;
+        overflow-y: auto;
+        scrollbar-width: thin;
+        scrollbar-color: #007acc #2d2d2d;
+        font-family: inherit;
+      }
+
+      .code-animation-box pre::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+      }
+
+      .code-animation-box pre::-webkit-scrollbar-track {
+        background: #2d2d2d;
+        border-radius: 4px;
+      }
+
+      .code-animation-box pre::-webkit-scrollbar-thumb {
+        background: #007acc;
+        border-radius: 4px;
+        border: 2px solid #2d2d2d;
+      }
+
+      .code-animation-box pre::-webkit-scrollbar-thumb:hover {
+        background: #1a8cff;
+      }
+
+      .code-animation-box pre::-webkit-scrollbar-corner {
+        background: #1e1e1e;
+      }
+
+      /* VS Code status bar at bottom */
+      .code-animation-box .status-bar {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #007acc;
+        color: white;
+        padding: 2px 10px;
+        font-size: 0.7rem;
+        display: flex;
+        justify-content: space-between;
+        opacity: 0.8;
+        border-bottom-left-radius: 12px;
+        border-bottom-right-radius: 12px;
+        z-index: 10;
+      }
+
+      /* VS Code breadcrumb */
+      .code-animation-box .breadcrumb {
+        color: #8dc3f0;
+        font-size: 0.7rem;
+        padding-bottom: 8px;
+        border-bottom: 1px solid #3c3c3c;
+        margin-bottom: 8px;
+      }
+
+      /* Language indicator */
+      .code-animation-box .language-badge {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        color: #6a9955;
+        font-size: 0.7rem;
+        font-family: 'Fira Code';
+        background: #2d2d2d;
+        padding: 2px 8px;
+        border-radius: 12px;
+        border: 1px solid #3c3c3c;
+        z-index: 10;
+      }
+
+      /* VS Code minimap area */
+      .code-animation-box .minimap {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 60px;
+        height: 100%;
+        background: #252525;
+        opacity: 0.3;
+        pointer-events: none;
+        z-index: 5;
+      }
+
+      /* Typing animation pulse */
+      .code-animation-box .typing {
+        animation: typePulse 0.1s ease-in-out;
+      }
+
+      @keyframes typePulse {
+        0% { opacity: 0.7; }
+        50% { opacity: 1; transform: scale(1.02); }
+        100% { opacity: 0.7; }
+      }
+
+      .hero-right {
+        flex: 1;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+      }
+      
+      .hero-left {
+        flex: 1;
+      }
+      
+      .hero-container {
+        display: flex;
+        align-items: center;
+        gap: 3rem;
+      }
+
+      @media (max-width: 900px) {
+        .hero-container {
+          flex-direction: column;
+        }
+        .hero-right {
+          justify-content: center;
+          width: 100%;
+        }
+        .code-animation-box {
+          max-width: 100%;
+          min-width: 100%;
+          height: 350px;
+        }
+      }
+      
       @media (max-width: 700px) {
-        body { padding: 0; }
-        
-        .nav-links {
-          display: none !important;
-        }
-        .mobile-menu-btn {
-          display: block !important;
-        }
-        .mobile-menu.open {
-          display: flex !important;
-        }
-        .navbar {
-          flex-wrap: wrap;
-          position: relative;
-          padding: 1.2rem 1.5rem !important;
-        }
-        .hero, .showcase, .footer {
-          padding-left: 1.5rem !important;
-          padding-right: 1.5rem !important;
-        }
-        .hero { padding-top: 2rem !important; padding-bottom: 3rem !important; }
-        .showcase { padding-top: 2rem !important; padding-bottom: 2rem !important; }
-        
-        .card-grid {
-          grid-template-columns: 1fr !important;
-          gap: 1.2rem !important;
-        }
-        .hero-title {
-          font-size: clamp(2.2rem, 13vw, 3.2rem) !important;
-        }
-        .hero-sub {
-          font-size: 1rem !important;
-          line-height: 1.5 !important;
-        }
-        .hero-metrics {
-          flex-direction: row !important;
-          flex-wrap: wrap;
-          gap: 1.5rem !important;
-        }
-        .why-tools-grid {
-          grid-template-columns: 1fr !important;
-          gap: 1.2rem !important;
-        }
-        .testimonial-inner {
-          padding: 2rem 1.8rem !important;
-          border-radius: 2rem !important;
-        }
-        .quote-text {
-          font-size: 1.1rem !important;
-          line-height: 1.5 !important;
-        }
-        .quote-mark {
-          font-size: 4rem !important;
-        }
-        .quote-author {
-          font-size: 0.95rem !important;
-        }
-        .footer {
-          padding: 2rem 1.5rem 1.2rem !important;
-        }
-        .footer-main {
-          flex-direction: column !important;
-          gap: 1.5rem !important;
-          margin-bottom: 2rem !important;
-        }
-        .footer-links {
-          flex-wrap: wrap !important;
-          gap: 1.2rem !important;
-        }
-        .footer-copyright {
-          flex-direction: column !important;
-          gap: 0.5rem !important;
-          text-align: center !important;
-        }
+        html { font-size: 14px; }
+        .chatbot-panel { width: 300px; right: 16px; bottom: 80px; }
+        .footer-columns { flex-direction: column; gap: 1.5rem; }
       }
     </style>
 </head>
@@ -263,38 +624,35 @@
       // ---------- ALL APP DATA ----------
       const shinyApps = [
         { id:1, name:"FactorGuard", desc:"A factor-retention decision tool for EFA", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/FactorGuard.png", run:"https://mudassiribrahim2026.shinyapps.io/FactorGuard/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/FactorGuard.R" },
-        { id:2, name:"CalcuStats", desc:"Tool for sample size calculation, power analysis, and descriptive statistics", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/CalcuStats.png", run:"https://mudassiribrahim2025.shinyapps.io/CalcuStats/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/CalcuStats.R" },
-        { id:3, name:"CATrend Analyzer", desc:"Cochran-Armitage test for trend tool", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/CAtrend.png", run:"https://newappstesting.shinyapps.io/CATrendAnalyzer/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/CATrendAnalyzer.R" },
+        { id:2, name:"CalcuStats", desc:"Tool for sample size calculation, power analysis, and descriptive statistics for clinical trials & observational studies", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/CalcuStats.png", run:"https://mudassiribrahim2025.shinyapps.io/CalcuStats/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/CalcuStats.R" },
+        { id:3, name:"CATrend Analyzer", desc:"Cochran-Armitage trend test for dose-response & regulatory submissions", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/CAtrend.png", run:"https://newappstesting.shinyapps.io/CATrendAnalyzer/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/CATrendAnalyzer.R" },
         { id:4, name:"ROC Curve Builder", desc:"ROC curve analysis and diagnostic test evaluation", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/ROC.png", run:"https://mudassiribrahim30.shinyapps.io/ROC_CURVE/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/ROC%20Curve%20Builder.R" },
-        { id:5, name:"Data2SPSS", desc:"Convert datasets to SPSS (.sav) files", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/Data2SPSS.png", run:"https://newappstesting.shinyapps.io/Data2SPSS/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/Data2SPSS" },
-        { id:6, name:"MedModr", desc:"Mediation and moderation analysis tool", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/MedModr.png", run:"https://mudassiribrahim30.shinyapps.io/MedModr/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/MedModr.R" },
-        { id:7, name:"EpiDem Suite", desc:"Epidemiological data analysis suite", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/EpiDem.png", run:"https://mudassiribrahim2025.shinyapps.io/EpiDemSuite/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/EpiDem%20Suite.R" },
-        { id:8, name:"ggPubPlot", desc:"Publication-ready ggplot2 visualizations", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/ggLogo.png", run:"https://mudassiribrahim2025.shinyapps.io/ggPubPlot/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/ggPubPlot.R" },
-        { id:9, name:"APA Table Generator", desc:"Generate APA formatted tables", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/APA%20logo.png", run:"https://newappstesting.shinyapps.io/APATableGenerator/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/APA%20Table%20Generator%20Pro.R" },
-        { id:10, name:"SysSampler", desc:"Systematic sampling tool", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/Sys%20Sampler.png", run:"https://mudassiribrahim2025b.shinyapps.io/SysSampler/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/SysSampler" },
-        { id:11, name:"CMH Analyzer", desc:"Cochran-Mantel-Haenszel analysis", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/CMH.png", run:"https://newappstesting.shinyapps.io/CMHAnalyzer/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/CMHAnalyzer.R" },
-        { id:12, name:"TNMTC DataLab", desc:"Comprehensive data analysis", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/TNMTC.png", run:"https://newappstesting.shinyapps.io/NMTCDataLab/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/NMTC%20APP.R" },
-        { id:13, name:"PharmaCalc Pro", desc:"Pharmaceutical calculations", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/Pharma.png", run:"https://mudassiribrahim2025b.shinyapps.io/PharmaCalcPro/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/PharmaCalcPro.R" },
-        { id:14, name:"RegEffect Xplorer", desc:"Explore regression effects visually", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/RegEf.png", run:"https://mudassiribrahim2025b.shinyapps.io/RegEffectXplorer/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/RegEffectXplorer.R" },
-        { id:15, name:"Data TransformR", desc:"Data transformation and preprocessing", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/DataTrans.png", run:"https://mudassiribrahim2025b.shinyapps.io/DataTransformR/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/DataTransformR.R" },
-        { id:16, name:"CleanMyData", desc:"Data screening and cleaning", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/CleanMyData.png", run:"https://mudassiribrahim2025b.shinyapps.io/CleanMyData/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/CleanMyData.R" },
-        { id:17, name:"KMPlot Genie", desc:"Kaplan-Meier survival plot generator", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/KMPlot.png", run:"https://mudassiribrahim30.shinyapps.io/KMPlotGenie/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/KMPlotGenie.R" },
-        { id:18, name:"QuickStatsGen", desc:"Custom Data Generator for education", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/QuickStats.png", run:"https://mudassiribrahim2025.shinyapps.io/QuickStatsGen/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/QuickStatsGen.R" },
-        { id:19, name:"Robust Regressor", desc:"Robust regression analysis", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/Robust.png", run:"https://mudassiribrahim2025.shinyapps.io/Robustregression/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/Robust%20%20Regressor.R" },
-        { id:20, name:"TagSelect", desc:"Participant selection tool", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/TagSelect.png", run:"https://mudassiribrahim30.shinyapps.io/Tagselect/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/TagSelect.R" },
-        { id:21, name:"FAnalyzr", desc:"Factor analysis and dimensionality reduction", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/FA.png", run:"https://mudassiribrahim30.shinyapps.io/fanalyzr/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/FAnalyzr.R" }
+        { id:5, name:"Data2SPSS", desc:"Effortlessly convert datasets in RData, Stata, SAS, Excel, or CSV formats to SPSS (.sav)", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/Data2SPSS.png", run:"https://newappstesting.shinyapps.io/Data2SPSS/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/Data2SPSS" },
+        { id:6, name:"MedModr", desc:"Mediation and moderation analysis tool for research studies", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/MedModr.png", run:"https://mudassiribrahim30.shinyapps.io/MedModr/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/MedModr.R" },
+        { id:7, name:"EpiDem Suite", desc:"Epidemiological data analysis suite for public health research", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/EpiDem.png", run:"https://mudassiribrahim2025.shinyapps.io/EpiDemSuite/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/EpiDem%20Suite.R" },
+        { id:8, name:"ggPubPlot", desc:"Tool for generating publication-ready graphics (ggplot2) with journal formatting", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/ggLogo.png", run:"https://mudassiribrahim2025.shinyapps.io/ggPubPlot/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/ggPubPlot.R" },
+        { id:9, name:"APA Table Generator", desc:"Generate APA formatted tables for research papers and publications", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/APA%20logo.png", run:"https://newappstesting.shinyapps.io/APATableGenerator/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/APA%20Table%20Generator%20Pro.R" },
+        { id:10, name:"SysSampler", desc:"Systematic sampling tool for survey methodology", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/Sys%20Sampler.png", run:"https://mudassiribrahim2025b.shinyapps.io/SysSampler/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/SysSampler" },
+        { id:11, name:"CMH Analyzer", desc:"Cochran-Mantel-Haenszel analysis tool for stratified data", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/CMH.png", run:"https://newappstesting.shinyapps.io/CMHAnalyzer/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/CMHAnalyzer.R" },
+        { id:12, name:"R DataLab", desc:"Statistical analysis tool for clinical data exploration", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/RdataLab.png", run:"https://newappstesting.shinyapps.io/RDataLab/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/RDataLab.R" },
+        { id:13, name:"PharmaCalc Pro", desc:"Pharmaceutical calculations for dosage", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/Pharma.png", run:"https://mudassiribrahim2025b.shinyapps.io/PharmaCalcPro/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/PharmaCalcPro.R" },
+        { id:14, name:"RegEffect Xplorer", desc:"Explore regression effects visually with interactive plots", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/RegEf.png", run:"https://mudassiribrahim2025b.shinyapps.io/RegEffectXplorer/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/RegEffectXplorer.R" },
+        { id:15, name:"Data TransformR", desc:"Data transformation and preprocessing tool for analytics", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/DataTrans.png", run:"https://mudassiribrahim2025b.shinyapps.io/DataTransformR/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/DataTransformR.R" },
+        { id:16, name:"CleanMyData", desc:"Data screening and cleaning tool with visualization", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/CleanMyData.png", run:"https://mudassiribrahim2025b.shinyapps.io/CleanMyData/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/CleanMyData.R" },
+        { id:17, name:"KMPlot Genie", desc:"Kaplan–Meier survival curves generator with log-rank tests", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/KMPlot.png", run:"https://mudassiribrahim30.shinyapps.io/KMPlotGenie/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/KMPlotGenie.R" },
+        { id:18, name:"QuickStatsGen", desc:"Simulated data generator for education & protocol development", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/QuickStats.png", run:"https://mudassiribrahim2025.shinyapps.io/QuickStatsGen/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/QuickStatsGen.R" },
+        { id:19, name:"Robust Regressor", desc:"Robust regression analysis for outlier-resistant modeling", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/Robust.png", run:"https://mudassiribrahim2025.shinyapps.io/Robustregression/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/Robust%20%20Regressor.R" },
+        { id:20, name:"TagSelect", desc:"Participant selection and randomization tool", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/TagSelect.png", run:"https://mudassiribrahim30.shinyapps.io/Tagselect/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/TagSelect.R" },
+        { id:21, name:"FAnalyzr", desc:"Factor analysis and dimensionality reduction tool", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/FA.png", run:"https://mudassiribrahim30.shinyapps.io/fanalyzr/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/FAnalyzr.R" }
       ];
 
-      // Featured apps (6 for home)
       const featuredApps = shinyApps.slice(0, 6);
 
-      // Testimonials data (5 items)
       const testimonials = [
-        { id:1, text:"These tools saved me hours of coding. The ROC curve builder and survival plot generator are incredibly intuitive. Perfect for health researchers without a stats background.", role:"health researcher" },
-        { id:2, text:"The sample size calculator and power analysis tools are spot-on. I use them for all my research proposals now. Clean interface and reliable results.", role:"clinical researcher" },
-        { id:3, text:"Finally, free tools that actually work! The factor analysis app helped me validate my survey instrument in minutes instead of days.", role:"phd candidate" },
-        { id:4, text:"I've recommended these tools to my colleagues. The data conversion and SPSS export features are lifesavers.", role:"data analyst" },
-        { id:5, text:"The MedModr tool is brilliant. It makes complex statistical concepts accessible and visual.", role:"research methodologist" }
+        { id:1, text:"My experience using CalcuStats has been really good. The app is easy to use and very straightforward, even if you're not strong in statistics. It quickly gives accurate results (a breakdown of the results) once you enter your values. It has saved me a lot of time. One more special feature I am very passionate about is the non-response rate. It's a helpful and reliable tool for sample size calculation, to say the least.", role:"Health researcher" },
+        { id:2, text:"This app (CalcuStats) made the work very simple for me. It even helped me generate a flowchart with just a click.", role:"Health researcher" },
+        { id:3, text:"Data2SPSS saves my time each week. Seamless conversion with no errors.", role:"Data Analyst" },
+        { id:4, text:"We compared MedModr with the PROCESS macro and obtained identical results, but MedModr offers a far more interactive experience. Users can choose between an intuitive interactive interface or a syntax mode to write code directly. What is particularly impressive is that when an analysis is run through the interactive interface, switching to the syntax mode reveals the exact R code that was executed. Highly recommended for researchers seeking both transparency and flexibility.", role:"Health Researcher, Data Analyst" }
       ];
 
       // ---------- COMPONENTS ----------
@@ -304,88 +662,320 @@
           if (!containerRef.current) return;
           const container = containerRef.current;
           container.innerHTML = '';
-          const particleCount = 42;
+          const particleCount = 30;
           for (let i = 0; i < particleCount; i++) {
             const particle = document.createElement("span");
             particle.className = "particle";
-            const size = Math.random() * 6 + 2;
+            const size = Math.random() * 4 + 1;
             particle.style.width = size + "px";
             particle.style.height = size + "px";
             particle.style.left = Math.random() * 100 + "%";
             particle.style.top = Math.random() * 100 + "%";
             particle.style.animationDelay = Math.random() * 8 + "s";
             particle.style.animationDuration = Math.random() * 10 + 12 + "s";
-            particle.style.background = `rgba(${160 + Math.random() * 80}, ${180 + Math.random() * 70}, 255, ${Math.random() * 0.3 + 0.1})`;
-            particle.style.boxShadow = `0 0 ${Math.random() * 12 + 4}px currentColor`;
+            particle.style.background = `rgba(11, 59, 92, ${Math.random() * 0.15 + 0.05})`;
+            particle.style.boxShadow = `0 0 4px #0b3b5c20`;
             container.appendChild(particle);
           }
         }, []);
         return <div ref={containerRef} className="particle-field" />;
       };
 
-      const Navbar = ({ activeTab, setActiveTab, setShowPrivacy }) => {
-        const [scrolled, setScrolled] = useState(false);
-        const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+       // VS Code Animation Component - NOW WITH AUTO-TYPING EFFECT
+      const CodeAnimation = () => {
+        const [displayedCode, setDisplayedCode] = useState('');
+        const [isTyping, setIsTyping] = useState(true);
+        const [cursorVisible, setCursorVisible] = useState(true);
         
+        const fullCode = `# # Load the ggplot2 package 
+library(ggplot2)
+
+# Generate sample data
+set.seed(123)
+data <- data.frame(
+  group = rep(c("Control", "Treatment"), each = 30),
+  response = c(rnorm(30, 10, 2), rnorm(30, 12, 2.5))
+)
+# Run statistical test
+t_test <- t.test(response ~ group, data = data)
+
+# Create publication plot
+ggplot(data, aes(x = group, y = response, fill = group)) ]`;
+
         useEffect(() => {
-          const handleScroll = () => setScrolled(window.scrollY > 20);
-          window.addEventListener("scroll", handleScroll);
-          return () => window.removeEventListener("scroll", handleScroll);
+          let i = 0;
+          const typingSpeed = 30; // milliseconds per character
+          let timeoutId;
+          
+          const typeNextChar = () => {
+            if (i < fullCode.length) {
+              setDisplayedCode(fullCode.substring(0, i + 1));
+              i++;
+              timeoutId = setTimeout(typeNextChar, typingSpeed);
+            } else {
+              setIsTyping(false);
+              // Restart after 3 seconds when complete
+              setTimeout(() => {
+                setDisplayedCode('');
+                i = 0;
+                setIsTyping(true);
+                timeoutId = setTimeout(typeNextChar, typingSpeed);
+              }, 3000);
+            }
+          };
+          
+          // Start typing animation
+          timeoutId = setTimeout(typeNextChar, 500);
+          
+          // Cursor blinking effect
+          const cursorInterval = setInterval(() => {
+            setCursorVisible(prev => !prev);
+          }, 500);
+          
+          return () => {
+            clearTimeout(timeoutId);
+            clearInterval(cursorInterval);
+          };
         }, []);
-        
-        const handleLogoClick = (e) => {
-          e.preventDefault();           // stay on same page
-          setActiveTab('home');
-          setMobileMenuOpen(false);
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        };
-
-        const handleNavClick = (tab) => {
-          setActiveTab(tab);
-          setMobileMenuOpen(false);
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        };
-
-        const handleAboutClick = (e) => {
-          e.preventDefault();
-          // open in same tab (stay within website tab)
-          window.location.href = 'https://www.mudasiribrahim.com';
-          setMobileMenuOpen(false);
-        };
 
         return (
-          <nav className={`navbar ${scrolled ? "navbar-blur" : ""}`}>
-            <div className="nav-logo">
-              <a href="#" onClick={handleLogoClick}>
-                <span className="logo-glow">✦ shinyhealthtools</span>
-              </a>
-            </div>
-            
-            {/* Desktop Navigation - no theme toggle */}
-            <div className="nav-links">
-              <a href="#" onClick={(e) => { e.preventDefault(); handleNavClick('home'); }}>home</a>
-              <a href="#" onClick={(e) => { e.preventDefault(); handleNavClick('apps'); }}>apps</a>
-              <a href="#" onClick={handleAboutClick}>about me</a>
-            </div>
-
-            <button className="mobile-menu-btn" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-              <i className={`fas fa-${mobileMenuOpen ? 'times' : 'bars'}`}></i>
-            </button>
-
-            <div className={`mobile-menu ${mobileMenuOpen ? 'open' : ''}`}>
-              <a href="#" onClick={(e) => { e.preventDefault(); handleNavClick('home'); }}>home</a>
-              <a href="#" onClick={(e) => { e.preventDefault(); handleNavClick('apps'); }}>apps</a>
-              <a href="#" onClick={handleAboutClick}>about me</a>
-            </div>
-          </nav>
+          <div className="code-animation-box">
+            <pre>
+              {displayedCode}
+              <span style={{ 
+                opacity: cursorVisible ? 1 : 0,
+                backgroundColor: '#007acc',
+                width: '8px',
+                height: '1.2em',
+                display: 'inline-block',
+                marginLeft: '2px',
+                verticalAlign: 'middle'
+              }}></span>
+            </pre>
+            {!isTyping && (
+              <div style={{ 
+                position: 'absolute', 
+                bottom: '10px', 
+                right: '15px',
+                color: '#6a9955',
+                fontSize: '0.7rem',
+                fontFamily: 'Fira Code',
+                background: '#2d2d2d',
+                padding: '2px 8px',
+                borderRadius: '12px',
+                border: '1px solid #3c3c3c'
+              }}>
+                <i className="fas fa-redo-alt" style={{ marginRight: '4px' }}></i> replaying in 3s
+              </div>
+            )}
+          </div>
         );
       };
 
-      const PrivacyModal = ({ onClose }) => {
+      const TopHeader = ({ darkTheme, toggleTheme, searchQuery, setSearchQuery, performSearch, searchResults, setActiveTab }) => {
+        const handleSearchInput = (e) => {
+          setSearchQuery(e.target.value);
+          performSearch(e.target.value);
+        };
+        return (
+          <div className="top-header" style={{ background: '#ffffff', borderBottom: '1px solid #d0ddef', padding: '0.5rem 3rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', transition: 'background 0.3s' }}>
+            <div className="social-icons" style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+              <a href="https://youtube.com" target="_blank" style={{ color: '#0b3b5c', fontSize: '1.1rem' }}><i className="fab fa-youtube"></i></a>
+              <a href="https://facebook.com" target="_blank" style={{ color: '#0b3b5c', fontSize: '1.1rem' }}><i className="fab fa-facebook-f"></i></a>
+              <a href="https://twitter.com" target="_blank" style={{ color: '#0b3b5c', fontSize: '1.1rem' }}><i className="fab fa-x-twitter"></i></a>
+              <a href="https://instagram.com" target="_blank" style={{ color: '#0b3b5c', fontSize: '1.1rem' }}><i className="fab fa-instagram"></i></a>
+              <a href="https://github.com/mudassiribrahim30" target="_blank" style={{ color: '#0b3b5c', fontSize: '1.1rem' }}><i className="fab fa-github"></i></a>
+            </div>
+            <div className="social-search" style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+              <div style={{ position: 'relative' }}>
+                <input
+                  type="text"
+                  placeholder="Search apps, keywords..."
+                  value={searchQuery}
+                  onChange={handleSearchInput}
+                  style={{ padding: '0.4rem 1rem 0.4rem 2rem', borderRadius: '30px', border: '1px solid #b8cde0', fontSize: '0.85rem', width: '200px', background: '#fff', color: '#1e2a3a' }}
+                />
+                <i className="fas fa-search" style={{ position: 'absolute', left: '10px', top: '50%', transform: 'translateY(-50%)', color: '#7f8fa4', fontSize: '0.8rem' }}></i>
+                {searchQuery && searchResults.length > 0 && (
+                  <div style={{ position: 'absolute', top: '100%', left: 0, right: 0, background: '#fff', border: '1px solid #ccc', borderRadius: '10px', marginTop: '4px', maxHeight: '200px', overflowY: 'auto', zIndex: 999, boxShadow: '0 8px 16px rgba(0,0,0,0.1)' }}>
+                    {searchResults.map(item => (
+                      <div key={item.id} onClick={() => { window.open(item.run, '_blank'); setSearchQuery(''); }} style={{ padding: '0.5rem 1rem', cursor: 'pointer', borderBottom: '1px solid #eee', fontWeight: 500, color: '#0b3b5c', fontSize: '0.85rem' }}>
+                        {item.name} <span style={{ fontSize: '0.7rem', color: '#6b7c93' }}>↗</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+              <button onClick={toggleTheme} style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '1.1rem', color: '#0b3b5c' }}>
+                <i className={`fas fa-${darkTheme ? 'sun' : 'moon'}`}></i>
+              </button>
+            </div>
+          </div>
+        );
+      };
+
+const Navbar = ({ activeTab, setActiveTab, setShowPrivacy, setModalContent, darkTheme, toggleTheme, searchQuery, setSearchQuery, performSearch, searchResults }) => {
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [hideTopHeader, setHideTopHeader] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      // Update scrolled state for navbar blur effect
+      setScrolled(currentScrollY > 10);
+      
+      // Hide top header when scrolling down, show when scrolling up
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // Scrolling DOWN - hide top header
+        setHideTopHeader(true);
+      } else {
+        // Scrolling UP - show top header
+        setHideTopHeader(false);
+      }
+      
+      setLastScrollY(currentScrollY);
+    };
+    
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
+
+  const handleSearchInput = (e) => {
+    setSearchQuery(e.target.value);
+    performSearch(e.target.value);
+  };
+  
+  const handleLogoClick = (e) => {
+    e.preventDefault();
+    setActiveTab('home');
+    setMobileMenuOpen(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleNavClick = (tab) => {
+    setActiveTab(tab);
+    setMobileMenuOpen(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleAboutClick = (e) => {
+    e.preventDefault();
+    window.location.href = 'https://www.mudasiribrahim.com';
+    setMobileMenuOpen(false);
+  };
+
+  const handleSupportClick = (e) => {
+    e.preventDefault();
+    setModalContent({
+      title: '📬 Support & Appreciation',
+      content: `
+        If any of the apps have been helpful, consider supporting them: 
+        <a href="https://buymeacoffee.com/mudasiribrahim30" target="_blank" style="color:#0b3b5c;">Buy Me a Coffee</a>.<br><br>
+        For technical assistance, contact 
+        <a href="mailto:mudassiribrahim30@gmail.com" style="color:#0b3b5c;">mudassiribrahim30@gmail.com</a>. 
+        Responses are typically provided within 24 hours on business days.
+      `
+    });
+    setMobileMenuOpen(false);
+  };
+
+  return (
+    <>
+      {/* White Top Header - hides when scrolling down */}
+      <div className="top-header" style={{ 
+        background: '#ffffff', 
+        borderBottom: '1px solid #d0ddef', 
+        padding: '0.5rem 3rem', 
+        display: 'flex', 
+        justifyContent: 'space-between', 
+        alignItems: 'center', 
+        flexWrap: 'wrap',
+        transition: 'transform 0.3s ease, opacity 0.3s ease',
+        transform: hideTopHeader ? 'translateY(-100%)' : 'translateY(0)',
+        opacity: hideTopHeader ? 0 : 1,
+        position: 'sticky',
+        top: 0,
+        zIndex: 30
+      }}>
+        <div className="social-icons" style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+          <a href="https://youtube.com" target="_blank" style={{ color: '#0b3b5c', fontSize: '1.1rem' }}><i className="fab fa-youtube"></i></a>
+          <a href="https://facebook.com" target="_blank" style={{ color: '#0b3b5c', fontSize: '1.1rem' }}><i className="fab fa-facebook-f"></i></a>
+          <a href="https://twitter.com" target="_blank" style={{ color: '#0b3b5c', fontSize: '1.1rem' }}><i className="fab fa-x-twitter"></i></a>
+          <a href="https://instagram.com" target="_blank" style={{ color: '#0b3b5c', fontSize: '1.1rem' }}><i className="fab fa-instagram"></i></a>
+          <a href="https://github.com/mudassiribrahim30" target="_blank" style={{ color: '#0b3b5c', fontSize: '1.1rem' }}><i className="fab fa-github"></i></a>
+        </div>
+        <div className="social-search" style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+          <div style={{ position: 'relative' }}>
+            <input
+              type="text"
+              placeholder="Search apps, keywords..."
+              value={searchQuery}
+              onChange={handleSearchInput}
+              style={{ padding: '0.4rem 1rem 0.4rem 2rem', borderRadius: '30px', border: '1px solid #b8cde0', fontSize: '0.85rem', width: '200px', background: '#fff', color: '#1e2a3a' }}
+            />
+            <i className="fas fa-search" style={{ position: 'absolute', left: '10px', top: '50%', transform: 'translateY(-50%)', color: '#7f8fa4', fontSize: '0.8rem' }}></i>
+            {searchQuery && searchResults.length > 0 && (
+              <div style={{ position: 'absolute', top: '100%', left: 0, right: 0, background: '#fff', border: '1px solid #ccc', borderRadius: '10px', marginTop: '4px', maxHeight: '200px', overflowY: 'auto', zIndex: 999, boxShadow: '0 8px 16px rgba(0,0,0,0.1)' }}>
+                {searchResults.map(item => (
+                  <div key={item.id} onClick={() => { window.open(item.run, '_blank'); setSearchQuery(''); }} style={{ padding: '0.5rem 1rem', cursor: 'pointer', borderBottom: '1px solid #eee', fontWeight: 500, color: '#0b3b5c', fontSize: '0.85rem' }}>
+                    {item.name} <span style={{ fontSize: '0.7rem', color: '#6b7c93' }}>↗</span>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+          <button onClick={toggleTheme} style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '1.1rem', color: '#0b3b5c' }}>
+            <i className={`fas fa-${darkTheme ? 'sun' : 'moon'}`}></i>
+          </button>
+        </div>
+      </div>
+
+      {/* Black Navbar - always visible, sticks below white header when white header is visible */}
+      <nav className={`navbar ${scrolled ? "navbar-blur" : ""}`} style={{ 
+        background: '#000000', 
+        borderBottom: '1px solid #333333',
+        position: 'sticky',
+        top: hideTopHeader ? 0 : '42px', // Adjust based on white header visibility
+        transition: 'top 0.3s ease, background 0.2s, box-shadow 0.2s',
+        zIndex: 29
+      }}>
+        <div className="nav-logo">
+          <a href="#" onClick={handleLogoClick}>
+            <span className="logo-glow" style={{ color: '#ffffff' }}><i className="fas fa-chart-pie" style={{ marginRight: '6px', color: '#ffffff' }}></i>ShinyHealthTools</span>
+          </a>
+        </div>
+        
+        <div className="nav-links">
+          <a href="#" onClick={(e) => { e.preventDefault(); handleNavClick('home'); }} style={{ color: '#ffffff' }}>Home</a>
+          <a href="#" onClick={(e) => { e.preventDefault(); handleNavClick('apps'); }} style={{ color: '#ffffff' }}>Apps</a>
+          <a href="#" onClick={handleAboutClick} style={{ color: '#ffffff' }}>About The Developer</a>
+          <a href="#" onClick={handleSupportClick} style={{ color: '#ffffff' }}>Support</a>
+        </div>
+
+        <button className="mobile-menu-btn" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} style={{ color: '#ffffff' }}>
+          <i className={`fas fa-${mobileMenuOpen ? 'times' : 'bars'}`}></i>
+        </button>
+
+        <div className={`mobile-menu ${mobileMenuOpen ? 'open' : ''}`} style={{ 
+          background: '#000000', 
+          borderBottom: '1px solid #333333'
+        }}>
+          <a href="#" onClick={(e) => { e.preventDefault(); handleNavClick('home'); }} style={{ color: '#ffffff' }}><i className="fas fa-home"></i> Home</a>
+          <a href="#" onClick={(e) => { e.preventDefault(); handleNavClick('apps'); }} style={{ color: '#ffffff' }}><i className="fas fa-th"></i> Apps</a>
+          <a href="#" onClick={handleAboutClick} style={{ color: '#ffffff' }}><i className="fas fa-user"></i> About The Author</a>
+          <a href="#" onClick={handleSupportClick} style={{ color: '#ffffff' }}><i className="fas fa-envelope"></i> Support</a>
+        </div>
+      </nav>
+    </>
+  );
+};
+      const PrivacyModal = ({ onClose, title, content }) => {
         const modalRef = useRef(null);
         useEffect(() => {
           document.body.classList.add('modal-open');
-          // Scroll the modal into view smoothly after it mounts
           if (modalRef.current) {
             setTimeout(() => {
               modalRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -397,8 +987,8 @@
         return (
           <div className="modal-overlay" onClick={onClose}>
             <div className="modal-content" ref={modalRef} onClick={e => e.stopPropagation()}>
-              <h3>🔒 privacy notice</h3>
-              <p>The apps do not collect, store, or share any user data. No tracking, no cookies. Your data stays on your device.</p>
+              <h3>{title}</h3>
+              <div dangerouslySetInnerHTML={{ __html: content }} />
               <button className="modal-close" onClick={onClose}>close</button>
             </div>
           </div>
@@ -410,13 +1000,13 @@
         useEffect(() => {
           const interval = setInterval(() => {
             setActiveIndex((current) => (current + 1) % testimonials.length);
-          }, 5000);
+          }, 15000);
           return () => clearInterval(interval);
         }, []);
         return (
           <section className="testimonial">
             <div className="testimonial-inner">
-              <span className="quote-mark">"</span>
+              <span className="quote-mark">“</span>
               <div className="testimonial-carousel">
                 {testimonials.map((testimonial, index) => (
                   <div key={testimonial.id} className={`testimonial-slide ${index === activeIndex ? 'active' : ''}`}>
@@ -464,33 +1054,43 @@
         }, []);
 
         const whyToolsData = [
-          { icon:"fas fa-flask", title:"built for research", desc:"Every tool addresses a real need in health data analysis: sample size justification, ROC curves, survival plots, factor analysis, and more." },
-          { icon:"fas fa-code-branch", title:"100% open source", desc:"All code is available on GitHub. Built with R, Shiny, tidyverse, survival, psych, and more. Inspect, modify, or adapt them to your needs—no restrictions." },
-          { icon:"fas fa-cloud-upload-alt", title:"no installation", desc:"Hosted on shinyapps.io. Just click and run in your browser. No R setup, no packages to install—works on any device." },
-          { icon:"fas fa-heart", title:"forever free", desc:"No paywalls, no subscriptions. Research tools should be accessible to everyone, everywhere." }
+          { icon:"fas fa-flask", title:"Validated for research", desc:"All tools benchmarked against established software (R software - programming language). Suitable for grant applications and peer-reviewed publications." },
+          { icon:"fas fa-code-branch", title:"Fully open source", desc:"Source code available on GitHub. Built on R 4.3+, tidyverse, survival, psych, and other CRAN packages. Audit and extend." },
+          { icon:"fas fa-cloud-upload-alt", title:"Zero local installation", desc:"Deployed on shinyapps.io infrastructure. Accessible via any modern browser – secure and scalable." },
+          { icon:"fas fa-heart", title:"Commitment to accessibility", desc:"Free for academic, government, and non‑profit institutions. No license fees, no subscription traps." }
         ];
 
         return (
           <>
             <section className="hero">
-              <div className="hero-badge">✨ R/Shiny • free • open source</div>
-              <h1 className="hero-title">
-                <span className="title-line">interactive web apps</span>
-                <span className="title-line"><span className="gradient-text">for health research</span></span>
-              </h1>
-              <p className="hero-sub">
-                Free, intuitive applications for sample size, ROC curves, survival analysis, factor analysis, 
-                data conversion and more. Web tools built by a researcher for researchers—no coding required.
-              </p>
-              <div className="hero-metrics">
-                <div className="metric-item"><span className="metric-number">10+</span><span className="metric-label">R/Shiny tools</span></div>
-                <div className="metric-item"><span className="metric-number">100%</span><span className="metric-label">open source</span></div>
-                <div className="metric-item"><span className="metric-number">∞</span><span className="metric-label">free forever</span></div>
+              <div className="hero-container">
+                <div className="hero-left">
+                  <div className="hero-badge">📈statistical tools • open source • R-powered backend</div>
+                  <h1 className="hero-title">
+                    <span className="title-line">Empowering Public Health </span>
+                    <span className="title-line"><span className="gradient-text">with Innovative Tools</span></span>
+                  </h1>
+                  <p className="hero-sub">
+Welcome to ShinyHealthTools, a platform dedicated to advancing public health research in Africa and beyond. Here, you will find a collection of R/Shiny applications tailored for healthcare institutions, academic researchers, and clinical studies. You can access the apps directly or use the source code in RStudio to reproduce analyses.
+                  </p>
+                                    <p className="hero-sub">
+The various apps cover a wide range of functions, including sample size calculations, survival analysis, mediation analysis (simple and serial), ROC analysis, exploratory and confirmatory factor analysis, data conversion, and trend analysis. These advanced statistical procedures are user-friendly and can be performed without prior programming experience.
+
+                  </p>
+                  <div className="hero-metrics">
+                    <div className="metric-item"><span className="metric-number">21</span><span className="metric-label">statistical tools</span></div>
+                    <div className="metric-item"><span className="metric-number">100%</span><span className="metric-label">open source</span></div>
+                    <div className="metric-item"><span className="metric-number">0</span><span className="metric-label">license cost</span></div>
+                  </div>
+                </div>
+                <div className="hero-right">
+                  <CodeAnimation />
+                </div>
               </div>
             </section>
 
             <section className="showcase" style={{ paddingTop: '1rem' }}>
-              <h2 className="showcase-title"><span>/ / </span> featured applications</h2>
+              <h2 className="showcase-title"><span>// </span> featured applications</h2>
               <div className="card-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
                 {featuredApps.map((app, index) => (
                   <div key={app.id} ref={featuredRefs.current[index]} style={{ opacity:0, transform:'translateY(30px)', transition:'opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1)', transitionDelay:`${index * 0.15}s` }}>
@@ -501,14 +1101,14 @@
             </section>
 
             <section className="showcase" style={{ paddingTop: 0 }}>
-              <h2 className="showcase-title"><span>/ / </span> why these tools?</h2>
-              <div className="why-tools-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '2rem', marginTop: '1rem' }}>
+              <h2 className="showcase-title"><span>// </span> why researchers rely on these tools</h2>
+              <div className="why-tools-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1.8rem', marginTop: '1rem' }}>
                 {whyToolsData.map((tool, index) => (
                   <div key={index} ref={whyToolsRefs.current[index]} style={{ opacity:0, transform:'translateY(30px)', transition:'opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1)', transitionDelay:`${index * 0.15}s` }}>
-                    <div className="card" style={{ background: 'rgba(30,26,48,0.6)', padding: '2rem', height: '100%' }}>
-                      <i className={tool.icon} style={{ fontSize: '2.5rem', color: '#a388ff', marginBottom: '1rem' }}></i>
-                      <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>{tool.title}</h3>
-                      <p style={{ color: '#b1a9da' }}>{tool.desc}</p>
+                    <div className="card" style={{ background: '#f8fafd', padding: '1.8rem', height: '100%', border: '1px solid #e0e8f2' }}>
+                      <i className={tool.icon} style={{ fontSize: '2.2rem', color: '#0b3b5c', marginBottom: '0.8rem' }}></i>
+                      <h3 style={{ fontSize: '1.4rem', marginBottom: '0.8rem', color: '#0b1c2e', fontWeight: '700' }}>{tool.title}</h3>
+                      <p style={{ color: '#2d3a4f', fontWeight: '500', fontSize: '0.95rem', lineHeight: '1.5' }}>{tool.desc}</p>
                     </div>
                   </div>
                 ))}
@@ -522,27 +1122,24 @@
       const AppCard = ({ app }) => {
         const [imgLoaded, setImgLoaded] = useState(false);
         
-        // Use normal links that open in same tab (default behavior for <a> with target="_self")
-        // We remove target="_blank" so they open in the same website tab as requested.
         return (
-          <div className="card" style={{ animationDelay: '0s', height: '100%' }}>
-            <div className="card-glow" />
+          <div className="card" style={{ animationDelay: '0s', height: '100%', background: '#ffffff', border: '2px solid #0b3b5c30', boxShadow: '0 4px 12px rgba(0,0,0,0.05)' }}>
+            <div className="card-glow" style={{ background: 'radial-gradient(circle at 50% 0%, #0b3b5c20, transparent 70%)' }} />
             <div className="card-content">
               <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
                 {app.logo ? (
-                  <img src={app.logo} alt={app.name} style={{ width: '48px', height: '48px', borderRadius: '12px', objectFit: 'contain', background: '#fff', opacity: imgLoaded ? 1 : 0.6 }} onLoad={() => setImgLoaded(true)} />
+                  <img src={app.logo} alt={app.name} style={{ width: '42px', height: '42px', borderRadius: '6px', objectFit: 'contain', background: '#fff', opacity: imgLoaded ? 1 : 0.6 }} onLoad={() => setImgLoaded(true)} onError={(e) => { e.target.style.display='none'; }} />
                 ) : (
-                  <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: '#2a2a4a', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <i className="fas fa-cube" style={{ fontSize: '1.5rem', color: '#a99cff' }}></i>
+                  <div style={{ width: '42px', height: '42px', borderRadius: '6px', background: '#eaf0fa', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <i className="fas fa-chart-bar" style={{ fontSize: '1.3rem', color: '#0b3b5c' }}></i>
                   </div>
                 )}
-                <h3 style={{ fontSize: '1.4rem', margin: 0 }}>{app.name}</h3>
+                <h3 style={{ fontSize: '1.3rem', margin: 0, color: '#0b1c2e', fontWeight: '700' }}>{app.name}</h3>
               </div>
-              <p style={{ color: '#b1a9da', fontSize: '0.95rem', marginBottom: '1.5rem', minHeight: '60px' }}>{app.desc}</p>
-              <div className="card-footer" style={{ borderTop: '1px dashed rgba(255,255,255,0.1)', paddingTop: '1rem', display: 'flex', justifyContent: 'space-between' }}>
-                {/* REMOVED target="_blank" so links open in same tab */}
-                <a href={app.run} style={{ color: '#cbc3ff', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.3rem' }}><i className="fas fa-play"></i> launch</a>
-                <a href={app.code} style={{ color: '#cbc3ff', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.3rem' }}><i className="fab fa-github"></i> code</a>
+              <p style={{ color: '#2d3a4f', fontSize: '0.9rem', marginBottom: '1.2rem', minHeight: '50px', fontWeight: '500', lineHeight: '1.5' }}>{app.desc}</p>
+              <div className="card-footer" style={{ borderTop: '2px solid #0b3b5c20', paddingTop: '0.8rem', display: 'flex', justifyContent: 'space-between' }}>
+                <a href={app.run} target="_blank" style={{ color: '#0b3b5c', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.3rem', fontWeight:'600', fontSize:'0.9rem' }}><i className="fas fa-play"></i> launch</a>
+                <a href={app.code} target="_blank" style={{ color: '#0b3b5c', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.3rem', fontWeight:'600', fontSize:'0.9rem' }}><i className="fab fa-github"></i> source</a>
               </div>
             </div>
           </div>
@@ -574,7 +1171,7 @@
 
         return (
           <section className="showcase">
-            <h2 className="showcase-title"><span>/ / </span> all R/Shiny applications (21 tools)</h2>
+            <h2 className="showcase-title"><span>// </span> all applications (21 web tools)</h2>
             <div className="card-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
               {shinyApps.map((app, index) => (
                 <div key={app.id} ref={appRefs.current[index]} style={{ opacity:0, transform:'translateY(30px)', transition:'opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1)', transitionDelay:`${index * 0.05}s` }}>
@@ -586,26 +1183,217 @@
         );
       };
 
-      const Footer = ({ setShowPrivacy }) => {
-        const currentYear = new Date().getFullYear();
+ const Footer = ({ setShowPrivacy, setModalContent, setActiveTab }) => {
+  const currentYear = new Date().getFullYear();
+
+  const handleResourceClick = (title, content) => {
+    setModalContent({ title, content });
+  };
+
+  const handleAppClick = (appName) => {
+    const app = shinyApps.find(a => a.name === appName);
+    if (app) window.open(app.run, '_blank');
+  };
+
+  const handleAllAppsClick = () => {
+    setActiveTab('apps');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  return (
+    <footer className="footer" style={{ 
+      background: '#000000', 
+      borderTop: '1px solid #333333', 
+      color: '#ffffff' 
+    }}>
+      <div className="footer-columns">
+        <div className="footer-col">
+          <h4 style={{ color: '#ffffff' }}>Apps</h4>
+          <a onClick={() => handleAppClick('FactorGuard')} style={{ color: '#ffffff' }}>FactorGuard</a>
+          <a onClick={() => handleAppClick('CalcuStats')} style={{ color: '#ffffff' }}>CalcuStats</a>
+          <a onClick={() => handleAppClick('ROC Curve Builder')} style={{ color: '#ffffff' }}>ROC Curve Builder</a>
+          <a onClick={() => handleAppClick('Data2SPSS')} style={{ color: '#ffffff' }}>Data2SPSS</a>
+          <a onClick={() => handleAppClick('KMPlot Genie')} style={{ color: '#ffffff' }}>KMPlot Genie</a>
+          <a onClick={handleAllAppsClick} style={{ color: '#ffffff' }}>All Apps→</a>
+        </div>
+        <div className="footer-col">
+          <h4 style={{ color: '#ffffff' }}>Resources</h4>
+          <a onClick={() => handleResourceClick('📚 Documentation', 'Comprehensive documentation for all ShinyHealthTools applications is available at <a href=\"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/README.md" target=\"_blank\">github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/README.md</a>')} style={{ color: '#ffffff' }}>Documentation</a>
+          <a onClick={() => handleResourceClick('🐙 GitHub Repository', 'All source code is open source and available at <a href=\"https://github.com/mudassiribrahim30\" target=\"_blank\">github.com/mudassiribrahim30</a>. Licensed under MIT. Contributions welcome.')} style={{ color: '#ffffff' }}>GitHub Repository</a>
+          <a onClick={() => handleResourceClick('📖 Citation Guide', 'To cite ShinyHealthTools in publications:<br/><br/>Shiny Health Tools (2025). ShinyHealthTools: Statistical applications for health research. Retrieved from  [website URL] For specific apps, include the app name and version.')} style={{ color: '#ffffff' }}>Citation Guide</a>
+          <a onClick={() => handleResourceClick('📌 Release Notes', '**v2.1.0** (March 2026): Major redesign, improved UI responsiveness, dark theme integration, chatbot integration, and 21 total apps.<br/>')} style={{ color: '#ffffff' }}>Release Notes</a>
+        </div>
+        <div className="footer-col">
+          <h4 style={{ color: '#ffffff' }}>Support</h4>
+          <a onClick={() => handleResourceClick('📧 Email Support', 'For technical assistance, email me at <a href=\"mailto:mudassiribrahim30@gmail.com\">mudassiribrahim30@gmail.com</a>. Response within 24 hours.')} style={{ color: '#ffffff' }}>Email Support</a>
+          <a onClick={() => handleResourceClick('❓ Frequently Asked Questions', '<strong>Q: Are the tools really free?</strong><br/>A: Yes, completely free for academic, government, and non-profit use.<br/><br/><strong>Q: Do I need to install R?</strong><br/>A: No, everything runs in your browser.<br/><br/><strong>Q: How do I cite these tools?</strong><br/>A: See Citation Guide in Resources.<br/><br/><strong>Q: Is my data secure?</strong><br/>A: All processing is local; no data leaves your machine (see Privacy).')} style={{ color: '#ffffff' }}>FAQ</a>
+          <a onClick={() => setShowPrivacy(true)} style={{ color: '#ffffff' }}>Privacy</a>
+        </div>
+        <div className="footer-col">
+          <h4 style={{ color: '#ffffff' }}>Connect</h4>
+          <a href="https://youtube.com" target="_blank" style={{ color: '#ffffff' }}>Youtube</a>
+          <a href="https://facebook.com" target="_blank" style={{ color: '#ffffff' }}>Facebook</a>
+          <a href="https://instagram.com" target="_blank" style={{ color: '#ffffff' }}>Instagram</a>
+          <a href="https://github.com/mudassiribrahim30/R-Shiny-Apps" target="_blank" style={{ color: '#ffffff' }}>Github</a>
+        </div>
+      </div>
+      <div className="footer-copyright" style={{ 
+        color: '#ffffff', 
+        borderTop: '1px solid #333333', 
+        fontWeight: '500', 
+        fontSize: '0.85rem', 
+        paddingTop: '1.2rem', 
+        marginTop: '0.5rem' 
+      }}>
+        <span>Copyright © 2025–{currentYear} ShinyHealthTools. open source · free to use</span>
+        <span className="footer-extra">Interactive apps for health research</span>
+      </div>
+    </footer>
+  );
+};
+
+      // ChatBot Component with vanishing questions on click
+      const ChatBot = ({ appsData }) => {
+        const [isOpen, setIsOpen] = useState(false);
+        const [messages, setMessages] = useState([
+          { sender: 'bot', text: 'Hi! I\'m the ShinyHealthTools assistant. Ask me anything about our tools, features, or how to get started.' }
+        ]);
+        const [input, setInput] = useState('');
+        const [showSuggestions, setShowSuggestions] = useState(true);
+        const messagesEndRef = useRef(null);
+
+        const suggestedQuestions = [
+          "What tools are available?",
+          "How many applications?",
+          "Tell me about ROC Curve Builder",
+          "Are these tools free?",
+          "How do I cite ShinyHealthTools?",
+          "What is Data2SPSS?",
+          "Is source code available?",
+          "Tell me about FactorGuard"
+        ];
+
+        const scrollToBottom = () => {
+          messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+        };
+
+        useEffect(() => {
+          scrollToBottom();
+        }, [messages]);
+
+        // Show suggestions when user focuses input or types
+        useEffect(() => {
+          if (input.length > 0) {
+            setShowSuggestions(true);
+          }
+        }, [input]);
+
+        const generateResponse = (question) => {
+          const q = question.toLowerCase();
+          
+          // App-specific knowledge
+          if (q.includes('roc') || q.includes('curve builder')) {
+            const app = appsData.find(a => a.name.includes('ROC'));
+            return app ? `**${app.name}**: ${app.desc}. It provides diagnostic accuracy analysis with AUC, confidence intervals, and comparisons. [Launch here](${app.run})` : "ROC Curve Builder is a tool for diagnostic accuracy analysis with AUC and confidence intervals.";
+          }
+          if (q.includes('dataspss') || q.includes('data2spss')) {
+            const app = appsData.find(a => a.name.includes('Data2SPSS'));
+            return app ? `**${app.name}**: ${app.desc}. Seamlessly convert data to SPSS format. [Launch](${app.run})` : "Data2SPSS converts data to SPSS (.sav) with metadata preservation.";
+          }
+          if (q.includes('factorguard') || q.includes('factor analysis')) {
+            const app = appsData.find(a => a.name.includes('FactorGuard'));
+            return app ? `**${app.name}**: ${app.desc}. Enterprise-grade exploratory factor analysis. [Launch](${app.run})` : "FactorGuard is our tool for exploratory factor analysis and dimension validation.";
+          }
+          if (q.includes('calcustats') || q.includes('sample size') || q.includes('power calculator')) {
+            const app = appsData.find(a => a.name.includes('CalcuStats'));
+            return app ? `**${app.name}**: ${app.desc}. Essential for clinical trial planning. [Launch](${app.run})` : "CalcuStats provides sample size and power calculations for clinical trials.";
+          }
+          if (q.includes('survival') || q.includes('kmplot') || q.includes('kaplan')) {
+            const app = appsData.find(a => a.name.includes('KMPlot'));
+            return app ? `**${app.name}**: ${app.desc}. Kaplan-Meier curves with log-rank tests. [Launch](${app.run})` : "KMPlot Genie creates Kaplan-Meier survival curves with log-rank tests.";
+          }
+
+          // General knowledge
+          if (q.includes('how many') || q.includes('number of apps') || q.includes('tools available')) {
+            return `We currently offer **${appsData.length} validated applications** covering sample size, ROC, survival, factor analysis, data conversion, and more.`;
+          }
+          if (q.includes('free') || q.includes('cost') || q.includes('license')) {
+            return "All tools are **completely free** for academic, government, and non-profit institutions. No license fees, no subscriptions.";
+          }
+          if (q.includes('cite') || q.includes('citation')) {
+            return "You can cite ShinyHealthTools as: 'Shiny Health Tools (2025). Statistical applications for health research. Retrieved from https://ShinyHealthTools.org'";
+          }
+          if (q.includes('source code') || q.includes('github') || q.includes('open source')) {
+            return "All source code is available on GitHub at https://github.com/mudassiribrahim30. Fully open source under MIT license.";
+          }
+          if (q.includes('featured') || q.includes('popular')) {
+            const featured = appsData.slice(0, 6).map(a => a.name).join(', ');
+            return `Our featured applications include: ${featured}. All are highlighted on the homepage.`;
+          }
+          if (q.includes('hello') || q.includes('hi ') || q.includes('hey')) {
+            return "Hello! How can I help you with ShinyHealthTools today?";
+          }
+
+          return "I'm not sure about that. You can try asking about specific apps (e.g., 'ROC Curve Builder'), general features, or visit our Applications page.";
+        };
+
+        const handleSend = (text) => {
+          if (!text.trim()) return;
+          setMessages(prev => [...prev, { sender: 'user', text }]);
+          setShowSuggestions(false); // Hide suggestions after user sends a message
+          setTimeout(() => {
+            const response = generateResponse(text);
+            setMessages(prev => [...prev, { sender: 'bot', text: response }]);
+          }, 300);
+          setInput('');
+        };
+
+        const handleSuggestionClick = (q) => {
+          handleSend(q);
+        };
+
         return (
-          <footer className="footer">
-            <div className="footer-main">
-              <div className="footer-brand">
-                <span className="logo-glow">✦ shinyhealthtools</span>
-                <p>free tools for health research</p>
+          <>
+            <button className="chatbot-button" onClick={() => setIsOpen(!isOpen)}>
+              <i className="fas fa-comment"></i>
+            </button>
+            {isOpen && (
+              <div className="chatbot-panel">
+                <div className="chatbot-header">
+                  <span><i className="fas fa-robot"></i> ShinyHealthTools AI</span>
+                  <button onClick={() => setIsOpen(false)}><i className="fas fa-times"></i></button>
+                </div>
+                <div className="chatbot-messages">
+                  {messages.map((msg, idx) => (
+                    <div key={idx} className={`message ${msg.sender === 'user' ? 'user-message' : 'bot-message'}`}>
+                      {msg.text.split('**').map((part, i) => i % 2 ? <strong key={i}>{part}</strong> : part)}
+                    </div>
+                  ))}
+                  <div ref={messagesEndRef} />
+                </div>
+                {showSuggestions && (
+                  <div className="suggested-questions">
+                    {suggestedQuestions.map((q, idx) => (
+                      <span key={idx} className="suggested-question" onClick={() => handleSuggestionClick(q)}>
+                        {q}
+                      </span>
+                    ))}
+                  </div>
+                )}
+                <div className="chatbot-input-area">
+                  <input 
+                    type="text" 
+                    placeholder="Type your question..." 
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    onKeyPress={(e) => e.key === 'Enter' && handleSend(input)}
+                    onFocus={() => setShowSuggestions(true)}
+                  />
+                  <button onClick={() => handleSend(input)}><i className="fas fa-paper-plane"></i></button>
+                </div>
               </div>
-              <div className="footer-links">
-                <a href="#" onClick={(e) => { e.preventDefault(); setShowPrivacy(true); }}>privacy</a>
-                <a href="#" onClick={(e) => { e.preventDefault(); window.location.href = 'https://github.com/mudassiribrahim30'; }}>github</a>
-                <a href="#" onClick={(e) => { e.preventDefault(); window.location.href = 'https://buymeacoffee.com/mudasiribrahim30'; }}><i className="fas fa-coffee"></i> buy me a coffee</a>
-              </div>
-            </div>
-            <div className="footer-copyright">
-              <span>Copyright © 2025-{currentYear} shinyhealthtools</span>
-              <span className="footer-extra">open source • forever free</span>
-            </div>
-          </footer>
+            )}
+          </>
         );
       };
 
@@ -613,307 +1401,411 @@
       const App = () => {
         const [activeTab, setActiveTab] = useState('home');
         const [showPrivacy, setShowPrivacy] = useState(false);
+        const [modalContent, setModalContent] = useState(null);
+        const [darkTheme, setDarkTheme] = useState(false);
+        const [searchQuery, setSearchQuery] = useState('');
+        const [searchResults, setSearchResults] = useState([]);
+
+        const toggleTheme = () => {
+          setDarkTheme(prev => !prev);
+          document.body.classList.toggle('dark-theme');
+        };
+
+        // Comprehensive search
+        const performSearch = (keyword) => {
+          if (!keyword.trim()) { setSearchResults([]); return; }
+          const lower = keyword.toLowerCase();
+          const results = shinyApps.filter(app => 
+            app.name.toLowerCase().includes(lower) || 
+            app.desc.toLowerCase().includes(lower) ||
+            (app.name + ' ' + app.desc).toLowerCase().includes(lower)
+          ).map(app => ({ id: app.id, name: app.name, run: app.run }));
+          setSearchResults(results);
+        };
 
         useEffect(() => {
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }, [activeTab]);
 
-        return (
-          <div className="app-container">
-            <FloatingParticles />
-            <Navbar activeTab={activeTab} setActiveTab={setActiveTab} setShowPrivacy={setShowPrivacy} />
-            <main style={{ position: 'relative', zIndex: 5 }}>
-              {activeTab === 'home' && <Home setActiveTab={setActiveTab} />}
-              {activeTab === 'apps' && <AppsTab />}
-            </main>
-            <Footer setShowPrivacy={setShowPrivacy} />
-            {showPrivacy && <PrivacyModal onClose={() => setShowPrivacy(false)} />}
+        // Privacy content with local storage note
+        const privacyContent = `
+          <p><strong>🔒 Data Privacy & Security</strong></p>
+          <p>ShinyHealthTools applications run entirely in your browser and the shinyapps.io secure cloud. <strong>No personal data is recorded or stored on our servers.</strong> All processing is ephemeral.</p>
+          <p><strong>Local Processing:</strong> When you run any of our tools, all data you upload or generate stays in your browser's memory and is not transmitted to any server. You remain in full control.</p>
+          <p><strong>No Tracking:</strong> We do not use cookies, analytics, or tracking scripts. Your usage is anonymous.</p>
+          <p><strong>Institutional Compliance:</strong> Our architecture is compliant with institutional data protection requirements (HIPAA, GDPR, etc.) because data never leaves your machine unless you explicitly download results.</p>
+        `;
 
-            <style>{`
-              .app-container {
-                position: relative;
-                background: radial-gradient(circle at 30% 20%, #1e1a36, #0a0814 80%);
-                color: #eaeefb;
-                overflow: hidden;
-                isolation: isolate;
-              }
-              .particle-field {
-                position: absolute;
-                inset: 0;
-                pointer-events: none;
-                z-index: 0;
-              }
-              .particle {
-                position: absolute;
-                border-radius: 50%;
-                background: rgba(180, 190, 255, 0.4);
-                filter: blur(0.6px);
-                animation: floatParticle 18s infinite alternate ease-in-out;
-                opacity: 0.6;
-                color: #a8bfff;
-                will-change: transform;
-              }
-              @keyframes floatParticle {
-                0% { transform: translate(0, 0) scale(1); opacity: 0.2; }
-                50% { transform: translate(20px, -25px) scale(1.5); opacity: 0.5; }
-                100% { transform: translate(-15px, 30px) scale(0.8); opacity: 0.3; }
-              }
-              .navbar {
-                position: sticky;
-                top: 0;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 1.6rem 3rem;
-                z-index: 20;
-                transition: background 0.2s, backdrop-filter 0.2s;
-              }
-              .navbar-blur {
-                background: rgba(10, 8, 22, 0.7);
-                backdrop-filter: blur(8px);
-                border-bottom: 1px solid rgba(255,255,255,0.05);
-              }
-              .nav-logo {
-                font-weight: 600;
-                font-size: 1.6rem;
-                letter-spacing: -0.02em;
-              }
-              .nav-logo a {
-                color: inherit;
-                text-decoration: none;
-              }
-              .logo-glow {
-                background: linear-gradient(135deg, #fff, #c0b7ff);
-                -webkit-background-clip: text;
-                background-clip: text;
-                color: transparent;
-                text-shadow: 0 0 12px rgba(160, 140, 255, 0.6);
-              }
-              .nav-links {
-                display: flex;
-                gap: 2rem;
-                align-items: center;
-              }
-              .nav-links a {
-                text-decoration: none;
-                color: #ddd9ff;
-                font-weight: 400;
-                font-size: 1rem;
-                letter-spacing: 0.3px;
-                transition: color 0.2s, text-shadow 0.2s;
-              }
-              .nav-links a:hover {
-                color: white;
-                text-shadow: 0 0 8px #a99cff;
-              }
-              .hero {
-                padding: 3rem 4rem 5rem 4rem;
-                position: relative;
-                z-index: 5;
-                max-width: 900px;
-              }
-              .hero-badge {
-                display: inline-block;
-                background: rgba(150, 130, 255, 0.1);
-                backdrop-filter: blur(4px);
-                border-radius: 50px;
-                padding: 0.4rem 1.2rem;
-                margin-bottom: 2rem;
-                font-size: 0.85rem;
-                border: 1px solid rgba(255,215,255,0.15);
-                color: #cdc5ff;
-                animation: fadeSlideUp 0.8s ease-out;
-              }
-              .hero-title {
-                font-size: clamp(3rem, 8vw, 5.2rem);
-                font-weight: 600;
-                line-height: 1.1;
-                letter-spacing: -0.02em;
-                margin-bottom: 1.8rem;
-              }
-              .title-line {
-                display: block;
-                animation: slideUp 0.7s ease-out;
-                animation-fill-mode: both;
-              }
-              .title-line:nth-child(1) { animation-delay: 0.1s; }
-              .title-line:nth-child(2) { animation-delay: 0.2s; }
-              .gradient-text {
-                background: linear-gradient(120deg, #b9adff, #a3d0ff, #c3b2ff);
-                -webkit-background-clip: text;
-                background-clip: text;
-                color: transparent;
-                text-shadow: 0 0 20px #9d8cff;
-              }
-              .hero-sub {
-                font-size: 1.3rem;
-                max-width: 600px;
-                color: #c7c2e6;
-                margin-bottom: 2.5rem;
-                animation: fadeSlideUp 0.9s 0.2s ease-out both;
-                line-height: 1.5;
-              }
-              .hero-metrics {
-                display: flex;
-                gap: 3rem;
-                animation: fadeSlideUp 1s 0.4s both;
-              }
-              .metric-item {
-                display: flex;
-                flex-direction: column;
-              }
-              .metric-number {
-                font-size: 2rem;
-                font-weight: 500;
-                background: linear-gradient(135deg, #fff, #d4cbff);
-                -webkit-background-clip: text;
-                background-clip: text;
-                color: transparent;
-              }
-              .metric-label {
-                font-size: 0.8rem;
-                text-transform: uppercase;
-                letter-spacing: 1px;
-                color: #9990cc;
-              }
-              .showcase {
-                padding: 3rem 4rem;
-                z-index: 5;
-                position: relative;
-              }
-              .showcase-title {
-                font-size: 1.2rem;
-                font-weight: 400;
-                text-transform: uppercase;
-                letter-spacing: 3px;
-                color: #a79dcf;
-                margin-bottom: 2.5rem;
-              }
-              .card-grid {
-                display: grid;
-                gap: 1.8rem;
-              }
-              .card {
-                background: rgba(30, 26, 48, 0.6);
-                backdrop-filter: blur(8px);
-                border-radius: 2rem;
-                border: 1px solid rgba(255,255,255,0.03);
-                padding: 1.8rem 1.5rem;
-                transition: transform 0.2s, border-color 0.3s;
-                position: relative;
-                overflow: hidden;
-                box-shadow: 0 15px 30px -20px black;
-              }
-              .card:hover {
-                border-color: #7f9cf5;
-                transform: translateY(-6px) scale(1.01);
-              }
-              .card-glow {
-                position: absolute;
-                inset: 0;
-                background: radial-gradient(circle at 50% 0%, #7f9cf5, transparent 70%);
-                opacity: 0;
-                transition: opacity 0.4s;
-                pointer-events: none;
-              }
-              .card:hover .card-glow {
-                opacity: 0.25;
-              }
-              .card-content {
-                position: relative;
-                z-index: 2;
-              }
-              .card-footer a:hover {
-                color: white;
-                text-shadow: 0 0 8px #a99cff;
-              }
-              .testimonial {
-                padding: 4rem 4rem 5rem;
-                position: relative;
-              }
-              .testimonial-inner {
-                background: rgba(40, 30, 64, 0.4);
-                backdrop-filter: blur(8px);
-                border-radius: 3rem;
-                padding: 3.5rem 4rem;
-                border: 1px solid rgba(215, 195, 255, 0.1);
-                max-width: 850px;
-                margin: 0 auto;
-                animation: appear 1s ease-out;
-              }
-              .quote-mark {
-                font-size: 6rem;
-                line-height: 0.7;
-                color: #9380ff;
-                opacity: 0.4;
-                font-family: serif;
-              }
-              .quote-text {
-                font-size: 1.8rem;
-                font-weight: 300;
-                margin-bottom: 2rem;
-                color: #f0eaff;
-              }
-              .quote-author {
-                display: flex;
-                align-items: center;
-                gap: 1.2rem;
-              }
-              .author-avatar {
-                width: 48px;
-                height: 48px;
-                background: linear-gradient(145deg, #a388ff, #6d4fcf);
-                border-radius: 50%;
-                box-shadow: 0 0 0 2px rgba(255,255,255,0.2);
-              }
-              .footer {
-                padding: 2.5rem 4rem 1.5rem;
-                border-top: 1px solid rgba(255,255,255,0.02);
-                background: rgba(0,0,0,0.2);
-                position: relative;
-                z-index: 5;
-              }
-              .footer-main {
-                display: flex;
-                justify-content: space-between;
-                flex-wrap: wrap;
-                margin-bottom: 3rem;
-              }
-              .footer-brand p {
-                color: #a69cc9;
-                margin-top: 0.5rem;
-              }
-              .footer-links {
-                display: flex;
-                gap: 2.5rem;
-              }
-              .footer-links a {
-                text-decoration: none;
-                color: #cfc6ff;
-              }
-              .footer-copyright {
-                display: flex;
-                justify-content: space-between;
-                color: #736b99;
-                font-size: 0.85rem;
-                border-top: 1px solid rgba(255,255,255,0.02);
-                padding-top: 1.5rem;
-              }
-              @keyframes fadeSlideUp {
-                0% { opacity: 0; transform: translateY(20px); }
-                100% { opacity: 1; transform: translateY(0); }
-              }
-              @keyframes slideUp {
-                0% { opacity: 0; transform: translateY(60px); }
-                100% { opacity: 1; transform: translateY(0); }
-              }
-              @keyframes appear {
-                0% { opacity: 0; }
-                100% { opacity: 1; }
-              }
-            `}</style>
-          </div>
-        );
+ return (
+  <div className="app-container">
+    <FloatingParticles />
+    <Navbar 
+      activeTab={activeTab} 
+      setActiveTab={setActiveTab} 
+      setShowPrivacy={setShowPrivacy} 
+      setModalContent={setModalContent}
+      darkTheme={darkTheme}
+      toggleTheme={toggleTheme}
+      searchQuery={searchQuery}
+      setSearchQuery={setSearchQuery}
+      performSearch={performSearch}
+      searchResults={searchResults}
+    />
+    <main style={{ position: 'relative', zIndex: 5 }}>
+      {activeTab === 'home' && <Home setActiveTab={setActiveTab} />}
+      {activeTab === 'apps' && <AppsTab />}
+    </main>
+    <Footer setShowPrivacy={() => { setModalContent({ title: '🔒 Privacy & Data Handling', content: privacyContent }); }} setModalContent={setModalContent} setActiveTab={setActiveTab} />
+    {modalContent && <PrivacyModal title={modalContent.title} content={modalContent.content} onClose={() => setModalContent(null)} />}
+    <ChatBot appsData={shinyApps} />
+
+    <style>{`
+      .app-container {
+        position: relative;
+        background: #ffffff;
+        color: #1e2a3a;
+        overflow: hidden;
+        isolation: isolate;
+      }
+      body.dark-theme .app-container {
+        background: #1e2a3a;
+        color: #dce5f0;
+      }
+      .particle-field {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+      }
+      .particle {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(11, 59, 92, 0.1);
+        filter: blur(0.5px);
+        animation: floatParticle 20s infinite alternate ease-in-out;
+        opacity: 0.3;
+        will-change: transform;
+      }
+      @keyframes floatParticle {
+        0% { transform: translate(0, 0) scale(1); opacity: 0.1; }
+        50% { transform: translate(15px, -20px) scale(1.2); opacity: 0.2; }
+        100% { transform: translate(-10px, 20px) scale(0.9); opacity: 0.1; }
+      }
+
+      .navbar {
+        position: sticky;
+        top: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 3rem;
+        z-index: 20;
+        transition: top 0.3s ease, background 0.2s, box-shadow 0.2s;
+        background: #000000;
+        border-bottom: 1px solid #333333;
+      }
+      body.dark-theme .navbar {
+        background: #000000;
+        border-bottom: 1px solid #333333;
+      }
+      .navbar-blur {
+        box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        background: #000000;
+        backdrop-filter: blur(8px);
+      }
+      body.dark-theme .navbar-blur {
+        background: #000000;
+      }
+      
+      .nav-logo {
+        font-weight: 700;
+        font-size: 1.4rem;
+        letter-spacing: -0.01em;
+      }
+      .nav-logo a {
+        color: inherit;
+        text-decoration: none;
+      }
+      .logo-glow {
+        color: #0b3b5c;
+      }
+      body.dark-theme .logo-glow {
+        color: #9bbfe0;
+      }
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+      }
+      .nav-links a {
+        text-decoration: none;
+        color: #1e2a3a;
+        font-weight: 600;
+        font-size: 0.9rem;
+        letter-spacing: 0.3px;
+        transition: color 0.2s;
+      }
+      body.dark-theme .nav-links a {
+        color: #d1dceb;
+      }
+      .nav-links a:hover {
+        color: #0b3b5c;
+      }
+      .hero {
+        padding: 2.5rem 4rem 3rem 4rem;
+        position: relative;
+        z-index: 5;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+      .hero-container {
+        display: flex;
+        align-items: center;
+        gap: 3rem;
+      }
+      .hero-left {
+        flex: 1;
+      }
+      .hero-right {
+        flex: 1;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+      }
+      .hero-badge {
+        display: inline-block;
+        background: #eaf0fa;
+        border-radius: 4px;
+        padding: 0.35rem 1rem;
+        margin-bottom: 1.5rem;
+        font-size: 0.8rem;
+        border: 1px solid #bccfe5;
+        color: #0b3b5c;
+        font-weight: 600;
+        animation: fadeSlideUp 0.8s ease-out;
+      }
+      body.dark-theme .hero-badge {
+        background: #2e4057;
+        border-color: #57708f;
+        color: #b6d6ff;
+      }
+      .hero-title {
+        font-size: clamp(2.6rem, 7vw, 4.2rem);
+        font-weight: 700;
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+        margin-bottom: 1.2rem;
+        color: #0b1c2e;
+      }
+      body.dark-theme .hero-title {
+        color: #eaf0fa;
+      }
+      .title-line {
+        display: block;
+        animation: slideUp 0.7s ease-out;
+        animation-fill-mode: both;
+      }
+      .title-line:nth-child(1) { animation-delay: 0.1s; }
+      .title-line:nth-child(2) { animation-delay: 0.2s; }
+      .gradient-text {
+        color: #0b3b5c;
+        background: none;
+        -webkit-background-clip: unset;
+        background-clip: unset;
+        text-shadow: none;
+      }
+      body.dark-theme .gradient-text {
+        color: #9bc0f0;
+      }
+      .hero-sub {
+        font-size: 1.1rem;
+        max-width: 650px;
+        color: #2d3a4f;
+        margin-bottom: 2rem;
+        animation: fadeSlideUp 0.9s 0.2s ease-out both;
+        line-height: 1.5;
+        font-weight: 500;
+      }
+      body.dark-theme .hero-sub {
+        color: #b7c9e0;
+      }
+      .hero-metrics {
+        display: flex;
+        gap: 2.5rem;
+        animation: fadeSlideUp 1s 0.4s both;
+      }
+      .metric-item {
+        display: flex;
+        flex-direction: column;
+      }
+      .metric-number {
+        font-size: 1.9rem;
+        font-weight: 700;
+        color: #0b3b5c;
+      }
+      body.dark-theme .metric-number {
+        color: #9bc0f0;
+      }
+      .metric-label {
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #4f658d;
+        font-weight: 600;
+      }
+      body.dark-theme .metric-label {
+        color: #9db4d4;
+      }
+      .showcase {
+        padding: 2.5rem 4rem;
+        z-index: 5;
+        position: relative;
+      }
+      .showcase-title {
+        font-size: 1rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: #4f658d;
+        margin-bottom: 2rem;
+      }
+      body.dark-theme .showcase-title {
+        color: #9db4d4;
+      }
+      .card-grid {
+        display: grid;
+        gap: 1.5rem;
+      }
+      .card {
+        background: #ffffff;
+        border-radius: 0.9rem;
+        border: 2px solid #0b3b5c30;
+        padding: 1.5rem;
+        transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      }
+      body.dark-theme .card {
+        background: #2f3f50;
+        border-color: #57708f;
+        color: #dde5f0;
+      }
+      .card:hover {
+        border-color: #0b3b5c;
+        transform: translateY(-4px);
+        box-shadow: 0 12px 24px -12px rgba(11,59,92,0.3);
+      }
+      body.dark-theme .card:hover {
+        border-color: #9bbfe0;
+        box-shadow: 0 12px 24px -12px #90b0d0;
+      }
+      .card-glow {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 50% 0%, #0b3b5c10, transparent 70%);
+        opacity: 0;
+        transition: opacity 0.4s;
+        pointer-events: none;
+      }
+      .card:hover .card-glow {
+        opacity: 1;
+      }
+      .card-content {
+        position: relative;
+        z-index: 2;
+      }
+      .card-footer a:hover {
+        color: #0b3b5c;
+        text-decoration: underline;
+      }
+      .testimonial {
+        padding: 3rem 4rem 4rem;
+        position: relative;
+      }
+      .testimonial-inner {
+        background: #f8fbfe;
+        border-radius: 1.5rem;
+        padding: 2.5rem 3rem;
+        border: 2px solid #0b3b5c30;
+        max-width: 950px;
+        margin: 0 auto;
+        animation: appear 1s ease-out;
+      }
+      body.dark-theme .testimonial-inner {
+        background: #2a3847;
+        border-color: #57708f;
+      }
+      .quote-mark {
+        font-size: 4.5rem;
+        line-height: 0.7;
+        color: #0b3b5c30;
+        font-family: serif;
+      }
+      body.dark-theme .quote-mark {
+        color: #6883a3;
+      }
+      .quote-text {
+        font-size: 1.4rem;
+        font-weight: 500;
+        margin-bottom: 1.5rem;
+        color: #0b1c2e;
+        line-height: 1.4;
+      }
+      body.dark-theme .quote-text {
+        color: #d1def0;
+      }
+      .quote-author {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        font-weight: 600;
+        color: #1e2a3a;
+        font-size: 0.9rem;
+      }
+      body.dark-theme .quote-author {
+        color: #bccfe0;
+      }
+      .author-avatar {
+        width: 42px;
+        height: 42px;
+        background: linear-gradient(145deg, #b0c8e0, #819ab8);
+        border-radius: 50%;
+        box-shadow: 0 0 0 2px #ffffff;
+      }
+      body.dark-theme .author-avatar {
+        background: #57708f;
+      }
+      .footer {
+        padding: 2rem 4rem 1.2rem;
+        background: #000000;
+        border-top: 1px solid #333333;
+        position: relative;
+        z-index: 5;
+      }
+      .footer-copyright {
+        display: flex;
+        justify-content: space-between;
+        color: #9bb1cc;
+        font-size: 0.85rem;
+        border-top: 1px solid #263f59;
+        padding-top: 1.2rem;
+      }
+      @keyframes fadeSlideUp {
+        0% { opacity: 0; transform: translateY(20px); }
+        100% { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes slideUp {
+        0% { opacity: 0; transform: translateY(60px); }
+        100% { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes appear {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+      }
+    `}</style>
+  </div>
+);
       };
 
       const root = ReactDOM.createRoot(document.getElementById("root"));
