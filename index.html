@@ -1420,7 +1420,7 @@ const Navbar = ({ activeTab, setActiveTab, setShowPrivacy, setModalContent, dark
           </a>
         </div>
         
-        <div className="nav-links">
+        <div className="nav-links" style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
           <a href="#" onClick={(e) => { e.preventDefault(); handleNavClick('home'); }} style={{ color: '#ffffff' }}>Home</a>
           <a href="#" onClick={(e) => { e.preventDefault(); handleNavClick('apps'); }} style={{ color: '#ffffff' }}>Apps</a>
           <a href="#" onClick={(e) => { e.preventDefault(); handleNavClick('blog'); }} style={{ color: '#ffffff' }}>Blog</a>
@@ -1428,13 +1428,22 @@ const Navbar = ({ activeTab, setActiveTab, setShowPrivacy, setModalContent, dark
           <a href="#" onClick={handleSupportClick} style={{ color: '#ffffff' }}>Support</a>
         </div>
 
-        <button className="mobile-menu-btn" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} style={{ color: '#ffffff' }}>
+        <button className="mobile-menu-btn" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} style={{ color: '#ffffff', display: 'none', background: 'none', border: 'none', fontSize: '1.6rem', cursor: 'pointer', zIndex: 30 }}>
           <i className={`fas fa-${mobileMenuOpen ? 'times' : 'bars'}`}></i>
         </button>
 
         <div className={`mobile-menu ${mobileMenuOpen ? 'open' : ''}`} style={{ 
           background: '#000000', 
-          borderBottom: '1px solid #333333'
+          borderBottom: '1px solid #333333',
+          display: mobileMenuOpen ? 'flex' : 'none',
+          position: 'absolute',
+          top: '100%',
+          left: 0,
+          right: 0,
+          padding: '0.8rem 1.5rem',
+          flexDirection: 'column',
+          gap: '0.3rem',
+          zIndex: 25
         }}>
           <a href="#" onClick={(e) => { e.preventDefault(); handleNavClick('home'); }} style={{ color: '#ffffff' }}><i className="fas fa-home"></i> Home</a>
           <a href="#" onClick={(e) => { e.preventDefault(); handleNavClick('apps'); }} style={{ color: '#ffffff' }}><i className="fas fa-th"></i> Apps</a>
@@ -1443,6 +1452,67 @@ const Navbar = ({ activeTab, setActiveTab, setShowPrivacy, setModalContent, dark
           <a href="#" onClick={handleSupportClick} style={{ color: '#ffffff' }}><i className="fas fa-envelope"></i> Support</a>
         </div>
       </nav>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .nav-links {
+            display: none !important;
+          }
+          .mobile-menu-btn {
+            display: block !important;
+          }
+          .navbar {
+            padding: 1rem 1.5rem !important;
+          }
+        }
+        .card-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 1.5rem;
+        }
+        @media (max-width: 1024px) {
+          .card-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+        @media (max-width: 600px) {
+          .card-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+        .hero-container {
+          display: flex;
+          align-items: center;
+          gap: 3rem;
+        }
+        @media (max-width: 900px) {
+          .hero-container {
+            flex-direction: column;
+          }
+          .hero-right {
+            width: 100%;
+          }
+          .code-animation-box {
+            max-width: 100%;
+            min-width: 100%;
+          }
+        }
+        .top-header {
+          padding-left: 1rem !important;
+          padding-right: 1rem !important;
+        }
+        .social-search input {
+          width: 160px !important;
+        }
+        @media (max-width: 480px) {
+          .social-search input {
+            width: 140px !important;
+          }
+          .social-icons {
+            gap: 0.6rem !important;
+          }
+        }
+      `}</style>
     </>
   );
 };
