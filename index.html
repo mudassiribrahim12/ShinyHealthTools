@@ -194,7 +194,7 @@
       
   .testimonial-carousel {
   position: relative;
-  min-height: 300px; /* Increased fixed minimum height */
+  min-height: 300px;
   height: auto;
 }
 
@@ -206,7 +206,7 @@
   opacity: 0;
   transition: opacity 0.8s ease-in-out;
   pointer-events: none;
-  min-height: 250px; /* Fixed minimum height for each slide */
+  min-height: 250px;
 }
 
 .testimonial-slide.active {
@@ -215,7 +215,6 @@
   pointer-events: auto;
 }
 
-/* Add this new class for the testimonial inner container */
 .testimonial-inner {
   background: #f8fbfe;
   border-radius: 1.5rem;
@@ -224,7 +223,7 @@
   max-width: 950px;
   margin: 0 auto;
   animation: appear 1s ease-out;
-  min-height: 350px; /* Fixed height for the entire testimonial box */
+  min-height: 350px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -374,6 +373,215 @@
         margin-left: 0.5rem;
         cursor: pointer;
       }
+      
+            /* FORCE ALL TEXT IN DARKMODE TO BE WHITE - ADD THIS */
+      body.dark-theme,
+      body.dark-theme * {
+        color: #ffffff !important;
+      }
+      
+      /* EXEMPT FIRST WHITE HEADER (top-header) - KEEP ORIGINAL COLORS */
+      body.dark-theme .top-header,
+      body.dark-theme .top-header * {
+        color: inherit !important;
+      }
+      
+      body.dark-theme .top-header .social-icons a {
+        color: #0b3b5c !important;
+      }
+      
+      body.dark-theme .top-header input {
+        background: #ffffff !important;
+        color: #1e2a3a !important;
+        border-color: #b8cde0 !important;
+      }
+      
+      body.dark-theme .top-header input::placeholder {
+        color: #7f8fa4 !important;
+      }
+      
+      body.dark-theme .top-header .fa-search {
+        color: #7f8fa4 !important;
+      }
+      
+      /* EXEMPT APP CARDS - KEEP THEIR ORIGINAL STYLING */
+      body.dark-theme .card,
+      body.dark-theme .card * {
+        color: inherit !important;
+      }
+      
+      body.dark-theme .card h3 {
+        color: #0b1c2e !important;
+      }
+      
+      body.dark-theme .card p {
+        color: #2d3a4f !important;
+      }
+      
+      body.dark-theme .card .card-footer a {
+        color: #0b3b5c !important;
+      }
+      
+      /* Make dark mode toggle button visible */
+      body.dark-theme .top-header button,
+      body.dark-theme .social-search button {
+        background: #2a3a4a !important;
+        color: white !important;
+        border: 1px solid #4a5a6a !important;
+        border-radius: 50% !important;
+        width: 36px !important;
+        height: 36px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        transition: all 0.2s ease !important;
+      }
+      
+      body.dark-theme .top-header button:hover,
+      body.dark-theme .social-search button:hover {
+        background: #0b3b5c !important;
+        border-color: #ffffff !important;
+        transform: scale(1.1) !important;
+      }
+      
+      body.dark-theme .top-header button i,
+      body.dark-theme .social-search button i {
+        color: white !important;
+        font-size: 1rem !important;
+      }
+      
+      /* EXCEPTIONS - keep buttons, links interactive but readable */
+      body.dark-theme button:not(.modal-close):not(.chatbot-button):not(.suggested-question),
+      body.dark-theme .archive-button,
+      body.dark-theme .read-post-btn,
+      body.dark-theme .load-more-btn,
+      body.dark-theme .show-all-button {
+        color: #ffffff !important;
+      }
+      
+      body.dark-theme .archive-button.active {
+        background-color: #0b3b5c !important;
+        color: white !important;
+      }
+      
+      body.dark-theme .chatbot-messages .bot-message {
+        background: #2a3a4a !important;
+        color: white !important;
+      }
+      
+      body.dark-theme .chatbot-messages .user-message {
+        background: #0b3b5c !important;
+        color: white !important;
+      }
+      
+      body.dark-theme input,
+      body.dark-theme textarea {
+        background: #2a3a4a !important;
+        color: white !important;
+        border-color: #4a5a6a !important;
+      }
+      
+      body.dark-theme input::placeholder {
+        color: #cccccc !important;
+      }
+      
+      /* SEARCH DROPDOWN DARK MODE STYLES */
+      body.dark-theme .top-header div[style*="position: absolute"][style*="top: 100%"] {
+        background: #1e2a3a !important;
+        border-color: #4a5a6a !important;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.3) !important;
+      }
+      
+      body.dark-theme .top-header div[style*="position: absolute"][style*="top: 100%"] div {
+        background: #1e2a3a !important;
+        color: white !important;
+        border-bottom-color: #4a5a6a !important;
+      }
+      
+      body.dark-theme .top-header div[style*="position: absolute"][style*="top: 100%"] div:hover {
+        background: #2a3a4a !important;
+      }
+      
+      body.dark-theme .top-header div[style*="position: absolute"][style*="top: 100%"] div span {
+        color: #cccccc !important;
+      }
+      
+      body.dark-theme .footer,
+      body.dark-theme .footer * {
+        color: white !important;
+      }
+      
+      body.dark-theme .footer a {
+        color: white !important;
+      }
+      
+      body.dark-theme .footer a:hover {
+        color: #cccccc !important;
+      }
+      
+      body.dark-theme .navbar,
+      body.dark-theme .navbar * {
+        color: white !important;
+      }
+      
+      body.dark-theme .nav-links a {
+        color: white !important;
+      }
+      
+      body.dark-theme .hero-title,
+      body.dark-theme .hero-sub,
+      body.dark-theme .metric-number,
+      body.dark-theme .metric-label,
+      body.dark-theme .showcase-title {
+        color: white !important;
+      }
+      
+      body.dark-theme .blog-post-title,
+      body.dark-theme .blog-post-excerpt,
+      body.dark-theme .blog-post-date,
+      body.dark-theme .archive-title,
+      body.dark-theme .archive-month,
+      body.dark-theme .archive-year,
+      body.dark-theme .archive-total,
+      body.dark-theme .selected-month-text {
+        color: white !important;
+      }
+      
+      body.dark-theme .quote-text,
+      body.dark-theme .quote-author {
+        color: white !important;
+      }
+      
+      body.dark-theme .hero-badge {
+        background: #2a3a4a !important;
+        color: white !important;
+        border-color: #4a5a6a !important;
+      }
+      
+      /* Ensure dark mode toggle icon is visible in both modes */
+      .top-header button,
+      .social-search button {
+        background: #f0f5ff !important;
+        border: 1px solid #b8cde0 !important;
+        border-radius: 50% !important;
+        width: 36px !important;
+        height: 36px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        transition: all 0.2s ease !important;
+      }
+      
+      .top-header button:hover,
+      .social-search button:hover {
+        background: #0b3b5c !important;
+        color: white !important;
+      }
+      
+      .top-header button i,
+      .social-search button i {
+        font-size: 1rem !important;
+      }
 
       /* Footer vertical columns */
       .footer-columns {
@@ -407,7 +615,7 @@
   text-decoration: underline;
 }
 
-       /* VS Code animation box - Professional fixed size with syntax highlighting */
+       /* VS Code animation box */
       .code-animation-box {
         font-family: 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
         background: #1e1e1e;
@@ -427,7 +635,6 @@
         border: 1px solid #3c3c3c;
       }
 
-      /* VS Code syntax highlighting colors */
       .code-animation-box .keyword { 
         color: #569cd6;
         font-weight: 500;
@@ -454,7 +661,6 @@
         color: #ffd700;
       }
 
-      /* VS Code cursor animation */
       .code-animation-box .cursor {
         display: inline-block;
         width: 8px;
@@ -470,7 +676,6 @@
         51%, 100% { opacity: 0; }
       }
 
-      /* VS Code scrollbar styling */
       .code-animation-box pre {
         margin: 0;
         white-space: pre-wrap;
@@ -506,7 +711,6 @@
         background: #1e1e1e;
       }
 
-      /* VS Code status bar at bottom */
       .code-animation-box .status-bar {
         position: absolute;
         bottom: 0;
@@ -524,7 +728,6 @@
         z-index: 10;
       }
 
-      /* VS Code breadcrumb */
       .code-animation-box .breadcrumb {
         color: #8dc3f0;
         font-size: 0.7rem;
@@ -533,7 +736,6 @@
         margin-bottom: 8px;
       }
 
-      /* Language indicator */
       .code-animation-box .language-badge {
         position: absolute;
         top: 10px;
@@ -548,7 +750,6 @@
         z-index: 10;
       }
 
-      /* VS Code minimap area */
       .code-animation-box .minimap {
         position: absolute;
         right: 0;
@@ -561,7 +762,6 @@
         z-index: 5;
       }
 
-      /* Typing animation pulse */
       .code-animation-box .typing {
         animation: typePulse 0.1s ease-in-out;
       }
@@ -608,6 +808,292 @@
         html { font-size: 14px; }
         .chatbot-panel { width: 300px; right: 16px; bottom: 80px; }
         .footer-columns { flex-direction: column; gap: 1.5rem; }
+      }
+
+      /* Blog Styles - copied exactly from personal website */
+      .blog-container {
+        display: flex;
+        gap: 40px;
+        margin: 2em 0;
+      }
+      .blog-content {
+        flex: 3;
+      }
+      .blog-sidebar {
+        flex: 1;
+        min-width: 220px;
+        max-width: 280px;
+      }
+      .archive-section {
+        background-color: #ffffff;
+        border: 1px solid #e0e8f2;
+        border-radius: 8px;
+        padding: 20px;
+        position: sticky;
+        top: 90px;
+      }
+      body.dark-theme .archive-section {
+        background-color: #1e2a3a;
+        border-color: #3a4b5e;
+      }
+      .archive-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #0b1c2e;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #e0e8f2;
+        font-family: 'Montserrat', sans-serif;
+      }
+      body.dark-theme .archive-title {
+        color: #eef4fa;
+        border-bottom-color: #3a4b5e;
+      }
+      .archive-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      .archive-item {
+        margin-bottom: 10px;
+      }
+      .archive-button {
+        display: block;
+        width: 100%;
+        text-align: left;
+        background: none;
+        border: 1px solid #e0e8f2;
+        color: #1e2a3a;
+        text-decoration: none;
+        font-size: 0.95rem;
+        padding: 10px 15px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-family: 'Montserrat', sans-serif;
+      }
+      body.dark-theme .archive-button {
+        color: #d1dceb;
+        border-color: #3a4b5e;
+      }
+      .archive-button:hover {
+        background-color: #f0f5ff;
+        border-color: #0b3b5c;
+      }
+      .archive-button.active {
+        background-color: #0b3b5c;
+        color: white;
+        border-color: #0b3b5c;
+      }
+      .archive-month {
+        font-weight: 500;
+      }
+      .archive-year {
+        font-weight: 400;
+        opacity: 0.8;
+      }
+      .post-count-badge {
+        background-color: #0b3b5c;
+        color: white;
+        font-size: 0.75rem;
+        padding: 2px 8px;
+        border-radius: 10px;
+        float: right;
+      }
+      .archive-button.active .post-count-badge {
+        background-color: white;
+        color: #0b3b5c;
+      }
+      .archive-total {
+        margin-top: 20px;
+        padding-top: 15px;
+        border-top: 1px solid #e0e8f2;
+        font-size: 0.9rem;
+        color: #5f7d9c;
+        text-align: center;
+      }
+      .selected-month-info {
+        background-color: #f0f5ff;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        border-left: 4px solid #0b3b5c;
+      }
+      body.dark-theme .selected-month-info {
+        background-color: #2f4055;
+      }
+      .selected-month-text {
+        font-weight: 600;
+        color: #0b1c2e;
+        margin-bottom: 5px;
+      }
+      body.dark-theme .selected-month-text {
+        color: #eef4fa;
+      }
+      .show-all-button {
+        display: inline-block;
+        background: none;
+        border: 1px solid #e0e8f2;
+        color: #1e2a3a;
+        padding: 5px 15px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.85rem;
+        margin-top: 5px;
+        transition: all 0.2s ease;
+      }
+      .show-all-button:hover {
+        background-color: white;
+        border-color: #0b3b5c;
+      }
+      .blog-posts-list {
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+        margin: 2em 0;
+      }
+      .blog-post-item {
+        padding: 20px;
+        background-color: #ffffff;
+        border: 1px solid #e0e8f2;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+      }
+      body.dark-theme .blog-post-item {
+        background-color: #1e2a3a;
+        border-color: #3a4b5e;
+      }
+      .blog-post-item:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+      .blog-post-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 15px;
+      }
+      .blog-post-icon {
+        color: #5f7d9c;
+        font-size: 1.3rem;
+      }
+      .blog-post-title {
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: #0b1c2e;
+        margin: 0;
+        flex: 1;
+        font-family: 'Montserrat', sans-serif;
+      }
+      body.dark-theme .blog-post-title {
+        color: #eef4fa;
+      }
+      .blog-post-date {
+        color: #5f7d9c;
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        white-space: nowrap;
+        font-weight: 500;
+      }
+      .blog-post-excerpt {
+        color: #1e2a3a;
+        line-height: 1.6;
+        margin-bottom: 15px;
+        font-size: 1rem;
+        font-weight: 400;
+      }
+      body.dark-theme .blog-post-excerpt {
+        color: #d1dceb;
+      }
+      .blog-post-actions {
+        text-align: right;
+      }
+      .read-post-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background-color: #0b3b5c;
+        color: white;
+        padding: 8px 20px;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.9rem;
+        transition: all 0.2s;
+      }
+      .read-post-btn:hover {
+        background-color: #0f4a73;
+      }
+      .blog-loading {
+        text-align: center;
+        padding: 60px 20px;
+        color: #5f7d9c;
+      }
+      .blog-error {
+        text-align: center;
+        padding: 60px 20px;
+        color: #c44536;
+        background-color: #ffffff;
+        border: 1px solid #e0e8f2;
+        border-radius: 8px;
+      }
+      body.dark-theme .blog-error {
+        background-color: #1e2a3a;
+      }
+      .blog-load-more {
+        text-align: center;
+        margin: 30px 0;
+      }
+      .load-more-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background-color: #ffffff;
+        color: #1e2a3a;
+        padding: 10px 24px;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.95rem;
+        transition: all 0.2s;
+        border: 1px solid #e0e8f2;
+        cursor: pointer;
+      }
+      body.dark-theme .load-more-btn {
+        background-color: #1e2a3a;
+        color: #d1dceb;
+        border-color: #3a4b5e;
+      }
+      .load-more-btn:hover {
+        background-color: #f0f5ff;
+      }
+      .blog-introduction {
+        background-color: #ffffff;
+        border: 1px solid #e0e8f2;
+        border-radius: 8px;
+        padding: 25px;
+        margin-bottom: 30px;
+        position: relative;
+        overflow: hidden;
+      }
+      body.dark-theme .blog-introduction {
+        background-color: #1e2a3a;
+        border-color: #3a4b5e;
+      }
+      @media (max-width: 768px) {
+        .blog-container {
+          flex-direction: column;
+        }
+        .blog-sidebar {
+          max-width: 100%;
+          order: -1;
+          margin-bottom: 30px;
+        }
+        .archive-section {
+          position: static;
+        }
       }
     </style>
 </head>
@@ -681,7 +1167,6 @@
         return <div ref={containerRef} className="particle-field" />;
       };
 
-       // VS Code Animation Component - NOW WITH AUTO-TYPING EFFECT
       const CodeAnimation = () => {
         const [displayedCode, setDisplayedCode] = useState('');
         const [isTyping, setIsTyping] = useState(true);
@@ -704,7 +1189,7 @@ ggplot(data, aes(x = group, y = response, fill = group)) ]`;
 
         useEffect(() => {
           let i = 0;
-          const typingSpeed = 30; // milliseconds per character
+          const typingSpeed = 30;
           let timeoutId;
           
           const typeNextChar = () => {
@@ -714,7 +1199,6 @@ ggplot(data, aes(x = group, y = response, fill = group)) ]`;
               timeoutId = setTimeout(typeNextChar, typingSpeed);
             } else {
               setIsTyping(false);
-              // Restart after 3 seconds when complete
               setTimeout(() => {
                 setDisplayedCode('');
                 i = 0;
@@ -724,10 +1208,8 @@ ggplot(data, aes(x = group, y = response, fill = group)) ]`;
             }
           };
           
-          // Start typing animation
           timeoutId = setTimeout(typeNextChar, 500);
           
-          // Cursor blinking effect
           const cursorInterval = setInterval(() => {
             setCursorVisible(prev => !prev);
           }, 500);
@@ -823,22 +1305,14 @@ const Navbar = ({ activeTab, setActiveTab, setShowPrivacy, setModalContent, dark
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      
-      // Update scrolled state for navbar blur effect
       setScrolled(currentScrollY > 10);
-      
-      // Hide top header when scrolling down, show when scrolling up
       if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        // Scrolling DOWN - hide top header
         setHideTopHeader(true);
       } else {
-        // Scrolling UP - show top header
         setHideTopHeader(false);
       }
-      
       setLastScrollY(currentScrollY);
     };
-    
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
@@ -884,7 +1358,6 @@ const Navbar = ({ activeTab, setActiveTab, setShowPrivacy, setModalContent, dark
 
   return (
     <>
-      {/* White Top Header - hides when scrolling down */}
       <div className="top-header" style={{ 
         background: '#ffffff', 
         borderBottom: '1px solid #d0ddef', 
@@ -933,12 +1406,11 @@ const Navbar = ({ activeTab, setActiveTab, setShowPrivacy, setModalContent, dark
         </div>
       </div>
 
-      {/* Black Navbar - always visible, sticks below white header when white header is visible */}
       <nav className={`navbar ${scrolled ? "navbar-blur" : ""}`} style={{ 
         background: '#000000', 
         borderBottom: '1px solid #333333',
         position: 'sticky',
-        top: hideTopHeader ? 0 : '42px', // Adjust based on white header visibility
+        top: hideTopHeader ? 0 : '42px',
         transition: 'top 0.3s ease, background 0.2s, box-shadow 0.2s',
         zIndex: 29
       }}>
@@ -951,6 +1423,7 @@ const Navbar = ({ activeTab, setActiveTab, setShowPrivacy, setModalContent, dark
         <div className="nav-links">
           <a href="#" onClick={(e) => { e.preventDefault(); handleNavClick('home'); }} style={{ color: '#ffffff' }}>Home</a>
           <a href="#" onClick={(e) => { e.preventDefault(); handleNavClick('apps'); }} style={{ color: '#ffffff' }}>Apps</a>
+          <a href="#" onClick={(e) => { e.preventDefault(); handleNavClick('blog'); }} style={{ color: '#ffffff' }}>Blog</a>
           <a href="#" onClick={handleAboutClick} style={{ color: '#ffffff' }}>About The Developer</a>
           <a href="#" onClick={handleSupportClick} style={{ color: '#ffffff' }}>Support</a>
         </div>
@@ -965,6 +1438,7 @@ const Navbar = ({ activeTab, setActiveTab, setShowPrivacy, setModalContent, dark
         }}>
           <a href="#" onClick={(e) => { e.preventDefault(); handleNavClick('home'); }} style={{ color: '#ffffff' }}><i className="fas fa-home"></i> Home</a>
           <a href="#" onClick={(e) => { e.preventDefault(); handleNavClick('apps'); }} style={{ color: '#ffffff' }}><i className="fas fa-th"></i> Apps</a>
+          <a href="#" onClick={(e) => { e.preventDefault(); handleNavClick('blog'); }} style={{ color: '#ffffff' }}><i className="fas fa-blog"></i> Blog</a>
           <a href="#" onClick={handleAboutClick} style={{ color: '#ffffff' }}><i className="fas fa-user"></i> About The Author</a>
           <a href="#" onClick={handleSupportClick} style={{ color: '#ffffff' }}><i className="fas fa-envelope"></i> Support</a>
         </div>
@@ -1067,15 +1541,14 @@ const Navbar = ({ activeTab, setActiveTab, setShowPrivacy, setModalContent, dark
                 <div className="hero-left">
                   <div className="hero-badge">📈statistical tools • open source • R-powered backend</div>
                   <h1 className="hero-title">
-                    <span className="title-line">Empowering Public Health </span>
+                    <span className="title-line">Empowering Health Research</span>
                     <span className="title-line"><span className="gradient-text">with Innovative Tools</span></span>
                   </h1>
                   <p className="hero-sub">
 Welcome to ShinyHealthTools, a platform dedicated to advancing public health research in Africa and beyond. Here, you will find a collection of R/Shiny applications tailored for healthcare institutions, academic researchers, and clinical studies. You can access the apps directly or use the source code in RStudio to reproduce analyses.
                   </p>
-                                    <p className="hero-sub">
+                  <p className="hero-sub">
 The various apps cover a wide range of functions, including sample size calculations, survival analysis, mediation analysis (simple and serial), ROC analysis, exploratory and confirmatory factor analysis, data conversion, and trend analysis. These advanced statistical procedures are user-friendly and can be performed without prior programming experience.
-
                   </p>
                   <div className="hero-metrics">
                     <div className="metric-item"><span className="metric-number">21</span><span className="metric-label">statistical tools</span></div>
@@ -1183,81 +1656,387 @@ The various apps cover a wide range of functions, including sample size calculat
         );
       };
 
- const Footer = ({ setShowPrivacy, setModalContent, setActiveTab }) => {
-  const currentYear = new Date().getFullYear();
+      // BlogTab - using exact same configuration as personal website
+      const BlogTab = () => {
+        const [blogPosts, setBlogPosts] = useState([]);
+        const [loadingBlog, setLoadingBlog] = useState(true);
+        const [blogError, setBlogError] = useState(false);
+        const [visiblePosts, setVisiblePosts] = useState(10);
+        const [selectedMonth, setSelectedMonth] = useState(null);
+        const [filteredPosts, setFilteredPosts] = useState([]);
 
-  const handleResourceClick = (title, content) => {
-    setModalContent({ title, content });
-  };
+        const extractExcerpt = (content, maxLength = 250) => {
+          if (!content) return 'No content available';
+          let text = content.replace(/<[^>]*>/g, '');
+          const textarea = document.createElement('textarea');
+          textarea.innerHTML = text;
+          let decoded = textarea.value;
+          if (decoded === text) {
+            decoded = text
+              .replace(/&nbsp;/g, ' ')
+              .replace(/&amp;/g, '&')
+              .replace(/&lt;/g, '<')
+              .replace(/&gt;/g, '>')
+              .replace(/&quot;/g, '"')
+              .replace(/&#39;/g, "'")
+              .replace(/&ldquo;/g, '"')
+              .replace(/&rdquo;/g, '"')
+              .replace(/&lsquo;/g, "'")
+              .replace(/&rsquo;/g, "'")
+              .replace(/&mdash;/g, '—')
+              .replace(/&ndash;/g, '–')
+              .replace(/&hellip;/g, '…');
+          }
+          decoded = decoded.replace(/\s+/g, ' ').trim();
+          return decoded.length > maxLength ? decoded.substring(0, maxLength).trim() + '...' : decoded;
+        };
 
-  const handleAppClick = (appName) => {
-    const app = shinyApps.find(a => a.name === appName);
-    if (app) window.open(app.run, '_blank');
-  };
+        const loadBlogPosts = async () => {
+          setLoadingBlog(true);
+          setBlogError(false);
+          
+          try {
+            const timestamp = new Date().getTime();
+            const rssFeedUrl = 'https://mudasir-ibrahim.blogspot.com/feeds/posts/default?alt=json&max-results=100';
+            const encodedUrl = encodeURIComponent(rssFeedUrl);
+            
+            const proxyUrls = [
+              `https://api.allorigins.win/get?url=${encodedUrl}&timestamp=${timestamp}`,
+              `https://corsproxy.io/?${encodedUrl}&_=${timestamp}`,
+              `https://api.codetabs.com/v1/proxy?quest=${encodedUrl}&t=${timestamp}`,
+              `https://thingproxy.freeboard.io/fetch/${rssFeedUrl}?t=${timestamp}`
+            ];
+            
+            let success = false;
+            let data = null;
+            
+            for (let i = 0; i < proxyUrls.length; i++) {
+              try {
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 5000);
+                const response = await fetch(proxyUrls[i], { signal: controller.signal });
+                clearTimeout(timeoutId);
+                if (response.ok) {
+                  const result = await response.json();
+                  if (proxyUrls[i].includes('allorigins.win')) {
+                    data = JSON.parse(result.contents);
+                  } else {
+                    data = result;
+                  }
+                  if (data && data.feed && data.feed.entry) {
+                    success = true;
+                    break;
+                  }
+                }
+              } catch (proxyError) {
+                continue;
+              }
+            }
+            
+            if (!success || !data) {
+              await new Promise((resolve) => {
+                const callbackName = `bloggerCallback_${Date.now()}`;
+                const jsonpUrl = `https://mudasir-ibrahim.blogspot.com/feeds/posts/default?alt=json-in-script&callback=${callbackName}&max-results=50`;
+                window[callbackName] = (jsonpData) => {
+                  data = jsonpData;
+                  delete window[callbackName];
+                  resolve();
+                };
+                const script = document.createElement('script');
+                script.src = jsonpUrl;
+                script.onerror = () => {
+                  delete window[callbackName];
+                  resolve();
+                };
+                document.head.appendChild(script);
+                setTimeout(() => {
+                  if (script.parentNode) document.head.removeChild(script);
+                  resolve();
+                }, 8000);
+              });
+            }
+            
+            if (data && data.feed && data.feed.entry) {
+              const posts = data.feed.entry;
+              if (posts.length > 0) {
+                const sortedPosts = posts.sort((a, b) => {
+                  const dateA = new Date(a.published?.$t || a.updated?.$t || 0);
+                  const dateB = new Date(b.published?.$t || b.updated?.$t || 0);
+                  return dateB - dateA;
+                });
+                setBlogPosts(sortedPosts);
+                setFilteredPosts(sortedPosts);
+                setBlogError(false);
+                try {
+                  localStorage.setItem('bloggerCache', JSON.stringify({
+                    posts: sortedPosts,
+                    timestamp: Date.now()
+                  }));
+                } catch (e) {}
+              } else {
+                setBlogError(true);
+              }
+            } else {
+              try {
+                const cached = localStorage.getItem('bloggerCache');
+                if (cached) {
+                  const cacheData = JSON.parse(cached);
+                  if (Date.now() - cacheData.timestamp < 3600000) {
+                    setBlogPosts(cacheData.posts);
+                    setFilteredPosts(cacheData.posts);
+                    setBlogError(false);
+                  } else {
+                    setBlogError(true);
+                  }
+                } else {
+                  setBlogError(true);
+                }
+              } catch (e) {
+                setBlogError(true);
+              }
+            }
+          } catch (error) {
+            setBlogError(true);
+            try {
+              const cached = localStorage.getItem('bloggerCache');
+              if (cached) {
+                const cacheData = JSON.parse(cached);
+                setBlogPosts(cacheData.posts);
+                setFilteredPosts(cacheData.posts);
+                setBlogError(false);
+              }
+            } catch (e) {}
+          } finally {
+            setLoadingBlog(false);
+          }
+        };
 
-  const handleAllAppsClick = () => {
-    setActiveTab('apps');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+        useEffect(() => {
+          loadBlogPosts();
+        }, []);
 
-  return (
-    <footer className="footer" style={{ 
-      background: '#000000', 
-      borderTop: '1px solid #333333', 
-      color: '#ffffff' 
-    }}>
-      <div className="footer-columns">
-        <div className="footer-col">
-          <h4 style={{ color: '#ffffff' }}>Apps</h4>
-          <a onClick={() => handleAppClick('FactorGuard')} style={{ color: '#ffffff' }}>FactorGuard</a>
-          <a onClick={() => handleAppClick('CalcuStats')} style={{ color: '#ffffff' }}>CalcuStats</a>
-          <a onClick={() => handleAppClick('ROC Curve Builder')} style={{ color: '#ffffff' }}>ROC Curve Builder</a>
-          <a onClick={() => handleAppClick('Data2SPSS')} style={{ color: '#ffffff' }}>Data2SPSS</a>
-          <a onClick={() => handleAppClick('KMPlot Genie')} style={{ color: '#ffffff' }}>KMPlot Genie</a>
-          <a onClick={handleAllAppsClick} style={{ color: '#ffffff' }}>All Apps→</a>
-        </div>
-        <div className="footer-col">
-          <h4 style={{ color: '#ffffff' }}>Resources</h4>
-          <a onClick={() => handleResourceClick('📚 Documentation', 'Comprehensive documentation for all ShinyHealthTools applications is available at <a href=\"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/README.md" target=\"_blank\">github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/README.md</a>')} style={{ color: '#ffffff' }}>Documentation</a>
-          <a onClick={() => handleResourceClick('🐙 GitHub Repository', 'All source code is open source and available at <a href=\"https://github.com/mudassiribrahim30\" target=\"_blank\">github.com/mudassiribrahim30</a>. Licensed under MIT. Contributions welcome.')} style={{ color: '#ffffff' }}>GitHub Repository</a>
-          <a onClick={() => handleResourceClick('📖 Citation Guide', 'To cite ShinyHealthTools in publications:<br/><br/>Shiny Health Tools (2025). ShinyHealthTools: Statistical applications for health research. Retrieved from  [website URL] For specific apps, include the app name and version.')} style={{ color: '#ffffff' }}>Citation Guide</a>
-          <a onClick={() => handleResourceClick('📌 Release Notes', '**v2.1.0** (March 2026): Major redesign, improved UI responsiveness, dark theme integration, chatbot integration, and 21 total apps.<br/>')} style={{ color: '#ffffff' }}>Release Notes</a>
-        </div>
-        <div className="footer-col">
-          <h4 style={{ color: '#ffffff' }}>Support</h4>
-          <a onClick={() => handleResourceClick('📧 Email Support', 'For technical assistance, email me at <a href=\"mailto:mudassiribrahim30@gmail.com\">mudassiribrahim30@gmail.com</a>. Response within 24 hours.')} style={{ color: '#ffffff' }}>Email Support</a>
-          <a onClick={() => handleResourceClick('❓ Frequently Asked Questions', '<strong>Q: Are the tools really free?</strong><br/>A: Yes, completely free for academic, government, and non-profit use.<br/><br/><strong>Q: Do I need to install R?</strong><br/>A: No, everything runs in your browser.<br/><br/><strong>Q: How do I cite these tools?</strong><br/>A: See Citation Guide in Resources.<br/><br/><strong>Q: Is my data secure?</strong><br/>A: All processing is local; no data leaves your machine (see Privacy).')} style={{ color: '#ffffff' }}>FAQ</a>
-          <a onClick={() => setShowPrivacy(true)} style={{ color: '#ffffff' }}>Privacy</a>
-        </div>
-        <div className="footer-col">
-          <h4 style={{ color: '#ffffff' }}>Connect</h4>
-          <a href="https://youtube.com" target="_blank" style={{ color: '#ffffff' }}>Youtube</a>
-          <a href="https://facebook.com" target="_blank" style={{ color: '#ffffff' }}>Facebook</a>
-          <a href="https://instagram.com" target="_blank" style={{ color: '#ffffff' }}>Instagram</a>
-          <a href="https://github.com/mudassiribrahim30/R-Shiny-Apps" target="_blank" style={{ color: '#ffffff' }}>Github</a>
-        </div>
-      </div>
-      <div className="footer-copyright" style={{ 
-        color: '#ffffff', 
-        borderTop: '1px solid #333333', 
-        fontWeight: '500', 
-        fontSize: '0.85rem', 
-        paddingTop: '1.2rem', 
-        marginTop: '0.5rem' 
-      }}>
-        <span>Copyright © 2025–{currentYear} ShinyHealthTools. open source · free to use</span>
-        <span className="footer-extra">Interactive apps for health research</span>
-      </div>
-    </footer>
-  );
-};
+        const loadMorePosts = () => setVisiblePosts(prev => prev + 10);
 
-      // ChatBot Component with vanishing questions on click
+        const groupedPosts = {};
+        blogPosts.forEach(post => {
+          const published = post.published?.$t || new Date().toISOString();
+          const date = new Date(published);
+          const year = date.getFullYear();
+          const month = date.toLocaleDateString('en-US', { month: 'long' });
+          const monthYearKey = `${month} ${year}`;
+          if (!groupedPosts[monthYearKey]) {
+            groupedPosts[monthYearKey] = { month, year, dateObj: date, posts: [] };
+          }
+          groupedPosts[monthYearKey].posts.push(post);
+        });
+
+        const sortedMonths = Object.values(groupedPosts).sort((a, b) => b.dateObj - a.dateObj);
+
+        const handleMonthSelect = (monthYear) => {
+          if (selectedMonth === monthYear) {
+            setSelectedMonth(null);
+            setFilteredPosts(blogPosts);
+          } else {
+            setSelectedMonth(monthYear);
+            setFilteredPosts(groupedPosts[monthYear]?.posts || []);
+          }
+          setVisiblePosts(10);
+        };
+
+        const handleShowAll = () => {
+          setSelectedMonth(null);
+          setFilteredPosts(blogPosts);
+          setVisiblePosts(10);
+        };
+
+        const postsToDisplay = filteredPosts.length > 0 ? filteredPosts : blogPosts;
+        const hasMorePosts = visiblePosts < postsToDisplay.length;
+
+        return (
+          <section className="showcase">
+            <h2 className="showcase-title"><span>// </span>blog</h2>
+            
+            <div className="blog-introduction">
+              <div style={{ position: 'absolute', top: '10px', right: '10px', fontSize: '2.5rem', color: '#0b3b5c', opacity: 0.1 }}>
+                <i className="fas fa-blog"></i>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '20px', marginBottom: '15px' }}>
+                <div style={{ backgroundColor: '#0b3b5c', color: 'white', width: '50px', height: '50px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' }}>
+                  <i className="fas fa-pen-nib"></i>
+                </div>
+                <h3 style={{ margin: 0, color: '#0b1c2e', fontSize: '1.5rem' }}>Welcome to the ShinyHealthTools Blog</h3>
+              </div>
+              <p style={{ fontSize: '1.1rem', lineHeight: '1.7', color: '#1e2a3a', marginBottom: '15px' }}>
+                <i className="fas fa-quote-left" style={{ color: '#0b3b5c', marginRight: '10px', opacity: 0.7 }}></i>
+                Insights and updates on the ShinyHealthTools.
+                <i className="fas fa-quote-right" style={{ color: '#0b3b5c', marginLeft: '10px', opacity: 0.7 }}></i>
+              </p>
+            </div>
+
+            {loadingBlog ? (
+              <div className="blog-loading">
+                <i className="fas fa-spinner fa-spin" style={{ fontSize: '2rem', marginBottom: '20px' }}></i>
+                <p>Loading blog posts...</p>
+              </div>
+            ) : blogError ? (
+              <div className="blog-error">
+                <i className="fas fa-exclamation-triangle"></i>
+                <p>Unable to load blog posts. Please visit the blog directly.</p>
+                <a href="https://mudasir-ibrahim.blogspot.com" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-block', marginTop: '1rem', padding: '0.6rem 1.5rem', background: '#0b3b5c', color: 'white', textDecoration: 'none', borderRadius: '4px' }}>Go to Blog <i className="fas fa-external-link-alt" style={{ marginLeft: '0.5rem' }}></i></a>
+              </div>
+            ) : blogPosts.length > 0 ? (
+              <div className="blog-container">
+                <div className="blog-sidebar">
+                  <div className="archive-section">
+                    <h3 className="archive-title"><i className="fas fa-filter" style={{ marginRight: '10px' }}></i>Filter by Month</h3>
+                    <ul className="archive-list">
+                      <li className="archive-item">
+                        <button className={`archive-button ${!selectedMonth ? 'active' : ''}`} onClick={handleShowAll}>
+                          <span className="archive-month">All Posts</span>
+                          <span className="post-count-badge">{blogPosts.length}</span>
+                        </button>
+                      </li>
+                      {sortedMonths.map((monthData) => {
+                        const monthYearKey = `${monthData.month} ${monthData.year}`;
+                        const isActive = selectedMonth === monthYearKey;
+                        return (
+                          <li key={monthYearKey} className="archive-item">
+                            <button className={`archive-button ${isActive ? 'active' : ''}`} onClick={() => handleMonthSelect(monthYearKey)}>
+                              <span className="archive-month">{monthData.month}</span> <span className="archive-year">{monthData.year}</span>
+                              <span className="post-count-badge">{monthData.posts.length}</span>
+                            </button>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                    <div className="archive-total">{blogPosts.length} posts across {sortedMonths.length} months</div>
+                  </div>
+                </div>
+
+                <div className="blog-content">
+                  {selectedMonth ? (
+                    <div className="selected-month-info">
+                      <div className="selected-month-text">Showing posts from: <strong>{selectedMonth}</strong> <span style={{ marginLeft: '10px', fontSize: '0.9rem', color: '#5f7d9c' }}>({postsToDisplay.length} posts)</span></div>
+                      <button className="show-all-button" onClick={handleShowAll}><i className="fas fa-list" style={{ marginRight: '5px' }}></i>Show All Posts</button>
+                    </div>
+                  ) : (
+                    <div className="selected-month-info" style={{ borderLeftColor: '#2ecc71' }}>
+                      <div className="selected-month-text">Showing: <strong>All Posts</strong> <span style={{ marginLeft: '10px', fontSize: '0.9rem', color: '#5f7d9c' }}>({postsToDisplay.length} total posts)</span></div>
+                      {sortedMonths.length > 0 && <div style={{ fontSize: '0.9rem', marginTop: '5px', color: '#5f7d9c' }}>Latest: {sortedMonths[0].month} {sortedMonths[0].year}</div>}
+                    </div>
+                  )}
+
+                  <div className="blog-posts-list">
+                    {postsToDisplay.slice(0, visiblePosts).map((post, index) => {
+                      const title = post.title?.$t || 'Untitled Post';
+                      const content = post.content?.$t || '';
+                      const published = post.published?.$t || new Date().toISOString();
+                      const link = post.link?.find(l => l.rel === 'alternate')?.href || '#';
+                      const excerpt = extractExcerpt(content, 200);
+                      const date = new Date(published).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+                      return (
+                        <div key={index} className="blog-post-item">
+                          <div className="blog-post-header">
+                            <i className="fas fa-blog blog-post-icon"></i>
+                            <h3 className="blog-post-title">{title}</h3>
+                            <div className="blog-post-date"><i className="far fa-calendar"></i><span>{date}</span></div>
+                          </div>
+                          <p className="blog-post-excerpt">{excerpt}</p>
+                          <div className="blog-post-actions">
+                            <a href={link} target="_blank" rel="noopener noreferrer" className="read-post-btn"><i className="fas fa-external-link-alt"></i> Read Full Post</a>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  {hasMorePosts && (
+                    <div className="blog-load-more">
+                      <button className="load-more-btn" onClick={loadMorePosts}><i className="fas fa-chevron-down"></i> Load More Posts ({postsToDisplay.length - visiblePosts} remaining)</button>
+                    </div>
+                  )}
+                  {!hasMorePosts && postsToDisplay.length > 0 && (
+                    <div style={{ textAlign: 'center', padding: '20px', color: '#5f7d9c', fontSize: '0.9rem' }}>
+                      <i className="fas fa-check-circle" style={{ marginRight: '8px', color: '#2ecc71' }}></i> Showing all {postsToDisplay.length} posts
+                    </div>
+                  )}
+                </div>
+              </div>
+            ) : (
+              <div className="blog-error"><i className="fas fa-exclamation-triangle"></i><p>No blog posts found</p></div>
+            )}
+          </section>
+        );
+      };
+
+      const Footer = ({ setShowPrivacy, setModalContent, setActiveTab }) => {
+        const currentYear = new Date().getFullYear();
+
+        const handleResourceClick = (title, content) => {
+          setModalContent({ title, content });
+        };
+
+        const handleAppClick = (appName) => {
+          const app = shinyApps.find(a => a.name === appName);
+          if (app) window.open(app.run, '_blank');
+        };
+
+        const handleAllAppsClick = () => {
+          setActiveTab('apps');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+
+        const handleBlogClick = () => {
+          setActiveTab('blog');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+
+        return (
+          <footer className="footer" style={{ background: '#000000', borderTop: '1px solid #333333', color: '#ffffff' }}>
+            <div className="footer-columns">
+              <div className="footer-col">
+                <h4 style={{ color: '#ffffff' }}>Apps</h4>
+                <a onClick={() => handleAppClick('FactorGuard')} style={{ color: '#ffffff' }}>FactorGuard</a>
+                <a onClick={() => handleAppClick('CalcuStats')} style={{ color: '#ffffff' }}>CalcuStats</a>
+                <a onClick={() => handleAppClick('ROC Curve Builder')} style={{ color: '#ffffff' }}>ROC Curve Builder</a>
+                <a onClick={() => handleAppClick('Data2SPSS')} style={{ color: '#ffffff' }}>Data2SPSS</a>
+                <a onClick={() => handleAppClick('KMPlot Genie')} style={{ color: '#ffffff' }}>KMPlot Genie</a>
+                <a onClick={handleAllAppsClick} style={{ color: '#ffffff' }}>All Apps→</a>
+              </div>
+              <div className="footer-col">
+                <h4 style={{ color: '#ffffff' }}>Resources</h4>
+                <a onClick={() => handleResourceClick('📚 Documentation', 'Comprehensive documentation for all ShinyHealthTools applications is available at <a href=\"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/README.md\" target=\"_blank\">github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/README.md</a>')} style={{ color: '#ffffff' }}>Documentation</a>
+                <a onClick={() => handleResourceClick('🐙 GitHub Repository', 'All source code is open source and available at <a href=\"https://github.com/mudassiribrahim30\" target=\"_blank\">github.com/mudassiribrahim30</a>. Licensed under MIT. Contributions welcome.')} style={{ color: '#ffffff' }}>GitHub Repository</a>
+                <a onClick={() => handleResourceClick('📖 Citation Guide', 'To cite ShinyHealthTools in publications:<br/><br/>Shiny Health Tools (2025). ShinyHealthTools: Statistical applications for health research. Retrieved from [website URL] For specific apps, include the app name and version.')} style={{ color: '#ffffff' }}>Citation Guide</a>
+                <a onClick={() => handleResourceClick('📌 Release Notes', '**v2.1.0** (March 2026): Major redesign, improved UI responsiveness, dark theme integration, chatbot integration, and 21 total apps.<br/>')} style={{ color: '#ffffff' }}>Release Notes</a>
+              </div>
+              <div className="footer-col">
+                <h4 style={{ color: '#ffffff' }}>Support</h4>
+                <a onClick={() => handleResourceClick('📧 Email Support', 'For technical assistance, email me at <a href=\"mailto:mudassiribrahim30@gmail.com\">mudassiribrahim30@gmail.com</a>. Response within 24 hours.')} style={{ color: '#ffffff' }}>Email Support</a>
+                <a onClick={() => handleResourceClick('❓ Frequently Asked Questions', '<strong>Q: Are the tools really free?</strong><br/>A: Yes, completely free for academic, government, and non-profit use.<br/><br/><strong>Q: Do I need to install R?</strong><br/>A: No, everything runs in your browser.<br/><br/><strong>Q: How do I cite these tools?</strong><br/>A: See Citation Guide in Resources.<br/><br/><strong>Q: Is my data secure?</strong><br/>A: All processing is local; no data leaves your machine (see Privacy).')} style={{ color: '#ffffff' }}>FAQ</a>
+                <a onClick={() => setShowPrivacy(true)} style={{ color: '#ffffff' }}>Privacy</a>
+              </div>
+              <div className="footer-col">
+                <h4 style={{ color: '#ffffff' }}>Connect</h4>
+                <a href="https://youtube.com" target="_blank" style={{ color: '#ffffff' }}>Youtube</a>
+                <a href="https://facebook.com" target="_blank" style={{ color: '#ffffff' }}>Facebook</a>
+                <a href="https://instagram.com" target="_blank" style={{ color: '#ffffff' }}>Instagram</a>
+                <a href="https://github.com/mudassiribrahim30/R-Shiny-Apps" target="_blank" style={{ color: '#ffffff' }}>Github</a>
+                <a onClick={handleBlogClick} style={{ color: '#ffffff', cursor: 'pointer' }}>Blog</a>
+              </div>
+            </div>
+            <div className="footer-copyright" style={{ color: '#ffffff', borderTop: '1px solid #333333', fontWeight: '500', fontSize: '0.85rem', paddingTop: '1.2rem', marginTop: '0.5rem' }}>
+              <span>Copyright © 2025–{currentYear} ShinyHealthTools. open source · free to use</span>
+              <span className="footer-extra">Interactive apps for health research</span>
+            </div>
+          </footer>
+        );
+      };
+
+      // ChatBot Component
       const ChatBot = ({ appsData }) => {
         const [isOpen, setIsOpen] = useState(false);
-        const [messages, setMessages] = useState([
-          { sender: 'bot', text: 'Hi! I\'m the ShinyHealthTools assistant. Ask me anything about our tools, features, or how to get started.' }
-        ]);
+        const [messages, setMessages] = useState([{ sender: 'bot', text: 'Hi! I\'m the ShinyHealthTools assistant. Ask me anything about our tools, features, or how to get started.' }]);
         const [input, setInput] = useState('');
         const [showSuggestions, setShowSuggestions] = useState(true);
         const messagesEndRef = useRef(null);
@@ -1273,25 +2052,13 @@ The various apps cover a wide range of functions, including sample size calculat
           "Tell me about FactorGuard"
         ];
 
-        const scrollToBottom = () => {
-          messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-        };
+        const scrollToBottom = () => messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
 
-        useEffect(() => {
-          scrollToBottom();
-        }, [messages]);
-
-        // Show suggestions when user focuses input or types
-        useEffect(() => {
-          if (input.length > 0) {
-            setShowSuggestions(true);
-          }
-        }, [input]);
+        useEffect(scrollToBottom, [messages]);
+        useEffect(() => { if (input.length > 0) setShowSuggestions(true); }, [input]);
 
         const generateResponse = (question) => {
           const q = question.toLowerCase();
-          
-          // App-specific knowledge
           if (q.includes('roc') || q.includes('curve builder')) {
             const app = appsData.find(a => a.name.includes('ROC'));
             return app ? `**${app.name}**: ${app.desc}. It provides diagnostic accuracy analysis with AUC, confidence intervals, and comparisons. [Launch here](${app.run})` : "ROC Curve Builder is a tool for diagnostic accuracy analysis with AUC and confidence intervals.";
@@ -1312,8 +2079,6 @@ The various apps cover a wide range of functions, including sample size calculat
             const app = appsData.find(a => a.name.includes('KMPlot'));
             return app ? `**${app.name}**: ${app.desc}. Kaplan-Meier curves with log-rank tests. [Launch](${app.run})` : "KMPlot Genie creates Kaplan-Meier survival curves with log-rank tests.";
           }
-
-          // General knowledge
           if (q.includes('how many') || q.includes('number of apps') || q.includes('tools available')) {
             return `We currently offer **${appsData.length} validated applications** covering sample size, ROC, survival, factor analysis, data conversion, and more.`;
           }
@@ -1333,14 +2098,13 @@ The various apps cover a wide range of functions, including sample size calculat
           if (q.includes('hello') || q.includes('hi ') || q.includes('hey')) {
             return "Hello! How can I help you with ShinyHealthTools today?";
           }
-
           return "I'm not sure about that. You can try asking about specific apps (e.g., 'ROC Curve Builder'), general features, or visit our Applications page.";
         };
 
         const handleSend = (text) => {
           if (!text.trim()) return;
           setMessages(prev => [...prev, { sender: 'user', text }]);
-          setShowSuggestions(false); // Hide suggestions after user sends a message
+          setShowSuggestions(false);
           setTimeout(() => {
             const response = generateResponse(text);
             setMessages(prev => [...prev, { sender: 'bot', text: response }]);
@@ -1348,21 +2112,14 @@ The various apps cover a wide range of functions, including sample size calculat
           setInput('');
         };
 
-        const handleSuggestionClick = (q) => {
-          handleSend(q);
-        };
+        const handleSuggestionClick = (q) => handleSend(q);
 
         return (
           <>
-            <button className="chatbot-button" onClick={() => setIsOpen(!isOpen)}>
-              <i className="fas fa-comment"></i>
-            </button>
+            <button className="chatbot-button" onClick={() => setIsOpen(!isOpen)}><i className="fas fa-comment"></i></button>
             {isOpen && (
               <div className="chatbot-panel">
-                <div className="chatbot-header">
-                  <span><i className="fas fa-robot"></i> ShinyHealthTools AI</span>
-                  <button onClick={() => setIsOpen(false)}><i className="fas fa-times"></i></button>
-                </div>
+                <div className="chatbot-header"><span><i className="fas fa-robot"></i> ShinyHealthTools AI</span><button onClick={() => setIsOpen(false)}><i className="fas fa-times"></i></button></div>
                 <div className="chatbot-messages">
                   {messages.map((msg, idx) => (
                     <div key={idx} className={`message ${msg.sender === 'user' ? 'user-message' : 'bot-message'}`}>
@@ -1373,22 +2130,11 @@ The various apps cover a wide range of functions, including sample size calculat
                 </div>
                 {showSuggestions && (
                   <div className="suggested-questions">
-                    {suggestedQuestions.map((q, idx) => (
-                      <span key={idx} className="suggested-question" onClick={() => handleSuggestionClick(q)}>
-                        {q}
-                      </span>
-                    ))}
+                    {suggestedQuestions.map((q, idx) => <span key={idx} className="suggested-question" onClick={() => handleSuggestionClick(q)}>{q}</span>)}
                   </div>
                 )}
                 <div className="chatbot-input-area">
-                  <input 
-                    type="text" 
-                    placeholder="Type your question..." 
-                    value={input}
-                    onChange={(e) => setInput(e.target.value)}
-                    onKeyPress={(e) => e.key === 'Enter' && handleSend(input)}
-                    onFocus={() => setShowSuggestions(true)}
-                  />
+                  <input type="text" placeholder="Type your question..." value={input} onChange={(e) => setInput(e.target.value)} onKeyPress={(e) => e.key === 'Enter' && handleSend(input)} onFocus={() => setShowSuggestions(true)} />
                   <button onClick={() => handleSend(input)}><i className="fas fa-paper-plane"></i></button>
                 </div>
               </div>
@@ -1411,23 +2157,15 @@ The various apps cover a wide range of functions, including sample size calculat
           document.body.classList.toggle('dark-theme');
         };
 
-        // Comprehensive search
         const performSearch = (keyword) => {
           if (!keyword.trim()) { setSearchResults([]); return; }
           const lower = keyword.toLowerCase();
-          const results = shinyApps.filter(app => 
-            app.name.toLowerCase().includes(lower) || 
-            app.desc.toLowerCase().includes(lower) ||
-            (app.name + ' ' + app.desc).toLowerCase().includes(lower)
-          ).map(app => ({ id: app.id, name: app.name, run: app.run }));
+          const results = shinyApps.filter(app => app.name.toLowerCase().includes(lower) || app.desc.toLowerCase().includes(lower) || (app.name + ' ' + app.desc).toLowerCase().includes(lower)).map(app => ({ id: app.id, name: app.name, run: app.run }));
           setSearchResults(results);
         };
 
-        useEffect(() => {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }, [activeTab]);
+        useEffect(() => window.scrollTo({ top: 0, behavior: 'smooth' }), [activeTab]);
 
-        // Privacy content with local storage note
         const privacyContent = `
           <p><strong>🔒 Data Privacy & Security</strong></p>
           <p>ShinyHealthTools applications run entirely in your browser and the shinyapps.io secure cloud. <strong>No personal data is recorded or stored on our servers.</strong> All processing is ephemeral.</p>
@@ -1436,376 +2174,100 @@ The various apps cover a wide range of functions, including sample size calculat
           <p><strong>Institutional Compliance:</strong> Our architecture is compliant with institutional data protection requirements (HIPAA, GDPR, etc.) because data never leaves your machine unless you explicitly download results.</p>
         `;
 
- return (
-  <div className="app-container">
-    <FloatingParticles />
-    <Navbar 
-      activeTab={activeTab} 
-      setActiveTab={setActiveTab} 
-      setShowPrivacy={setShowPrivacy} 
-      setModalContent={setModalContent}
-      darkTheme={darkTheme}
-      toggleTheme={toggleTheme}
-      searchQuery={searchQuery}
-      setSearchQuery={setSearchQuery}
-      performSearch={performSearch}
-      searchResults={searchResults}
-    />
-    <main style={{ position: 'relative', zIndex: 5 }}>
-      {activeTab === 'home' && <Home setActiveTab={setActiveTab} />}
-      {activeTab === 'apps' && <AppsTab />}
-    </main>
-    <Footer setShowPrivacy={() => { setModalContent({ title: '🔒 Privacy & Data Handling', content: privacyContent }); }} setModalContent={setModalContent} setActiveTab={setActiveTab} />
-    {modalContent && <PrivacyModal title={modalContent.title} content={modalContent.content} onClose={() => setModalContent(null)} />}
-    <ChatBot appsData={shinyApps} />
+        return (
+          <div className="app-container">
+            <FloatingParticles />
+            <Navbar 
+              activeTab={activeTab} 
+              setActiveTab={setActiveTab} 
+              setShowPrivacy={setShowPrivacy} 
+              setModalContent={setModalContent}
+              darkTheme={darkTheme}
+              toggleTheme={toggleTheme}
+              searchQuery={searchQuery}
+              setSearchQuery={setSearchQuery}
+              performSearch={performSearch}
+              searchResults={searchResults}
+            />
+            <main style={{ position: 'relative', zIndex: 5 }}>
+              {activeTab === 'home' && <Home setActiveTab={setActiveTab} />}
+              {activeTab === 'apps' && <AppsTab />}
+              {activeTab === 'blog' && <BlogTab />}
+            </main>
+            <Footer setShowPrivacy={() => { setModalContent({ title: '🔒 Privacy & Data Handling', content: privacyContent }); }} setModalContent={setModalContent} setActiveTab={setActiveTab} />
+            {modalContent && <PrivacyModal title={modalContent.title} content={modalContent.content} onClose={() => setModalContent(null)} />}
+            <ChatBot appsData={shinyApps} />
 
-    <style>{`
-      .app-container {
-        position: relative;
-        background: #ffffff;
-        color: #1e2a3a;
-        overflow: hidden;
-        isolation: isolate;
-      }
-      body.dark-theme .app-container {
-        background: #1e2a3a;
-        color: #dce5f0;
-      }
-      .particle-field {
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-        z-index: 0;
-      }
-      .particle {
-        position: absolute;
-        border-radius: 50%;
-        background: rgba(11, 59, 92, 0.1);
-        filter: blur(0.5px);
-        animation: floatParticle 20s infinite alternate ease-in-out;
-        opacity: 0.3;
-        will-change: transform;
-      }
-      @keyframes floatParticle {
-        0% { transform: translate(0, 0) scale(1); opacity: 0.1; }
-        50% { transform: translate(15px, -20px) scale(1.2); opacity: 0.2; }
-        100% { transform: translate(-10px, 20px) scale(0.9); opacity: 0.1; }
-      }
-
-      .navbar {
-        position: sticky;
-        top: 0;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1rem 3rem;
-        z-index: 20;
-        transition: top 0.3s ease, background 0.2s, box-shadow 0.2s;
-        background: #000000;
-        border-bottom: 1px solid #333333;
-      }
-      body.dark-theme .navbar {
-        background: #000000;
-        border-bottom: 1px solid #333333;
-      }
-      .navbar-blur {
-        box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-        background: #000000;
-        backdrop-filter: blur(8px);
-      }
-      body.dark-theme .navbar-blur {
-        background: #000000;
-      }
-      
-      .nav-logo {
-        font-weight: 700;
-        font-size: 1.4rem;
-        letter-spacing: -0.01em;
-      }
-      .nav-logo a {
-        color: inherit;
-        text-decoration: none;
-      }
-      .logo-glow {
-        color: #0b3b5c;
-      }
-      body.dark-theme .logo-glow {
-        color: #9bbfe0;
-      }
-      .nav-links {
-        display: flex;
-        gap: 2rem;
-        align-items: center;
-      }
-      .nav-links a {
-        text-decoration: none;
-        color: #1e2a3a;
-        font-weight: 600;
-        font-size: 0.9rem;
-        letter-spacing: 0.3px;
-        transition: color 0.2s;
-      }
-      body.dark-theme .nav-links a {
-        color: #d1dceb;
-      }
-      .nav-links a:hover {
-        color: #0b3b5c;
-      }
-      .hero {
-        padding: 2.5rem 4rem 3rem 4rem;
-        position: relative;
-        z-index: 5;
-        max-width: 1400px;
-        margin: 0 auto;
-      }
-      .hero-container {
-        display: flex;
-        align-items: center;
-        gap: 3rem;
-      }
-      .hero-left {
-        flex: 1;
-      }
-      .hero-right {
-        flex: 1;
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-      }
-      .hero-badge {
-        display: inline-block;
-        background: #eaf0fa;
-        border-radius: 4px;
-        padding: 0.35rem 1rem;
-        margin-bottom: 1.5rem;
-        font-size: 0.8rem;
-        border: 1px solid #bccfe5;
-        color: #0b3b5c;
-        font-weight: 600;
-        animation: fadeSlideUp 0.8s ease-out;
-      }
-      body.dark-theme .hero-badge {
-        background: #2e4057;
-        border-color: #57708f;
-        color: #b6d6ff;
-      }
-      .hero-title {
-        font-size: clamp(2.6rem, 7vw, 4.2rem);
-        font-weight: 700;
-        line-height: 1.1;
-        letter-spacing: -0.02em;
-        margin-bottom: 1.2rem;
-        color: #0b1c2e;
-      }
-      body.dark-theme .hero-title {
-        color: #eaf0fa;
-      }
-      .title-line {
-        display: block;
-        animation: slideUp 0.7s ease-out;
-        animation-fill-mode: both;
-      }
-      .title-line:nth-child(1) { animation-delay: 0.1s; }
-      .title-line:nth-child(2) { animation-delay: 0.2s; }
-      .gradient-text {
-        color: #0b3b5c;
-        background: none;
-        -webkit-background-clip: unset;
-        background-clip: unset;
-        text-shadow: none;
-      }
-      body.dark-theme .gradient-text {
-        color: #9bc0f0;
-      }
-      .hero-sub {
-        font-size: 1.1rem;
-        max-width: 650px;
-        color: #2d3a4f;
-        margin-bottom: 2rem;
-        animation: fadeSlideUp 0.9s 0.2s ease-out both;
-        line-height: 1.5;
-        font-weight: 500;
-      }
-      body.dark-theme .hero-sub {
-        color: #b7c9e0;
-      }
-      .hero-metrics {
-        display: flex;
-        gap: 2.5rem;
-        animation: fadeSlideUp 1s 0.4s both;
-      }
-      .metric-item {
-        display: flex;
-        flex-direction: column;
-      }
-      .metric-number {
-        font-size: 1.9rem;
-        font-weight: 700;
-        color: #0b3b5c;
-      }
-      body.dark-theme .metric-number {
-        color: #9bc0f0;
-      }
-      .metric-label {
-        font-size: 0.8rem;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        color: #4f658d;
-        font-weight: 600;
-      }
-      body.dark-theme .metric-label {
-        color: #9db4d4;
-      }
-      .showcase {
-        padding: 2.5rem 4rem;
-        z-index: 5;
-        position: relative;
-      }
-      .showcase-title {
-        font-size: 1rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        color: #4f658d;
-        margin-bottom: 2rem;
-      }
-      body.dark-theme .showcase-title {
-        color: #9db4d4;
-      }
-      .card-grid {
-        display: grid;
-        gap: 1.5rem;
-      }
-      .card {
-        background: #ffffff;
-        border-radius: 0.9rem;
-        border: 2px solid #0b3b5c30;
-        padding: 1.5rem;
-        transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
-        position: relative;
-        overflow: hidden;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-      }
-      body.dark-theme .card {
-        background: #2f3f50;
-        border-color: #57708f;
-        color: #dde5f0;
-      }
-      .card:hover {
-        border-color: #0b3b5c;
-        transform: translateY(-4px);
-        box-shadow: 0 12px 24px -12px rgba(11,59,92,0.3);
-      }
-      body.dark-theme .card:hover {
-        border-color: #9bbfe0;
-        box-shadow: 0 12px 24px -12px #90b0d0;
-      }
-      .card-glow {
-        position: absolute;
-        inset: 0;
-        background: radial-gradient(circle at 50% 0%, #0b3b5c10, transparent 70%);
-        opacity: 0;
-        transition: opacity 0.4s;
-        pointer-events: none;
-      }
-      .card:hover .card-glow {
-        opacity: 1;
-      }
-      .card-content {
-        position: relative;
-        z-index: 2;
-      }
-      .card-footer a:hover {
-        color: #0b3b5c;
-        text-decoration: underline;
-      }
-      .testimonial {
-        padding: 3rem 4rem 4rem;
-        position: relative;
-      }
-      .testimonial-inner {
-        background: #f8fbfe;
-        border-radius: 1.5rem;
-        padding: 2.5rem 3rem;
-        border: 2px solid #0b3b5c30;
-        max-width: 950px;
-        margin: 0 auto;
-        animation: appear 1s ease-out;
-      }
-      body.dark-theme .testimonial-inner {
-        background: #2a3847;
-        border-color: #57708f;
-      }
-      .quote-mark {
-        font-size: 4.5rem;
-        line-height: 0.7;
-        color: #0b3b5c30;
-        font-family: serif;
-      }
-      body.dark-theme .quote-mark {
-        color: #6883a3;
-      }
-      .quote-text {
-        font-size: 1.4rem;
-        font-weight: 500;
-        margin-bottom: 1.5rem;
-        color: #0b1c2e;
-        line-height: 1.4;
-      }
-      body.dark-theme .quote-text {
-        color: #d1def0;
-      }
-      .quote-author {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        font-weight: 600;
-        color: #1e2a3a;
-        font-size: 0.9rem;
-      }
-      body.dark-theme .quote-author {
-        color: #bccfe0;
-      }
-      .author-avatar {
-        width: 42px;
-        height: 42px;
-        background: linear-gradient(145deg, #b0c8e0, #819ab8);
-        border-radius: 50%;
-        box-shadow: 0 0 0 2px #ffffff;
-      }
-      body.dark-theme .author-avatar {
-        background: #57708f;
-      }
-      .footer {
-        padding: 2rem 4rem 1.2rem;
-        background: #000000;
-        border-top: 1px solid #333333;
-        position: relative;
-        z-index: 5;
-      }
-      .footer-copyright {
-        display: flex;
-        justify-content: space-between;
-        color: #9bb1cc;
-        font-size: 0.85rem;
-        border-top: 1px solid #263f59;
-        padding-top: 1.2rem;
-      }
-      @keyframes fadeSlideUp {
-        0% { opacity: 0; transform: translateY(20px); }
-        100% { opacity: 1; transform: translateY(0); }
-      }
-      @keyframes slideUp {
-        0% { opacity: 0; transform: translateY(60px); }
-        100% { opacity: 1; transform: translateY(0); }
-      }
-      @keyframes appear {
-        0% { opacity: 0; }
-        100% { opacity: 1; }
-      }
-    `}</style>
-  </div>
-);
+            <style>{`
+              .app-container { position: relative; background: #ffffff; color: #1e2a3a; overflow: hidden; isolation: isolate; }
+              body.dark-theme .app-container { background: #1e2a3a; color: #dce5f0; }
+              .particle-field { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+              .particle { position: absolute; border-radius: 50%; background: rgba(11, 59, 92, 0.1); filter: blur(0.5px); animation: floatParticle 20s infinite alternate ease-in-out; opacity: 0.3; will-change: transform; }
+              @keyframes floatParticle { 0% { transform: translate(0, 0) scale(1); opacity: 0.1; } 50% { transform: translate(15px, -20px) scale(1.2); opacity: 0.2; } 100% { transform: translate(-10px, 20px) scale(0.9); opacity: 0.1; } }
+              .navbar { position: sticky; top: 0; display: flex; justify-content: space-between; align-items: center; padding: 1rem 3rem; z-index: 20; transition: top 0.3s ease, background 0.2s, box-shadow 0.2s; background: #000000; border-bottom: 1px solid #333333; }
+              body.dark-theme .navbar { background: #000000; border-bottom: 1px solid #333333; }
+              .navbar-blur { box-shadow: 0 2px 10px rgba(0,0,0,0.3); background: #000000; backdrop-filter: blur(8px); }
+              body.dark-theme .navbar-blur { background: #000000; }
+              .nav-logo { font-weight: 700; font-size: 1.4rem; letter-spacing: -0.01em; }
+              .nav-logo a { color: inherit; text-decoration: none; }
+              .logo-glow { color: #0b3b5c; }
+              body.dark-theme .logo-glow { color: #9bbfe0; }
+              .nav-links { display: flex; gap: 2rem; align-items: center; }
+              .nav-links a { text-decoration: none; color: #1e2a3a; font-weight: 600; font-size: 0.9rem; letter-spacing: 0.3px; transition: color 0.2s; }
+              body.dark-theme .nav-links a { color: #d1dceb; }
+              .nav-links a:hover { color: #0b3b5c; }
+              .hero { padding: 2.5rem 4rem 3rem 4rem; position: relative; z-index: 5; max-width: 1400px; margin: 0 auto; }
+              .hero-container { display: flex; align-items: center; gap: 3rem; }
+              .hero-left { flex: 1; }
+              .hero-right { flex: 1; display: flex; justify-content: flex-end; align-items: center; }
+              .hero-badge { display: inline-block; background: #eaf0fa; border-radius: 4px; padding: 0.35rem 1rem; margin-bottom: 1.5rem; font-size: 0.8rem; border: 1px solid #bccfe5; color: #0b3b5c; font-weight: 600; animation: fadeSlideUp 0.8s ease-out; }
+              body.dark-theme .hero-badge { background: #2e4057; border-color: #57708f; color: #b6d6ff; }
+              .hero-title { font-size: clamp(2.6rem, 7vw, 4.2rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1.2rem; color: #0b1c2e; }
+              body.dark-theme .hero-title { color: #eaf0fa; }
+              .title-line { display: block; animation: slideUp 0.7s ease-out; animation-fill-mode: both; }
+              .title-line:nth-child(1) { animation-delay: 0.1s; }
+              .title-line:nth-child(2) { animation-delay: 0.2s; }
+              .gradient-text { color: #0b3b5c; background: none; -webkit-background-clip: unset; background-clip: unset; text-shadow: none; }
+              body.dark-theme .gradient-text { color: #9bc0f0; }
+              .hero-sub { font-size: 1.1rem; max-width: 650px; color: #2d3a4f; margin-bottom: 2rem; animation: fadeSlideUp 0.9s 0.2s ease-out both; line-height: 1.5; font-weight: 500; }
+              body.dark-theme .hero-sub { color: #b7c9e0; }
+              .hero-metrics { display: flex; gap: 2.5rem; animation: fadeSlideUp 1s 0.4s both; }
+              .metric-item { display: flex; flex-direction: column; }
+              .metric-number { font-size: 1.9rem; font-weight: 700; color: #0b3b5c; }
+              body.dark-theme .metric-number { color: #9bc0f0; }
+              .metric-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: #4f658d; font-weight: 600; }
+              body.dark-theme .metric-label { color: #9db4d4; }
+              .showcase { padding: 2.5rem 4rem; z-index: 5; position: relative; }
+              .showcase-title { font-size: 1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: #4f658d; margin-bottom: 2rem; }
+              body.dark-theme .showcase-title { color: #9db4d4; }
+              .card-grid { display: grid; gap: 1.5rem; }
+              .card { background: #ffffff; border-radius: 0.9rem; border: 2px solid #0b3b5c30; padding: 1.5rem; transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s; position: relative; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+              body.dark-theme .card { background: #2f3f50; border-color: #57708f; color: #dde5f0; }
+              .card:hover { border-color: #0b3b5c; transform: translateY(-4px); box-shadow: 0 12px 24px -12px rgba(11,59,92,0.3); }
+              body.dark-theme .card:hover { border-color: #9bbfe0; box-shadow: 0 12px 24px -12px #90b0d0; }
+              .card-glow { position: absolute; inset: 0; background: radial-gradient(circle at 50% 0%, #0b3b5c10, transparent 70%); opacity: 0; transition: opacity 0.4s; pointer-events: none; }
+              .card:hover .card-glow { opacity: 1; }
+              .card-content { position: relative; z-index: 2; }
+              .card-footer a:hover { color: #0b3b5c; text-decoration: underline; }
+              .testimonial { padding: 3rem 4rem 4rem; position: relative; }
+              .testimonial-inner { background: #f8fbfe; border-radius: 1.5rem; padding: 2.5rem 3rem; border: 2px solid #0b3b5c30; max-width: 950px; margin: 0 auto; animation: appear 1s ease-out; }
+              body.dark-theme .testimonial-inner { background: #2a3847; border-color: #57708f; }
+              .quote-mark { font-size: 4.5rem; line-height: 0.7; color: #0b3b5c30; font-family: serif; }
+              body.dark-theme .quote-mark { color: #6883a3; }
+              .quote-text { font-size: 1.4rem; font-weight: 500; margin-bottom: 1.5rem; color: #0b1c2e; line-height: 1.4; }
+              body.dark-theme .quote-text { color: #d1def0; }
+              .quote-author { display: flex; align-items: center; gap: 1rem; font-weight: 600; color: #1e2a3a; font-size: 0.9rem; }
+              body.dark-theme .quote-author { color: #bccfe0; }
+              .author-avatar { width: 42px; height: 42px; background: linear-gradient(145deg, #b0c8e0, #819ab8); border-radius: 50%; box-shadow: 0 0 0 2px #ffffff; }
+              body.dark-theme .author-avatar { background: #57708f; }
+              .footer { padding: 2rem 4rem 1.2rem; background: #000000; border-top: 1px solid #333333; position: relative; z-index: 5; }
+              .footer-copyright { display: flex; justify-content: space-between; color: #9bb1cc; font-size: 0.85rem; border-top: 1px solid #263f59; padding-top: 1.2rem; }
+              @keyframes fadeSlideUp { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
+              @keyframes slideUp { 0% { opacity: 0; transform: translateY(60px); } 100% { opacity: 1; transform: translateY(0); } }
+              @keyframes appear { 0% { opacity: 0; } 100% { opacity: 1; } }
+            `}</style>
+          </div>
+        );
       };
 
       const root = ReactDOM.createRoot(document.getElementById("root"));
