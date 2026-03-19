@@ -1237,7 +1237,7 @@
 
       // ---------- ALL APP DATA ----------
       const shinyApps = [
-        { id:1, name:"FactorGuard", desc:"A decision-support tool for factor retention in exploratory factor analysis (EFA), helping researchers determine the optimal number of factors in their data.", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/FactorGuard.png", run:"https://mudassiribrahim2026.shinyapps.io/FactorGuard/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/FactorGuard.R" },
+        { id:1, name:"FactorGuard", desc:"A combined parallel analysis and scree plot tool for factor retention in exploratory factor analysis (EFA), enabling researchers to accurately identify the optimal number of factors in their datasets.", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/FactorGuard.png", run:"https://mudassiribrahim2026.shinyapps.io/FactorGuard/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/FactorGuard.R" },
         { id:2, name:"CalcuStats", desc:"Comprehensive tool for sample size calculation, power analysis, and descriptive statistics, suitable for clinical trials and observational studies.", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/CalcuStats.png", run:"https://mudassiribrahim2025.shinyapps.io/CalcuStats/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/CalcuStats.R" },
         { id:3, name:"CATrend Analyzer", desc:"Performs Cochran-Armitage trend tests for dose-response analysis and regulatory submissions.", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/CAtrend.png", run:"https://newappstesting.shinyapps.io/CATrendAnalyzer/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/CATrendAnalyzer.R" },
         { id:4, name:"ROC Curve Builder", desc:"Generates ROC curves and evaluates diagnostic test performance for clinical research.", logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/ROC.png", run:"https://mudassiribrahim30.shinyapps.io/ROC_CURVE/", code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/ROC%20Curve%20Builder.R" },
@@ -1400,7 +1400,7 @@ ggplot(data, aes(x = group, y = response, fill = group)) ]`;
               <div style={{ position: 'relative' }}>
                 <input
                   type="text"
-                  placeholder="Search apps, keywords..."
+                  placeholder="Search apps........."
                   value={searchQuery}
                   onChange={handleSearchInput}
                   style={{ padding: '0.4rem 1rem 0.4rem 2rem', borderRadius: '30px', border: '1px solid #b8cde0', fontSize: '0.85rem', width: '200px', background: '#fff', color: '#1e2a3a' }}
@@ -1524,7 +1524,7 @@ const Navbar = ({ activeTab, setActiveTab, setShowPrivacy, setModalContent, dark
           <div style={{ position: 'relative' }}>
             <input
               type="text"
-              placeholder="Search apps, keywords..."
+              placeholder="Search apps........."
               value={searchQuery}
               onChange={handleSearchInput}
               style={{ padding: '0.4rem 1rem 0.4rem 2rem', borderRadius: '30px', border: '1px solid #b8cde0', fontSize: '0.85rem', width: '200px', background: '#fff', color: '#1e2a3a' }}
@@ -1845,7 +1845,7 @@ The applications support a wide range of functions, including robust regression 
             </section>
 
             <section className="showcase" style={{ paddingTop: 0 }}>
-              <h2 className="showcase-title"><span>// </span> why researchers rely on these tools</h2>
+              <h2 className="showcase-title"><span>// </span> why researchers / data analysts rely on these tools</h2>
 <div className="why-tools-grid" style={{ gap: '1.8rem', marginTop: '1rem' }}>
                 {whyToolsData.map((tool, index) => (
                   <div key={index} ref={whyToolsRefs.current[index]} style={{ opacity:0, transform:'translateY(30px)', transition:'opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1)', transitionDelay:`${index * 0.15}s` }}>
