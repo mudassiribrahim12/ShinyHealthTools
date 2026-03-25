@@ -1564,13 +1564,13 @@ const Navbar = ({ activeTab, setActiveTab, setShowPrivacy, setModalContent, dark
           </a>
         </div>
         
-        {/* TABS MOVED TO LEFT SIDE */}
+        {/* TABS MOVED TO LEFT SIDE - font size reduced to a balanced, professional size */}
         <div className="nav-links" style={{ display: 'flex', gap: '2rem', alignItems: 'center', marginLeft: '2rem' }}>
-          <a href="#" onClick={(e) => { e.preventDefault(); handleNavClick('home'); }} style={{ color: '#ffffff', fontSize: '1.05rem', fontWeight: '600' }}>Home</a>
-          <a href="#" onClick={(e) => { e.preventDefault(); handleNavClick('apps'); }} style={{ color: '#ffffff', fontSize: '1.05rem', fontWeight: '600' }}>Apps</a>
-          <a href="#" onClick={(e) => { e.preventDefault(); handleNavClick('blog'); }} style={{ color: '#ffffff', fontSize: '1.05rem', fontWeight: '600' }}>Blog</a>
-          <a href="#" onClick={handleAboutClick} style={{ color: '#ffffff', fontSize: '1.05rem', fontWeight: '600' }}>Meet the Developer</a>
-          <a href="#" onClick={handleSupportClick} style={{ color: '#ffffff', fontSize: '1.05rem', fontWeight: '600' }}>Support</a>
+          <a href="#" onClick={(e) => { e.preventDefault(); handleNavClick('home'); }} style={{ color: '#ffffff', fontSize: '0.95rem', fontWeight: '600', letterSpacing: '0.3px' }}>Home</a>
+          <a href="#" onClick={(e) => { e.preventDefault(); handleNavClick('apps'); }} style={{ color: '#ffffff', fontSize: '0.95rem', fontWeight: '600', letterSpacing: '0.3px' }}>Apps</a>
+          <a href="#" onClick={(e) => { e.preventDefault(); handleNavClick('blog'); }} style={{ color: '#ffffff', fontSize: '0.95rem', fontWeight: '600', letterSpacing: '0.3px' }}>Blog</a>
+          <a href="#" onClick={handleAboutClick} style={{ color: '#ffffff', fontSize: '0.95rem', fontWeight: '600', letterSpacing: '0.3px' }}>Meet the Developer</a>
+          <a href="#" onClick={handleSupportClick} style={{ color: '#ffffff', fontSize: '0.95rem', fontWeight: '600', letterSpacing: '0.3px' }}>Support</a>
         </div>
 
         <button className="mobile-menu-btn" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} style={{ color: '#ffffff', display: 'none', background: 'none', border: 'none', fontSize: '1.6rem', cursor: 'pointer', zIndex: 30 }}>
@@ -1736,10 +1736,6 @@ const Navbar = ({ activeTab, setActiveTab, setShowPrivacy, setModalContent, dark
         }
         .card h3 {
           font-size: 1.35rem;
-        }
-        .nav-links a {
-          font-size: 1rem;
-          font-weight: 600;
         }
         .hero-sub {
           font-size: 1rem;
