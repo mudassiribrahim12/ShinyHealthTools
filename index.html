@@ -14,13 +14,14 @@
     <meta property="og:title" content="ShinyHealthTools | The #1 Platform for Intuitive R/Shiny Statistical Applications">
     <meta property="og:description" content="21 validated statistical applications for sample size, survival, ROC, factor analysis, data conversion, and significant others. Trusted by researchers and data analysts worldwide. Free forever.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://apps.mudasiribrahim.com">
+    <meta property="og:url" content="https://shinyhealthtools.vercel.app/">
     <meta property="og:image" content="https://raw.githubusercontent.com/mudassiribrahim12/ShinyHealthTools/main/og-preview.jpg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="ShinyHealthTools – enterprise statistical tools">
     <meta name="twitter:description" content="Validated R/Shiny apps for sample size, ROC, survival, factor analysis, data conversion, and significant others.">
     <meta name="twitter:image" content="https://raw.githubusercontent.com/mudassiribrahim12/ShinyHealthTools/main/og-preview.jpg">
     <meta name="google-site-verification" content="PGq_oDNzKGPvdcDK-DzNc2VYrCckkJxWLyiqq7OdHq0" />
+    <meta name="google-site-verification" content="kJB32ReGicGUyIhghuPcYT3SjyxekwpWrDlm9t7NasA" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -361,6 +362,7 @@
       transition: transform 0.28s, border-color 0.28s, box-shadow 0.28s;
       position: relative;
       box-shadow: var(--shadow-card);
+      /* Cards are always visible — no fade-up class needed for filter grids */
     }
     .app-card::before {
       content: '';
@@ -373,11 +375,21 @@
     html.dark .app-card:hover { border-color: rgba(0,212,255,0.2); }
     .app-card:hover::before { opacity: 1; }
 
+    /* Fade-in only used for hero/home section cards */
+    .app-card.fade-up {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s ease, transform 0.7s ease, border-color 0.28s, box-shadow 0.28s;
+    }
+    .app-card.fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     .app-card-top { display: flex; align-items: center; gap: 0.9rem; padding: 1.4rem 1.4rem 0.6rem; }
     .app-logo {
       width: 48px; height: 48px; border-radius: 9px;
       object-fit: contain; background: var(--bg2); flex-shrink: 0;
-      /* preload visible immediately */
       display: block;
     }
     .app-logo-fb {
@@ -577,7 +589,7 @@
     .toggle-thumb { position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; background: var(--muted); border-radius: 50%; transition: transform 0.25s cubic-bezier(.34,1.56,.64,1), background 0.25s; }
     .toggle-track.on .toggle-thumb { transform: translateX(18px); background: #fff; }
 
-    /* ── SCROLL FADE-IN ── */
+    /* ── SCROLL FADE-IN (home section only) ── */
     .fade-up { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
     .fade-left { opacity: 0; transform: translateX(-30px); transition: opacity 0.7s ease, transform 0.7s ease; }
@@ -606,6 +618,21 @@
     .stagger > *:nth-child(21) { transition-delay: 1.43s; }
 
     @keyframes fadeSlideUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+
+    /* Loading skeleton */
+    .img-skeleton {
+      background: linear-gradient(90deg, var(--bg2) 25%, var(--border2) 50%, var(--bg2) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+    }
+    @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
+    /* Blog preload skeleton */
+    .post-skeleton { background: var(--card-bg); border: 1.5px solid var(--border2); border-radius: 6px; padding: 1.55rem; margin-bottom: 1.1rem; }
+    .skel-line { height: 14px; border-radius: 4px; background: var(--bg2); margin-bottom: 10px; }
+    .skel-line.skel-title { height: 18px; width: 75%; }
+    .skel-line.skel-short { width: 40%; }
+    .skel-line.skel-med { width: 90%; }
 
     /* ── RESPONSIVE ── */
     @media(max-width:1100px) {
@@ -644,21 +671,6 @@
       .search-overlay { padding: 70px 1rem 0; }
       .hero-metrics { flex-direction: column; gap: 1.2rem; }
     }
-
-    /* Loading skeleton */
-    .img-skeleton {
-      background: linear-gradient(90deg, var(--bg2) 25%, var(--border2) 50%, var(--bg2) 75%);
-      background-size: 200% 100%;
-      animation: shimmer 1.5s infinite;
-    }
-    @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
-
-    /* Blog preload skeleton */
-    .post-skeleton { background: var(--card-bg); border: 1.5px solid var(--border2); border-radius: 6px; padding: 1.55rem; margin-bottom: 1.1rem; }
-    .skel-line { height: 14px; border-radius: 4px; background: var(--bg2); margin-bottom: 10px; }
-    .skel-line.skel-title { height: 18px; width: 75%; }
-    .skel-line.skel-short { width: 40%; }
-    .skel-line.skel-med { width: 90%; }
   </style>
 </head>
 <body>
@@ -761,6 +773,7 @@ const useStaggerFadeIn = (threshold=0.06) => {
   return ref;
 };
 
+/* ── HOME-ONLY: per-card fade for the Featured section ── */
 const usePerCardFadeIn = () => {
   const ref = useRef(null);
   useEffect(() => {
@@ -896,14 +909,15 @@ const AnimatedMetric = ({target, prefix='', suffix='', label, duration=1800}) =>
   );
 };
 
-const AppCard = ({app, className=''}) => {
+/* ── APP CARD ── no fade-up on Apps tab, fade-up only for home featured section ── */
+const AppCard = ({app, useFade=false}) => {
   const [loaded, setLoaded] = useState(() => !!preloadedImages[app.id]?.complete);
   const [err, setErr] = useState(false);
   const catColors = {viz:'rgba(0,119,204,0.08)', stats:'rgba(0,168,85,0.08)', data:'rgba(108,63,197,0.08)', factor:'rgba(234,97,20,0.08)'};
   const catTextColors = {viz:'#0077cc', stats:'#00803a', data:'#6c3fc5', factor:'#c95010'};
 
   return (
-    <div className={`app-card ${className}`}>
+    <div className={`app-card${useFade ? ' fade-up' : ''}`}>
       <div className="app-card-top">
         {app.logo && !err ? (
           <img
@@ -1006,8 +1020,9 @@ const HomeTab = ({setTab}) => {
             <h2 className="section-title">Six Essential Tools</h2>
             <p className="section-sub">A selection of our most-used applications across clinical research, epidemiology, and biostatistics.</p>
           </div>
+          {/* Home featured grid uses fade-up per card */}
           <div className="card-grid stagger" ref={featuredGridRef}>
-            {shinyApps.slice(0,6).map(a=><AppCard key={a.id} app={a} className="fade-up"/>)}
+            {shinyApps.slice(0,6).map(a=><AppCard key={a.id} app={a} useFade={true}/>)}
           </div>
           <div style={{textAlign:'center',marginTop:'2.75rem'}}>
             <button className="btn-outline" onClick={()=>{setTab('apps');window.scrollTo({top:0,behavior:'smooth'});}}>
@@ -1040,13 +1055,28 @@ const HomeTab = ({setTab}) => {
   );
 };
 
-/* ── APPS TAB ── */
+/* ── APPS TAB ──
+   FIX: Cards are rendered WITHOUT fade-up class so they are always visible.
+   Filter changes simply re-render the grid — no IntersectionObserver needed.
+   A lightweight CSS entry animation is added via a key prop so React remounts
+   the grid on filter change, triggering a fresh slide-in without any observer.
+── */
 const AppsTab = () => {
   const [activeFilter, setActiveFilter] = useState('all');
-  const hdrRef  = useFadeIn();
-  const gridRef = usePerCardFadeIn();
-  const filters = [{k:'all',l:'All'},{k:'stats',l:'Statistics'},{k:'viz',l:'Visualization'},{k:'data',l:'Data Tools'},{k:'factor',l:'Factor Analysis'}];
-  const filtered = activeFilter==='all' ? shinyApps : shinyApps.filter(a=>a.cat===activeFilter);
+  const hdrRef = useFadeIn();
+
+  const filters = [
+    {k:'all',    l:'All'},
+    {k:'stats',  l:'Statistics'},
+    {k:'viz',    l:'Visualization'},
+    {k:'data',   l:'Data Tools'},
+    {k:'factor', l:'Factor Analysis'}
+  ];
+
+  const filtered = activeFilter === 'all'
+    ? shinyApps
+    : shinyApps.filter(a => a.cat === activeFilter);
+
   return (
     <div className="section">
       <div className="section-inner">
@@ -1055,16 +1085,39 @@ const AppsTab = () => {
           <h2 className="section-title">21 Web Tools</h2>
           <p className="section-sub">Every application is open source, browser-based, and free for academic and research purposes.</p>
         </div>
+
         <div className="filter-bar">
-          {filters.map(f=>(
-            <button key={f.k} className={`filter-btn${activeFilter===f.k?' active':''}`} onClick={()=>setActiveFilter(f.k)}>
-              {f.l} {f.k!=='all'&&`(${shinyApps.filter(a=>a.cat===f.k).length})`}
+          {filters.map(f => (
+            <button
+              key={f.k}
+              className={`filter-btn${activeFilter === f.k ? ' active' : ''}`}
+              onClick={() => setActiveFilter(f.k)}
+            >
+              {f.l}{f.k !== 'all' && ` (${shinyApps.filter(a => a.cat === f.k).length})`}
             </button>
           ))}
         </div>
-        <div className="card-grid stagger" ref={gridRef}>
-          {filtered.map(a=><AppCard key={a.id} app={a} className="fade-up"/>)}
+
+        {/*
+          KEY on the grid = activeFilter: when filter changes React destroys and
+          remounts the div, which triggers the CSS animation again on fresh cards.
+          Cards use useFade=false so they are fully visible immediately — no
+          IntersectionObserver that fires only once and then disconnects.
+        */}
+        <div
+          key={activeFilter}
+          className="card-grid"
+          style={{animation: 'gridFadeIn 0.35s ease forwards'}}
+        >
+          {filtered.map(a => <AppCard key={a.id} app={a} useFade={false} />)}
         </div>
+
+        <style>{`
+          @keyframes gridFadeIn {
+            from { opacity: 0; transform: translateY(16px); }
+            to   { opacity: 1; transform: translateY(0); }
+          }
+        `}</style>
       </div>
     </div>
   );
@@ -1099,7 +1152,11 @@ const BlogTab = ({blogData}) => {
     grouped[k].posts.push(p);
   });
   const months = Object.entries(grouped).sort(([,a],[,b])=>b.d-a.d);
-  const selectMonth = k => { if(selMonth===k){setSelMonth(null);setFiltered(blogData.posts||[]);}else{setSelMonth(k);setFiltered(grouped[k]?.posts||[]);} setVisible(10); };
+  const selectMonth = k => {
+    if(selMonth===k){setSelMonth(null);setFiltered(blogData.posts||[]);}
+    else{setSelMonth(k);setFiltered(grouped[k]?.posts||[]);}
+    setVisible(10);
+  };
 
   const SkeletonPosts = () => Array.from({length:4}).map((_,i) => (
     <div className="post-skeleton" key={i}>
@@ -1306,7 +1363,7 @@ const App = () => {
 
   return (
     <>
-      {/* NAVBAR */}
+      {/* NAVBAR — theme toggle removed from here, lives only in footer */}
       <nav className={`navbar${scrolled?' scrolled':''}`}>
         <div className="nav-logo" onClick={()=>navTo('home')}>
           <div className="nav-logo-icon"><i className="fas fa-chart-pie"></i></div>
@@ -1322,12 +1379,10 @@ const App = () => {
           <a href="https://github.com/mudassiribrahim30/R-Shiny-Apps" target="_blank" className="nav-link-gh"><i className="fab fa-github"></i> GitHub</a>
           <button className="nav-search-btn" onClick={()=>setSearchOpen(true)} title="Search (⌘K)"><i className="fas fa-search"></i></button>
         </div>
-        <div style={{display:'flex', alignItems:'center', gap:'0.6rem'}}>
-          <ThemeToggle dark={dark} setDark={setDark}/>
-          <button className="mobile-btn" onClick={()=>setMobileOpen(!mobileOpen)}>
-            <i className={`fas fa-${mobileOpen?'times':'bars'}`}></i>
-          </button>
-        </div>
+        {/* Mobile: only hamburger button, no theme toggle */}
+        <button className="mobile-btn" onClick={()=>setMobileOpen(!mobileOpen)}>
+          <i className={`fas fa-${mobileOpen?'times':'bars'}`}></i>
+        </button>
       </nav>
 
       <div className={`mobile-nav${mobileOpen?' open':''}`}>
@@ -1390,6 +1445,7 @@ const App = () => {
           <div className="footer-bottom">
             <p>© 2025–{new Date().getFullYear()} ShinyHealthTools. All rights reserved.</p>
             <p>Built with <span>R & Shiny</span> for health research.</p>
+            {/* Theme toggle lives ONLY here in the footer */}
             <ThemeToggle dark={dark} setDark={setDark}/>
           </div>
         </div>
