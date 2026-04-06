@@ -14,11 +14,13 @@
     <meta property="og:title" content="ShinyHealthTools | The #1 Platform for Intuitive Statistical Applications">
     <meta property="og:description" content="21 validated R/shiny tools plus 4 HTML-native tools. Free forever.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://shinyhealthtools.vercel.app/">
+    <meta property="og:url" content="https://shinyhealthtools.github.io/apps/">
     <meta property="og:image" content="https://raw.githubusercontent.com/mudassiribrahim12/ShinyHealthTools/main/og-preview.jpg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="google-site-verification" content="PGq_oDNzKGPvdcDK-DzNc2VYrCckkJxWLyiqq7OdHq0" />
     <meta name="google-site-verification" content="kJB32ReGicGUyIhghuPcYT3SjyxekwpWrDlm9t7NasA" />
+    <meta name="google-site-verification" content="wziTcVA66OowBWGGGHsar8ky99roP427M_3ZTu8x1sI" />
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -1024,7 +1026,7 @@ const htmlApps = [
     icon: "fas fa-chart-area",
     logo: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/ROC.png",
     desc: "Visualize and construct receiver operating characteristic curves for binary classification evaluation.",
-    run: "https://roccurvebuilder.vercel.app/",
+    run: "https://shinyhealthtools.github.io/roccurvebuilder/",
     code: "https://github.com/mudassiribrahim12/ROCCurve-Builder"
   },
   {
@@ -1032,24 +1034,24 @@ const htmlApps = [
     icon: "fas fa-chart-line",
     logo: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/CAtrend.png",
     desc: "Explore and visualize categorical trends across datasets with interactive chart outputs.",
-    run: "https://cochran-armitage.vercel.app/",
-    code: "https://github.com/mudassiribrahim12/cochran-armitage"
+    run: "https://shinyhealthtools.github.io/catrendanalyzer/",
+    code: "https://github.com/shinyhealthtools/catrendanalyzer"
   },
   {
     id: 'h3', cat: 'calc', name: "CalcuStats",
     icon: "fas fa-calculator",
     logo: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/CalcuStats.png",
     desc: "Perform sample size calculations and descriptive analysis",
-    run: "https://calcustats.vercel.app/",
-    code: "https://github.com/mudassiribrahim12/CalcuStats-HTML-"
+    run: "https://shinyhealthtools.github.io/calcustats/",
+    code: "https://github.com/shinyhealthtools/calcustats"
   },
   {
     id: 'h4', cat: 'stats', name: "MedModr",
     icon: "fas fa-stethoscope",
     logo: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/MedModr.png",
     desc: "Perform simple mediation, serial mediation, moderation, and moderated mediation analysis.",
-    run: "https://medmodr.vercel.app/",
-    code: "https://github.com/mudassiribrahim12/MedModr-html-version/tree/main"
+    run: "https://shinyhealthtools.github.io/medmodr/",
+    code: "https://github.com/shinyhealthtools/medmodr"
   }
 ];
 
@@ -2207,9 +2209,8 @@ const App = () => {
           <button className={`nav-link${tab==='html'?' html-active':''}`} onClick={()=>navTo('html')}>HTML Tools</button>
           <button className={`nav-link${tab==='blog'?' active':''}`} onClick={()=>navTo('blog')}>Blog</button>
           <a href="https://shinyopensource.github.io/documentation/" target="_blank" className="nav-link">Docs</a>
-          <a href="https://mudasiribrahim.vercel.app/" target="_blank" className="nav-link">Developer</a>
+          <a href="https://mudasiribrahim.github.io/gh/" target="_blank" className="nav-link">Developer</a>
           <button className="nav-link" onClick={()=>openModal('Support & Appreciation','If any of the apps have been helpful, consider <a href="https://buymeacoffee.com/mudasiribrahim30" target="_blank">supporting this project ☕</a>.<br/><br/>For technical assistance, contact <a href="mailto:mudassiribrahim30@gmail.com">mudassiribrahim30@gmail.com</a>. Responses typically within 24 hours on business days.')}>Support</button>
-          <a href="https://github.com/mudassiribrahim30/R-Shiny-Apps" target="_blank" className="nav-link-gh"><i className="fab fa-github"></i> GitHub</a>
           <button className="nav-search-btn" onClick={()=>setSearchOpen(true)} title="Search (⌘K)"><i className="fas fa-search"></i></button>
         </div>
         <button className="mobile-btn" onClick={()=>setMobileOpen(!mobileOpen)}>
@@ -2217,14 +2218,14 @@ const App = () => {
         </button>
       </nav>
 
-      <div className={`mobile-nav${mobileOpen?' open':''}`}>
-        <button className="nav-link" onClick={()=>navTo('home')}><i className="fas fa-home" style={{marginRight:'0.65rem'}}></i>Home</button>
-        <button className="nav-link" onClick={()=>navTo('apps')}><i className="fas fa-th-large" style={{marginRight:'0.65rem'}}></i>shiny tools</button>
-        <button className="nav-link" onClick={()=>navTo('html')} style={{color:'var(--orange)'}}>HTML Tools</button>
-        <button className="nav-link" onClick={()=>navTo('blog')}><i className="fas fa-blog" style={{marginRight:'0.65rem'}}></i>Blog</button>
-        <a href="https://shinyopensource.github.io/documentation/" target="_blank" className="nav-link"><i className="fas fa-book" style={{marginRight:'0.65rem'}}></i>Docs</a>
-        <button className="nav-link" onClick={()=>{setSearchOpen(true);setMobileOpen(false);}}><i className="fas fa-search" style={{marginRight:'0.65rem'}}></i>Search</button>
-      </div>
+<div className={`mobile-nav${mobileOpen?' open':''}`}>
+  <button className="nav-link" onClick={()=>navTo('home')}><i className="fas fa-home" style={{marginRight:'0.65rem', width:'1.25rem'}}></i>Home</button>
+  <button className="nav-link" onClick={()=>navTo('apps')}><i className="fas fa-th-large" style={{marginRight:'0.65rem', width:'1.25rem'}}></i>Shiny Tools</button>
+  <button className="nav-link" onClick={()=>navTo('html')} style={{color:'var(--orange)'}}><i className="fas fa-code" style={{marginRight:'0.65rem', width:'1.25rem'}}></i>HTML Tools</button>
+  <button className="nav-link" onClick={()=>navTo('doc')}><i className="fas fa-book-open" style={{marginRight:'0.65rem', width:'1.25rem'}}></i>Docs</button>
+  <button className="nav-link" onClick={()=>navTo('blog')}><i className="fas fa-blog" style={{marginRight:'0.65rem', width:'1.25rem'}}></i>Blog</button>
+  <button className="nav-link" onClick={()=>{setSearchOpen(true);setMobileOpen(false);}}><i className="fas fa-search" style={{marginRight:'0.65rem', width:'1.25rem'}}></i>Search</button>
+</div>
 
       <main>
         {tab==='home'          && <HomeTab setTab={setTab}/>}
@@ -2248,7 +2249,6 @@ const App = () => {
                 <a href="https://www.facebook.com/mudassiribrahim81" target="_blank" className="fsoc"><i className="fab fa-facebook-f"></i></a>
                 <a href="https://x.com/WhizMuda" target="_blank" className="fsoc"><i className="fab fa-x-twitter"></i></a>
                 <a href="https://www.instagram.com/mudassiribrahim81" target="_blank" className="fsoc"><i className="fab fa-instagram"></i></a>
-                <a href="https://github.com/mudassiribrahim30" target="_blank" className="fsoc"><i className="fab fa-github"></i></a>
               </div>
             </div>
             <div>
@@ -2264,7 +2264,6 @@ const App = () => {
               {htmlApps.map(a=><a key={a.id} href={a.run} target="_blank" className="flink">{a.name}</a>)}
               <div className="fcol-title" style={{marginTop:'1.2rem'}}>Resources</div>
               <a href="https://shinyopensource.github.io/documentation/" target="_blank" className="flink">Documentation</a>
-              <a href="https://github.com/mudassiribrahim30" target="_blank" className="flink">GitHub Repository</a>
               <span className="flink" onClick={()=>openModal('Citation Guide','To cite ShinyHealthTools in publications:<br/><br/>ShinyHealthTools (2025). ShinyHealthTools: Statistical applications for health research. Retrieved from [website URL].<br/><br/>For specific apps, include the app name and version.')}>Citation Guide</span>
               <span className="flink" onClick={()=>openModal('Release Notes','<strong>v2.2.0</strong> (April 2026): Renamed to ShinyHealthTools, added 4 HTML-native tools tab, 21 shiny tools retained, Testimonials submission form added.')}>Release Notes</span>
               <span className="flink" onClick={()=>navTo('blog')}>Blog</span>
