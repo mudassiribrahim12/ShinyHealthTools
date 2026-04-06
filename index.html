@@ -3,23 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
-    <title>ShinyHealthTools | The Platform for Open Source R/Shiny Statistical Applications</title>
-    <meta name="title" content="ShinyHealthTools | The #1 Platform for Intuitive R/Shiny Statistical Applications">
-    <meta name="description" content="ShinyHealthTools delivers 21 validated R/Shiny applications built by Mudasir Mohammed Ibrahim for sample size calculations, survival analysis, mediation analysis (simple and serial), ROC analysis, exploratory and confirmatory factor analysis, data conversion, trend analysis, and significant others. Trusted by health researchers and data analysts. No coding, open-source, ISO 27001 aligned processes.">
-    <meta name="keywords" content="statistical software, data analysis, web applications, research, R Shiny, SPSS alternative, Mplus alternative, Stata alternative, R alternative, Excel alternative, SmartPLS alternative, Process MACRO alternative, SAS alternative, sample size calculator, survival analysis, factor analysis, health research tools, ROC curve, clinical trial design, open source statistics">
+    <title>ShinyHealthTools | The Platform for Open Source R/Shiny & HTML Statistical Applications</title>
+    <meta name="title" content="ShinyHealthTools | The #1 Platform for Intuitive Statistical Applications">
+    <meta name="description" content="ShinyHealthTools delivers 21 validated R/Shiny applications plus 4 HTML-native tools built by Mudasir Mohammed Ibrahim for sample size calculations, survival analysis, mediation analysis, ROC analysis, factor analysis, data conversion, and more. Trusted by health researchers and data analysts. No coding, open-source, ISO 27001 aligned processes.">
+    <meta name="keywords" content="statistical software, data analysis, web applications, research, R Shiny, SPSS alternative, sample size calculator, survival analysis, factor analysis, health research tools, ROC curve, open source statistics">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="apple-touch-icon" sizes="180x180" href="https://raw.githubusercontent.com/mudassiribrahim12/ShinyHealthTools/main/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="https://raw.githubusercontent.com/mudassiribrahim12/ShinyHealthTools/main/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="https://raw.githubusercontent.com/mudassiribrahim12/ShinyHealthTools/main/favicon-16x16.png">
-    <meta property="og:title" content="ShinyHealthTools | The #1 Platform for Intuitive R/Shiny Statistical Applications">
-    <meta property="og:description" content="21 validated statistical applications for sample size, survival, ROC, factor analysis, data conversion, and significant others. Trusted by researchers and data analysts worldwide. Free forever.">
+    <meta property="og:title" content="ShinyHealthTools | The #1 Platform for Intuitive Statistical Applications">
+    <meta property="og:description" content="21 validated R/Shiny apps plus 4 HTML-native tools. Free forever.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://shinyhealthtools.vercel.app/">
     <meta property="og:image" content="https://raw.githubusercontent.com/mudassiribrahim12/ShinyHealthTools/main/og-preview.jpg">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="ShinyHealthTools – enterprise statistical tools">
-    <meta name="twitter:description" content="Validated R/Shiny apps for sample size, ROC, survival, factor analysis, data conversion, and significant others.">
-    <meta name="twitter:image" content="https://raw.githubusercontent.com/mudassiribrahim12/ShinyHealthTools/main/og-preview.jpg">
     <meta name="google-site-verification" content="PGq_oDNzKGPvdcDK-DzNc2VYrCckkJxWLyiqq7OdHq0" />
     <meta name="google-site-verification" content="kJB32ReGicGUyIhghuPcYT3SjyxekwpWrDlm9t7NasA" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,6 +34,7 @@
       --accent2:  #005fa3;
       --green:    #00a855;
       --purple:   #6c3fc5;
+      --orange:   #e85a1a;
       --text:     #0f1f33;
       --muted:    #4a6070;
       --muted2:   #93a8b8;
@@ -62,6 +60,7 @@
       --accent2:  #0099cc;
       --green:    #00e87a;
       --purple:   #7c5cfc;
+      --orange:   #ff7a3d;
       --text:     #e8edf3;
       --muted:    #7a9aaa;
       --muted2:   #3a5060;
@@ -112,7 +111,7 @@
       pointer-events: none; z-index: 0;
     }
 
-    /* ── NAVBAR ── always consistent ── */
+    /* ── NAVBAR ── */
     .navbar {
       position: fixed; top:0; left:0; right:0; z-index: 900;
       display: flex; justify-content: space-between; align-items: center;
@@ -157,6 +156,10 @@
     }
     .nav-link:hover, .nav-link.active { color: var(--accent); background: rgba(0,119,204,0.08); }
     html.dark .nav-link:hover, html.dark .nav-link.active { background: rgba(0,212,255,0.08); }
+    /* HTML tab nav link gets orange tint when active */
+    .nav-link.html-active { color: var(--orange) !important; background: rgba(232,90,26,0.08) !important; }
+    html.dark .nav-link.html-active { background: rgba(255,122,61,0.08) !important; }
+
     .nav-link-gh {
       background: transparent;
       border: 1.5px solid var(--border);
@@ -362,7 +365,6 @@
       transition: transform 0.28s, border-color 0.28s, box-shadow 0.28s;
       position: relative;
       box-shadow: var(--shadow-card);
-      /* Cards are always visible — no fade-up class needed for filter grids */
     }
     .app-card::before {
       content: '';
@@ -375,7 +377,13 @@
     html.dark .app-card:hover { border-color: rgba(0,212,255,0.2); }
     .app-card:hover::before { opacity: 1; }
 
-    /* Fade-in only used for hero/home section cards */
+    /* HTML app card gets orange top stripe */
+    .html-app-card::before {
+      background: linear-gradient(90deg, transparent, var(--orange), transparent) !important;
+    }
+    .html-app-card:hover { border-color: rgba(232,90,26,0.25) !important; }
+    html.dark .html-app-card:hover { border-color: rgba(255,122,61,0.25) !important; }
+
     .app-card.fade-up {
       opacity: 0;
       transform: translateY(32px);
@@ -398,6 +406,11 @@
       display: flex; align-items: center; justify-content: center;
       color: var(--accent); font-size: 1.15rem; flex-shrink: 0;
     }
+    .app-logo-fb.orange-fb {
+      background: rgba(232,90,26,0.08);
+      border-color: rgba(232,90,26,0.2);
+      color: var(--orange);
+    }
     .app-name { font-size: 0.98rem; font-weight: 700; color: var(--text); letter-spacing: -0.01em; line-height: 1.3; }
     .app-desc {
       font-size: 0.87rem; color: var(--muted); line-height: 1.7;
@@ -414,6 +427,10 @@
     .app-link:hover { gap: 0.65rem; color: var(--accent2); text-decoration: none; }
     .app-link-src { color: var(--muted); }
     .app-link-src:hover { color: var(--text); }
+    /* Orange launch link for HTML apps */
+    .app-link-orange { color: var(--orange) !important; }
+    .app-link-orange:hover { color: #c94000 !important; }
+    html.dark .app-link-orange:hover { color: #ff9966 !important; }
 
     /* ── FILTER BAR ── */
     .filter-bar { display: flex; gap: 0.5rem; margin-bottom: 2.5rem; flex-wrap: wrap; }
@@ -425,6 +442,30 @@
     }
     .filter-btn.active, .filter-btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(0,119,204,0.06); }
     html.dark .filter-btn.active, html.dark .filter-btn:hover { background: rgba(0,212,255,0.06); }
+
+    /* ── HTML APPS SECTION (home + tab) ── */
+    .html-section-tag { color: var(--orange) !important; }
+    .html-section-tag::before { color: var(--orange) !important; opacity: 0.6; }
+
+    .html-banner {
+      display: flex; align-items: center; gap: 1rem;
+      background: rgba(232,90,26,0.06);
+      border: 1.5px solid rgba(232,90,26,0.18);
+      border-radius: 6px; padding: 1rem 1.4rem;
+      margin-bottom: 2.5rem; flex-wrap: wrap;
+    }
+    html.dark .html-banner { background: rgba(255,122,61,0.06); border-color: rgba(255,122,61,0.15); }
+    .html-banner-icon {
+      width: 40px; height: 40px; border-radius: 8px; flex-shrink: 0;
+      background: rgba(232,90,26,0.1); border: 1.5px solid rgba(232,90,26,0.2);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--orange); font-size: 1rem;
+    }
+    .html-banner-text strong { font-size: 0.92rem; font-weight: 700; color: var(--text); display: block; margin-bottom: 0.2rem; }
+    .html-banner-text span { font-size: 0.84rem; color: var(--muted); line-height: 1.55; }
+
+    /* HTML tab grid: 2-col */
+    .card-grid-2 { display: grid; grid-template-columns: repeat(2,1fr); gap: 1.35rem; }
 
     /* ── WHY SECTION ── */
     .why-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 1.35rem; }
@@ -589,7 +630,7 @@
     .toggle-thumb { position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; background: var(--muted); border-radius: 50%; transition: transform 0.25s cubic-bezier(.34,1.56,.64,1), background 0.25s; }
     .toggle-track.on .toggle-thumb { transform: translateX(18px); background: #fff; }
 
-    /* ── SCROLL FADE-IN (home section only) ── */
+    /* ── SCROLL FADE-IN ── */
     .fade-up { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
     .fade-left { opacity: 0; transform: translateX(-30px); transition: opacity 0.7s ease, transform 0.7s ease; }
@@ -619,7 +660,6 @@
 
     @keyframes fadeSlideUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
 
-    /* Loading skeleton */
     .img-skeleton {
       background: linear-gradient(90deg, var(--bg2) 25%, var(--border2) 50%, var(--bg2) 75%);
       background-size: 200% 100%;
@@ -627,7 +667,6 @@
     }
     @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
 
-    /* Blog preload skeleton */
     .post-skeleton { background: var(--card-bg); border: 1.5px solid var(--border2); border-radius: 6px; padding: 1.55rem; margin-bottom: 1.1rem; }
     .skel-line { height: 14px; border-radius: 4px; background: var(--bg2); margin-bottom: 10px; }
     .skel-line.skel-title { height: 18px; width: 75%; }
@@ -637,6 +676,7 @@
     /* ── RESPONSIVE ── */
     @media(max-width:1100px) {
       .card-grid { grid-template-columns: repeat(2,1fr); }
+      .card-grid-2 { grid-template-columns: repeat(2,1fr); }
       .footer-grid { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
     }
     @media(max-width:900px) {
@@ -654,6 +694,7 @@
       .nav-links { display: none; }
       .mobile-btn { display: block; }
       .card-grid { grid-template-columns: 1fr; }
+      .card-grid-2 { grid-template-columns: 1fr; }
       .why-grid { grid-template-columns: 1fr; }
       .blog-layout { flex-direction: column; }
       .blog-sidebar { width: 100%; position: static; }
@@ -705,6 +746,49 @@ const shinyApps = [
   {id:21, cat:'factor',   name:"FAnalyzr",             desc:"Supports exploratory and confirmatory factor analysis and dimensionality reduction, enabling researchers to simplify complex datasets.",                                                        logo:"https://raw.githubusercontent.com/mudassiribrahim12/me/main/FA.png",                 run:"https://mudassiribrahim30.shinyapps.io/fanalyzr/",              code:"https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/FAnalyzr.R"}
 ];
 
+const htmlApps = [
+  {
+    id: 'h1',
+    cat: 'viz',
+    name: "ROC Curve Builder",
+    icon: "fas fa-chart-area",
+    logo: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/ROC.png",
+    desc: "Visualize and construct receiver operating characteristic curves for binary classification evaluation.",
+    run: "https://roccurvebuilder.vercel.app/",
+    code: "https://github.com/mudassiribrahim12/ROCCurve-Builder"
+  },
+  {
+    id: 'h2',
+    cat: 'stats',
+    name: "CATrend Analyzer",
+    icon: "fas fa-chart-line",
+    logo: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/CAtrend.png",
+    desc: "Explore and visualize categorical trends across datasets with interactive chart outputs.",
+    run: "https://cochran-armitage.vercel.app/",
+    code: "https://github.com/mudassiribrahim12/cochran-armitage"
+  },
+  {
+    id: 'h3',
+    cat: 'calc',
+    name: "CalcuStats",
+    icon: "fas fa-calculator",
+    logo: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/CalcuStats.png",
+    desc: "Perform sample size calculations and descriptive analysis",
+    run: "https://calcustats.vercel.app/",
+    code: "https://github.com/mudassiribrahim12/CalcuStats-HTML-"
+  },
+  {
+    id: 'h4',
+    cat: 'stats',
+    name: "MedModr",
+    icon: "fas fa-stethoscope",
+    logo: "https://raw.githubusercontent.com/mudassiribrahim12/me/main/MedModr.png",
+    desc: "Perform simple mediation, serial mediation, moderation, and moderated mediation analysis.",
+    run: "https://medmodr.vercel.app/",
+    code: "https://github.com/mudassiribrahim12/MedModr-html-version/tree/main"
+  }
+];
+
 const testimonials = [
   {text:"My experience using CalcuStats has been really good. The app is easy to use and very straightforward, even if you're not strong in statistics. It quickly gives accurate results once you enter your values. It has saved me a lot of time. One more special feature I am very passionate about is the non-response rate. A helpful and reliable tool for sample size calculation.", role:"Health Researcher"},
   {text:"This app (CalcuStats) made the work very simple for me. It even helped me generate a flowchart with just a click.", role:"Health Researcher"},
@@ -714,7 +798,7 @@ const testimonials = [
 
 const whyData = [
   {icon:"fas fa-flask",            title:"Validated for Research",      desc:"All tools are benchmarked against established software and are suitable for grant applications and peer-reviewed publications."},
-  {icon:"fas fa-code-branch",      title:"Fully Open Source",           desc:"Source code is publicly available on GitHub. Built on R 4.3+, tidyverse, survival, psych, and other CRAN packages."},
+  {icon:"fas fa-code-branch",      title:"Fully Open Source",           desc:"Source code is publicly available on GitHub (MIT License). Built on R 4.3+, tidyverse, survival, psych, and other CRAN packages."},
   {icon:"fas fa-cloud-upload-alt", title:"Zero Local Installation",     desc:"Deployed on shinyapps.io and accessible via any modern browser. Secure, scalable, and maintenance-free."},
   {icon:"fas fa-heart",            title:"Commitment to Accessibility", desc:"Free for academic, government, and non-profit institutions. No license fees, no subscription traps."}
 ];
@@ -740,16 +824,6 @@ const codeLines = [
   {h:'&nbsp;&nbsp;<span class="cf">theme_minimal</span>()'},
 ];
 
-/* ── PRELOAD all app images ── */
-const preloadedImages = {};
-shinyApps.forEach(app => {
-  if (app.logo) {
-    const img = new Image();
-    img.src = app.logo;
-    preloadedImages[app.id] = img;
-  }
-});
-
 /* ── HOOKS ── */
 const useFadeIn = (threshold=0.12) => {
   const ref = useRef(null);
@@ -773,7 +847,6 @@ const useStaggerFadeIn = (threshold=0.06) => {
   return ref;
 };
 
-/* ── HOME-ONLY: per-card fade for the Featured section ── */
 const usePerCardFadeIn = () => {
   const ref = useRef(null);
   useEffect(() => {
@@ -860,7 +933,7 @@ const CodeBox = () => {
   );
 };
 
-/* ── SEARCH OVERLAY ── */
+/* ── SEARCH OVERLAY — searches both shiny + html apps ── */
 const SearchOverlay = ({onClose}) => {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
@@ -873,23 +946,30 @@ const SearchOverlay = ({onClose}) => {
   const doSearch = q => {
     if (!q.trim()) { setResults([]); return; }
     const lq = q.toLowerCase();
-    setResults(shinyApps.filter(a => a.name.toLowerCase().includes(lq)||a.desc.toLowerCase().includes(lq)));
+    const all = [...shinyApps, ...htmlApps];
+    setResults(all.filter(a => a.name.toLowerCase().includes(lq)||a.desc.toLowerCase().includes(lq)));
   };
   return (
     <div className="search-overlay" onClick={onClose}>
       <div className="search-box" onClick={e=>e.stopPropagation()}>
         <div className="search-box-inner">
           <i className="fas fa-search"></i>
-          <input ref={inputRef} className="search-box-input" placeholder="Search 21 statistical tools…"
+          <input ref={inputRef} className="search-box-input" placeholder="Search 25 statistical tools…"
             value={query} onChange={e=>{setQuery(e.target.value);doSearch(e.target.value);}}/>
           <button className="search-close-btn" onClick={onClose}>ESC</button>
         </div>
         <div className="search-results">
-          {!query.trim() && <div className="search-empty-state">Start typing to search all 21 tools.</div>}
+          {!query.trim() && <div className="search-empty-state">Start typing to search all 25 tools.</div>}
           {query.trim() && results.length===0 && <div className="search-no-results">No match for "{query}"</div>}
           {results.map(r=>(
             <div key={r.id} className="search-result-item" onClick={()=>{window.open(r.run,'_blank');onClose();}}>
-              <div><div className="sri-name">{r.name}</div><div className="sri-desc">{r.desc}</div></div>
+              <div>
+                <div className="sri-name">
+                  {r.name}
+                  {r.icon && <span style={{fontFamily:'var(--mono)',fontSize:'0.62rem',background:'rgba(232,90,26,0.1)',color:'var(--orange)',padding:'0.1rem 0.4rem',borderRadius:'3px',marginLeft:'0.4rem',letterSpacing:'0.06em',fontWeight:'700'}}>HTML</span>}
+                </div>
+                <div className="sri-desc">{r.desc}</div>
+              </div>
               <i className="fas fa-external-link-alt sri-arrow"></i>
             </div>
           ))}
@@ -909,9 +989,9 @@ const AnimatedMetric = ({target, prefix='', suffix='', label, duration=1800}) =>
   );
 };
 
-/* ── APP CARD ── no fade-up on Apps tab, fade-up only for home featured section ── */
+/* ── SHINY APP CARD ── */
 const AppCard = ({app, useFade=false}) => {
-  const [loaded, setLoaded] = useState(() => !!preloadedImages[app.id]?.complete);
+  const [loaded, setLoaded] = useState(false);
   const [err, setErr] = useState(false);
   const catColors = {viz:'rgba(0,119,204,0.08)', stats:'rgba(0,168,85,0.08)', data:'rgba(108,63,197,0.08)', factor:'rgba(234,97,20,0.08)'};
   const catTextColors = {viz:'#0077cc', stats:'#00803a', data:'#6c3fc5', factor:'#c95010'};
@@ -939,6 +1019,48 @@ const AppCard = ({app, useFade=false}) => {
       <p className="app-desc">{app.desc}</p>
       <div className="app-footer">
         <a href={app.run} target="_blank" className="app-link"><i className="fas fa-play" style={{fontSize:'0.63rem'}}></i> Launch</a>
+        <a href={app.code} target="_blank" className="app-link app-link-src"><i className="fab fa-github" style={{fontSize:'0.75rem'}}></i> Source</a>
+      </div>
+    </div>
+  );
+};
+
+/* ── HTML APP CARD ── consistent style with shiny cards */
+
+const HtmlAppCard = ({app, useFade=false}) => {
+  const [loaded, setLoaded] = useState(false);
+  const [err, setErr] = useState(false);
+  const catColors = {viz:'rgba(0,119,204,0.08)', stats:'rgba(0,168,85,0.08)', data:'rgba(108,63,197,0.08)', calc:'rgba(0,119,204,0.08)'};
+  const catTextColors = {viz:'#0077cc', stats:'#00803a', data:'#6c3fc5', calc:'#0077cc'};
+  const catLabel = app.cat === 'calc' ? 'Calculator' : app.cat;
+
+  return (
+    <div className={`app-card html-app-card${useFade ? ' fade-up' : ''}`}>
+      <div className="app-card-top">
+        {/* Show logo if available and not errored, otherwise show icon fallback */}
+        {app.logo && !err ? (
+          <img
+            src={app.logo}
+            alt={app.name}
+            className="app-logo"
+            onLoad={() => setLoaded(true)}
+            onError={() => setErr(true)}
+            style={{opacity: loaded ? 1 : 0.4, transition: 'opacity 0.3s'}}
+          />
+        ) : (
+          <div className="app-logo-fb orange-fb">
+            <i className={app.icon}></i>
+          </div>
+        )}
+        <div>
+          <div className="app-name">{app.name}</div>
+          <span style={{fontFamily:"'Space Mono',monospace",fontSize:'0.65rem',letterSpacing:'0.1em',textTransform:'uppercase',padding:'0.18rem 0.55rem',borderRadius:'3px',background:catColors[app.cat]||'rgba(0,119,204,0.08)',color:catTextColors[app.cat]||'#0077cc',marginTop:'0.3rem',display:'inline-block',fontWeight:'700'}}>{catLabel}</span>
+          <span style={{fontFamily:"'Space Mono',monospace",fontSize:'0.62rem',letterSpacing:'0.08em',textTransform:'uppercase',padding:'0.15rem 0.45rem',borderRadius:'3px',background:'rgba(232,90,26,0.1)',color:'var(--orange)',marginLeft:'0.35rem',display:'inline-block',fontWeight:'700'}}>HTML</span>
+        </div>
+      </div>
+      <p className="app-desc">{app.desc}</p>
+      <div className="app-footer">
+        <a href={app.run} target="_blank" className="app-link app-link-orange"><i className="fas fa-play" style={{fontSize:'0.63rem'}}></i> Launch</a>
         <a href={app.code} target="_blank" className="app-link app-link-src"><i className="fab fa-github" style={{fontSize:'0.75rem'}}></i> Source</a>
       </div>
     </div>
@@ -975,6 +1097,44 @@ const ThemeToggle = ({dark, setDark}) => (
   </div>
 );
 
+/* ── HTML APPS SECTION — reusable for home and html tab ── */
+const HtmlAppsSection = ({setTab, isTab=false}) => {
+  const hdrRef  = useFadeIn();
+  const gridRef = usePerCardFadeIn();
+  return (
+    <div className={`section${isTab ? '' : ' section-alt'}`}>
+      <div className="section-inner">
+        <div className="section-hdr fade-up" ref={hdrRef}>
+          <h2 className="section-title">HTML Native Tools</h2>
+        </div>
+
+        {isTab && (
+          <div className="html-banner">
+            <div className="html-banner-icon"><i className="fas fa-bolt"></i></div>
+            <div className="html-banner-text">
+              <strong>Zero-dependency, browser-native tools</strong>
+              <span>These applications are client-side versions of the original Shiny tools. They execute entirely within your browser, eliminating server dependencies and providing instantaneous launch. Click Launch to begin immediately.</span>
+            </div>
+          </div>
+        )}
+
+        <div className={`card-grid-2 stagger`} ref={isTab ? null : gridRef}>
+          {htmlApps.map(a => <HtmlAppCard key={a.id} app={a} useFade={!isTab}/>)}
+        </div>
+
+        {!isTab && (
+          <div style={{textAlign:'center',marginTop:'2.75rem'}}>
+            <button className="btn-outline" onClick={()=>{setTab('html');window.scrollTo({top:0,behavior:'smooth'});}}
+              style={{borderColor:'rgba(232,90,26,0.3)',color:'var(--orange)'}}>
+              View All HTML Applications <i className="fas fa-arrow-right" style={{fontSize:'0.82rem',marginLeft:'0.35rem'}}></i>
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
 /* ── HOME TAB ── */
 const HomeTab = ({setTab}) => {
   const featuredHdrRef  = useFadeIn();
@@ -993,46 +1153,44 @@ const HomeTab = ({setTab}) => {
             <h1 className="hero-title">
               Empowering Health<br/>Research with<br/><em>Innovative Tools</em>
             </h1>
-            <p className="hero-desc">ShinyHealthTools is a platform dedicated to advancing public health research worldwide — 21 validated R/Shiny applications for healthcare institutions, academic researchers, and clinical studies. No programming required.</p>
-            <p className="hero-desc" style={{marginTop:'0.35rem'}}>Survival analysis, mediation, ROC, factor analysis, SPSS conversion, regression, data screening, epidemiology, publication graphics, and more — all running directly in your browser.</p>
+            <p className="hero-desc">ShinyHealthTools is a comprehensive platform designed to advance public health research globally. It features 21 validated R Shiny applications alongside 4 HTML-native tools, developed to support healthcare institutions, academic researchers, and clinical investigations without requiring any programming expertise.</p>
+            <p className="hero-desc" style={{marginTop:'0.35rem'}}>The applications on this platform provide a comprehensive suite of analytical capabilities, including survival analysis, mediation analysis, ROC analysis, factor analysis, regression modeling, data screening, epidemiological analysis, SPSS data conversion, and publication-ready visualizations. All tools are fully web-based, ensuring seamless access and efficient execution directly within the browser, without the need for specialized software installation.</p>
             <div className="hero-actions">
-              <button className="btn-primary" onClick={()=>{setTab('apps');window.scrollTo({top:0,behavior:'smooth'});}}>
-                <i className="fas fa-th-large"></i> Browse All Apps
-              </button>
-              <a href="https://github.com/mudassiribrahim30/R-Shiny-Apps" target="_blank" className="btn-outline">
-                <i className="fab fa-github"></i> View on GitHub
-              </a>
             </div>
             <div className="hero-metrics">
-              <AnimatedMetric target={21}  suffix="" label="Statistical Tools" duration={1600}/>
-              <AnimatedMetric target={100} suffix="%" label="Open Source"      duration={1800}/>
-              <AnimatedMetric target={0}   prefix="$" label="License Cost"    duration={900}/>
+              <AnimatedMetric target={21}  suffix="" label="Shiny Tools"   duration={1600}/>
+              <AnimatedMetric target={4}   suffix="" label="HTML Tools"    duration={1000}/>
+              <AnimatedMetric target={100} suffix="%" label="Open Source"  duration={1800}/>
+              <AnimatedMetric target={0}   prefix="$" label="License Cost" duration={900}/>
             </div>
           </div>
           <div className="hero-right"><CodeBox/></div>
         </div>
       </div>
 
+      {/* FEATURED SHINY APPS */}
       <div className="section">
         <div className="section-inner">
           <div className="section-hdr fade-up" ref={featuredHdrRef}>
             <div className="section-tag-label">Featured Applications</div>
-            <h2 className="section-title">Six Essential Tools</h2>
-            <p className="section-sub">A selection of our most-used applications across clinical research, epidemiology, and biostatistics.</p>
+            <h2 className="section-title">Shiny Tool</h2>
           </div>
-          {/* Home featured grid uses fade-up per card */}
           <div className="card-grid stagger" ref={featuredGridRef}>
             {shinyApps.slice(0,6).map(a=><AppCard key={a.id} app={a} useFade={true}/>)}
           </div>
           <div style={{textAlign:'center',marginTop:'2.75rem'}}>
             <button className="btn-outline" onClick={()=>{setTab('apps');window.scrollTo({top:0,behavior:'smooth'});}}>
-              View All 21 Applications <i className="fas fa-arrow-right" style={{fontSize:'0.82rem',marginLeft:'0.35rem'}}></i>
+              View All Shiny Applications <i className="fas fa-arrow-right" style={{fontSize:'0.82rem',marginLeft:'0.35rem'}}></i>
             </button>
           </div>
         </div>
       </div>
 
-      <div className="section section-alt">
+      {/* HTML APPS SECTION ON HOME */}
+      <HtmlAppsSection setTab={setTab} isTab={false}/>
+
+      {/* WHY */}
+      <div className="section">
         <div className="section-inner">
           <div className="section-hdr fade-up" ref={whyHdrRef}>
             <div className="section-tag-label">Why ShinyHealthTools</div>
@@ -1055,12 +1213,7 @@ const HomeTab = ({setTab}) => {
   );
 };
 
-/* ── APPS TAB ──
-   FIX: Cards are rendered WITHOUT fade-up class so they are always visible.
-   Filter changes simply re-render the grid — no IntersectionObserver needed.
-   A lightweight CSS entry animation is added via a key prop so React remounts
-   the grid on filter change, triggering a fresh slide-in without any observer.
-── */
+/* ── APPS TAB (Shiny) ── */
 const AppsTab = () => {
   const [activeFilter, setActiveFilter] = useState('all');
   const hdrRef = useFadeIn();
@@ -1081,9 +1234,7 @@ const AppsTab = () => {
     <div className="section">
       <div className="section-inner">
         <div className="section-hdr fade-up" ref={hdrRef}>
-          <div className="section-tag-label">All Applications</div>
-          <h2 className="section-title">21 Web Tools</h2>
-          <p className="section-sub">Every application is open source, browser-based, and free for academic and research purposes.</p>
+          <h2 className="section-title">Shiny Tools</h2>
         </div>
 
         <div className="filter-bar">
@@ -1098,12 +1249,6 @@ const AppsTab = () => {
           ))}
         </div>
 
-        {/*
-          KEY on the grid = activeFilter: when filter changes React destroys and
-          remounts the div, which triggers the CSS animation again on fresh cards.
-          Cards use useFade=false so they are fully visible immediately — no
-          IntersectionObserver that fires only once and then disconnects.
-        */}
         <div
           key={activeFilter}
           className="card-grid"
@@ -1123,7 +1268,12 @@ const AppsTab = () => {
   );
 };
 
-/* ── BLOG TAB — preloads on mount ── */
+/* ── HTML APPS TAB ── */
+const HtmlTab = () => {
+  return <HtmlAppsSection setTab={null} isTab={true}/>;
+};
+
+/* ── BLOG TAB ── */
 const BlogTab = ({blogData}) => {
   const [visible, setVisible] = useState(10);
   const [selMonth, setSelMonth] = useState(null);
@@ -1172,7 +1322,6 @@ const BlogTab = ({blogData}) => {
     <div className="section">
       <div className="section-inner">
         <div className="section-hdr fade-up" ref={hdrRef}>
-          <div className="section-tag-label">Blog</div>
           <h2 className="section-title">Insights & Updates</h2>
           <p className="section-sub">Perspectives on ShinyHealthTools, statistical methods, and health data science.</p>
         </div>
@@ -1264,22 +1413,23 @@ const Modal = ({title, content, onClose}) => {
 
 const ChatBot = () => {
   const [open, setOpen] = useState(false);
-  const [msgs, setMsgs] = useState([{s:'bot',t:"Hi! I'm the ShinyHealthTools assistant. Ask me anything about our tools or how to get started."}]);
+  const [msgs, setMsgs] = useState([{s:'bot',t:"Hi! I'm the ShinyHealthTools assistant. Ask me anything about our 25 tools or how to get started."}]);
   const [input, setInput] = useState('');
   const [showSug, setShowSug] = useState(true);
   const endRef = useRef(null);
-  const sugs = ["What tools are available?","Are these tools free?","Tell me about CalcuStats","How do I cite ShinyHealthTools?","Is source code available?"];
+  const sugs = ["What tools are available?","Are these tools free?","What are HTML tools?","Tell me about CalcuStats","How do I cite ShinyHealthTools?"];
   useEffect(()=>{endRef.current?.scrollIntoView({behavior:'smooth'});},[msgs]);
   const respond = q => {
     const lq = q.toLowerCase();
-    if(lq.includes('free')||lq.includes('cost')) return "All 21 tools are completely free for academic, government, and non-profit use. No license fees or subscriptions.";
-    if(lq.includes('calcustats')||lq.includes('sample size')) return "CalcuStats handles sample size calculation, power analysis, and descriptive statistics — ideal for clinical trial planning.";
-    if(lq.includes('cite')) return "Cite as: 'Shiny Health Tools (2025). ShinyHealthTools: Statistical applications for health research. Retrieved from the website URL.'";
+    if(lq.includes('free')||lq.includes('cost')) return "All 25 tools are completely free for academic, government, and non-profit use. No license fees or subscriptions.";
+    if(lq.includes('html tool')||lq.includes('html app')) return "There are 4 HTML-native tools: ROC Curve Builder, CATrend Analyzer, CalcuStats, and MedModr. They run instantly in any browser — no Shiny server, no R install needed.";
+    if(lq.includes('calcustats')||lq.includes('sample size')) return "CalcuStats handles sample size calculation, power analysis, and descriptive statistics — available as both a Shiny app and an HTML tool.";
+    if(lq.includes('cite')) return "Cite as: 'ShinyHealthTools (2025). ShinyHealthTools: Statistical applications for health research. Retrieved from the website URL.'";
     if(lq.includes('source')||lq.includes('github')) return "All source code is at github.com/mudassiribrahim30 under MIT license. Fully open and auditable.";
-    if(lq.includes('how many')||lq.includes('available')) return "There are 21 validated applications covering survival, ROC, factor analysis, regression, mediation, data conversion, and more.";
-    if(lq.includes('roc')) return "ROC Curve Builder generates ROC curves and evaluates diagnostic test performance with AUC and confidence intervals.";
+    if(lq.includes('how many')||lq.includes('available')) return "There are 25 tools total: 21 R/Shiny apps and 4 HTML-native tools covering survival, ROC, factor analysis, regression, mediation, data conversion, and more.";
+    if(lq.includes('roc')) return "ROC Curve Builder is available as both a Shiny app and an HTML-native tool. Both generate ROC curves with AUC and confidence intervals.";
     if(lq.includes('hello')||lq.includes('hi')) return "Hello! How can I help you with ShinyHealthTools today?";
-    return "Try asking about a specific app (e.g. 'Tell me about MedModr'), or browse the Apps tab to see all 21 tools.";
+    return "Try asking about a specific app (e.g. 'Tell me about MedModr'), or browse the Shiny Apps or HTML Tools tabs.";
   };
   const send = text => {
     if(!text.trim()) return;
@@ -1296,7 +1446,7 @@ const ChatBot = () => {
       {open && (
         <div className="chat-panel">
           <div className="chat-hdr">
-            <div className="chat-hdr-name"><div className="chat-online"></div>// SHT Assistant</div>
+            <div className="chat-hdr-name"><div className="chat-online"></div>// ShinyHealthTools Assistant</div>
             <button className="chat-x" onClick={()=>setOpen(false)}><i className="fas fa-times"></i></button>
           </div>
           <div className="chat-msgs">
@@ -1326,7 +1476,6 @@ const App = () => {
   const [dark, setDark] = useDarkMode();
   const [scrolled, setScrolled] = useState(false);
 
-  // Blog preloaded at app level — loads immediately on app mount
   const [blogData, setBlogData] = useState({posts:[], loading:true, error:false});
 
   useEffect(() => {
@@ -1363,23 +1512,24 @@ const App = () => {
 
   return (
     <>
-      {/* NAVBAR — theme toggle removed from here, lives only in footer */}
       <nav className={`navbar${scrolled?' scrolled':''}`}>
         <div className="nav-logo" onClick={()=>navTo('home')}>
           <div className="nav-logo-icon"><i className="fas fa-chart-pie"></i></div>
-          <span className="nav-logo-text">Shiny<span>Health</span>Tools</span>
+          <span className="nav-logo-text">ShinyHealth<span>Tools</span></span>
         </div>
         <div className="nav-links">
           <button className={`nav-link${tab==='home'?' active':''}`} onClick={()=>navTo('home')}>Home</button>
-          <button className={`nav-link${tab==='apps'?' active':''}`} onClick={()=>navTo('apps')}>Apps</button>
+          <button className={`nav-link${tab==='apps'?' active':''}`} onClick={()=>navTo('apps')}>Shiny Apps</button>
+<button className={`nav-link${tab==='html'?' html-active':''}`} onClick={()=>navTo('html')}>
+  HTML Tools
+</button>
           <button className={`nav-link${tab==='blog'?' active':''}`} onClick={()=>navTo('blog')}>Blog</button>
           <a href="https://shinyopensource.github.io/documentation/" target="_blank" className="nav-link">Docs</a>
           <a href="https://mudasiribrahim.vercel.app/" target="_blank" className="nav-link">Developer</a>
-          <button className="nav-link" onClick={()=>openModal('Support & Appreciation','If any of the apps have been helpful, consider <a href="https://buymeacoffee.com/mudasiribrahim30" target="_blank">supporting the project ☕</a>.<br/><br/>For technical assistance, contact <a href="mailto:mudassiribrahim30@gmail.com">mudassiribrahim30@gmail.com</a>. Responses typically within 24 hours on business days.')}>Support</button>
+          <button className="nav-link" onClick={()=>openModal('Support & Appreciation','If any of the apps have been helpful, consider <a href="https://buymeacoffee.com/mudasiribrahim30" target="_blank">supporting this project ☕</a>.<br/><br/>For technical assistance, contact <a href="mailto:mudassiribrahim30@gmail.com">mudassiribrahim30@gmail.com</a>. Responses typically within 24 hours on business days.')}>Support</button>
           <a href="https://github.com/mudassiribrahim30/R-Shiny-Apps" target="_blank" className="nav-link-gh"><i className="fab fa-github"></i> GitHub</a>
           <button className="nav-search-btn" onClick={()=>setSearchOpen(true)} title="Search (⌘K)"><i className="fas fa-search"></i></button>
         </div>
-        {/* Mobile: only hamburger button, no theme toggle */}
         <button className="mobile-btn" onClick={()=>setMobileOpen(!mobileOpen)}>
           <i className={`fas fa-${mobileOpen?'times':'bars'}`}></i>
         </button>
@@ -1387,20 +1537,20 @@ const App = () => {
 
       <div className={`mobile-nav${mobileOpen?' open':''}`}>
         <button className="nav-link" onClick={()=>navTo('home')}><i className="fas fa-home" style={{marginRight:'0.65rem'}}></i>Home</button>
-        <button className="nav-link" onClick={()=>navTo('apps')}><i className="fas fa-th-large" style={{marginRight:'0.65rem'}}></i>Apps</button>
+        <button className="nav-link" onClick={()=>navTo('apps')}><i className="fas fa-th-large" style={{marginRight:'0.65rem'}}></i>Shiny Apps</button>
+<button className="nav-link" onClick={()=>navTo('html')} style={{color:'var(--orange)'}}>HTML Tools</button>
         <button className="nav-link" onClick={()=>navTo('blog')}><i className="fas fa-blog" style={{marginRight:'0.65rem'}}></i>Blog</button>
         <a href="https://shinyopensource.github.io/documentation/" target="_blank" className="nav-link"><i className="fas fa-book" style={{marginRight:'0.65rem'}}></i>Docs</a>
-        <a href="https://www.mudasiribrahim.com" target="_blank" className="nav-link"><i className="fas fa-user" style={{marginRight:'0.65rem'}}></i>Developer</a>
         <button className="nav-link" onClick={()=>{setSearchOpen(true);setMobileOpen(false);}}><i className="fas fa-search" style={{marginRight:'0.65rem'}}></i>Search</button>
       </div>
 
       <main>
         {tab==='home' && <HomeTab setTab={setTab}/>}
         {tab==='apps' && <AppsTab/>}
+        {tab==='html' && <HtmlTab/>}
         {tab==='blog' && <BlogTab blogData={blogData}/>}
       </main>
 
-      {/* FOOTER */}
       <footer>
         <div className="footer-inner">
           <div className="footer-grid">
@@ -1409,7 +1559,7 @@ const App = () => {
                 <div className="fbrand-icon"><i className="fas fa-chart-pie"></i></div>
                 ShinyHealthTools
               </div>
-              <div className="fbrand-desc">21 validated R/Shiny applications for health research. Open source, browser-based, and free to use for academic and clinical purposes.</div>
+              <div className="fbrand-desc">ShinyHealthTools was created to make advanced statistical analysis more accessible, as many methods remain locked behind commercial software or require coding expertise. Data analysis should be simple and accessible to all - Mudasir Mohammed Ibrahim</div>
               <div className="fsocials">
                 <a href="https://www.youtube.com/@mudasirmohammedibrahim1026" target="_blank" className="fsoc"><i className="fab fa-youtube"></i></a>
                 <a href="https://www.facebook.com/mudassiribrahim81" target="_blank" className="fsoc"><i className="fab fa-facebook-f"></i></a>
@@ -1419,33 +1569,34 @@ const App = () => {
               </div>
             </div>
             <div>
-              <div className="fcol-title">Apps</div>
+              <div className="fcol-title">Shiny Apps</div>
               {['FactorGuard','CalcuStats','ROC Curve Builder','Data2SPSS','KMPlot Genie','MedModr'].map(n=>{
                 const a=shinyApps.find(x=>x.name===n);
                 return <a key={n} href={a?.run} target="_blank" className="flink">{n}</a>;
               })}
-              <span className="flink" onClick={()=>navTo('apps')}>All 21 apps →</span>
+              <span className="flink" onClick={()=>navTo('apps')}>All 21 Shiny apps →</span>
             </div>
             <div>
-              <div className="fcol-title">Resources</div>
+              <div className="fcol-title">HTML Tools</div>
+              {htmlApps.map(a=><a key={a.id} href={a.run} target="_blank" className="flink">{a.name}</a>)}
+              <div className="fcol-title" style={{marginTop:'1.2rem'}}>Resources</div>
               <a href="https://shinyopensource.github.io/documentation/" target="_blank" className="flink">Documentation</a>
               <a href="https://github.com/mudassiribrahim30" target="_blank" className="flink">GitHub Repository</a>
-              <span className="flink" onClick={()=>openModal('Citation Guide','To cite ShinyHealthTools in publications:<br/><br/>Shiny Health Tools (2025). ShinyHealthTools: Statistical applications for health research. Retrieved from [website URL].<br/><br/>For specific apps, include the app name and version.')}>Citation Guide</span>
-              <span className="flink" onClick={()=>openModal('Release Notes','<strong>v2.1.0</strong> (March 2026): Major redesign, improved UI responsiveness, chatbot integration, and 21 total apps.')}>Release Notes</span>
+              <span className="flink" onClick={()=>openModal('Citation Guide','To cite ShinyHealthTools in publications:<br/><br/>ShinyHealthTools (2025). ShinyHealthTools: Statistical applications for health research. Retrieved from [website URL].<br/><br/>For specific apps, include the app name and version.')}>Citation Guide</span>
+              <span className="flink" onClick={()=>openModal('Release Notes','<strong>v2.2.0</strong> (April 2026): Renamed to ShinyHealthTools, added 4 HTML-native tools tab, 21 Shiny apps retained.')}>Release Notes</span>
               <span className="flink" onClick={()=>navTo('blog')}>Blog</span>
             </div>
             <div>
               <div className="fcol-title">Legal & Support</div>
               <span className="flink" onClick={()=>openModal('Privacy Policy',privacy)}>Privacy</span>
-              <span className="flink" onClick={()=>openModal('FAQ','<strong>Q: Are the tools really free?</strong><br/>A: Yes, completely free for academic, government, and non-profit use.<br/><br/><strong>Q: Do I need to install R?</strong><br/>A: No, everything runs in your browser.<br/><br/><strong>Q: How do I cite these tools?</strong><br/>A: See the Citation Guide in Resources.<br/><br/><strong>Q: Is my data secure?</strong><br/>A: All processing is local — no data leaves your machine.')}>FAQ</span>
+              <span className="flink" onClick={()=>openModal('FAQ','<strong>Q: Are the tools really free?</strong><br/>A: Yes, completely free for academic, government, and non-profit use.<br/><br/><strong>Q: Do I need to install R?</strong><br/>A: No. HTML tools need nothing at all. Shiny apps run in your browser via shinyapps.io.<br/><br/><strong>Q: How do I cite these tools?</strong><br/>A: See the Citation Guide in Resources.<br/><br/><strong>Q: Is my data secure?</strong><br/>A: All processing is local — no data leaves your machine.')}>FAQ</span>
               <span className="flink" onClick={()=>openModal('Contact','For technical assistance, email <a href="mailto:mudassiribrahim30@gmail.com">mudassiribrahim30@gmail.com</a>. Responses within 24 hours on business days.')}>Contact</span>
-              <a href="https://buymeacoffee.com/mudasiribrahim30" target="_blank" className="flink">Donate ☕</a>
+              <a href="https://buymeacoffee.com/mudasiribrahim30" target="_blank" className="flink">Donate</a>
             </div>
           </div>
           <div className="footer-bottom">
             <p>© 2025–{new Date().getFullYear()} ShinyHealthTools. All rights reserved.</p>
-            <p>Built with <span>R & Shiny</span> for health research.</p>
-            {/* Theme toggle lives ONLY here in the footer */}
+            <p>Built with <span>R, Shiny & HTML</span> for health research.</p>
             <ThemeToggle dark={dark} setDark={setDark}/>
           </div>
         </div>
