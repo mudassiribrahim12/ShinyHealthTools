@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
-  <title>ShinyHealthTools: Free Statistical Applications for Health Research</title>
+  <title>ShinyHealthTools – Your Free Resource Hub for Statistical Applications</title>
   <meta name="description" content="ShinyHealthTools delivers 21 validated R/Shiny applications plus 6 HTML-native tools built by Mudasir Mohammed Ibrahim for sample size calculations, survival analysis, mediation analysis, ROC analysis, factor analysis, data conversion, and more.">
   <meta name="keywords" content="statistical software, data analysis, web applications, research, R Shiny, SPSS alternative, sample size calculator, survival analysis, factor analysis, health research tools, ROC curve, open source statistics">
   <link rel="apple-touch-icon" sizes="180x180" href="https://raw.githubusercontent.com/mudassiribrahim12/ShinyHealthTools/main/apple-touch-icon.png">
@@ -106,26 +106,59 @@
   .site-header {
     width: 100%;
     background-color: var(--bg);
-    border-bottom: 1px solid var(--header-bd);
+    border-bottom: none;
     padding: 0 28px;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: sticky;
-    top: 0;
+    position: static;
     z-index: 100;
-    height: 50px;
-    transition: background-color 0.2s, border-color 0.2s;
+    height: 56px;
+    transition: background-color 0.2s;
   }
   .site-header .brand {
-    font-family: "Times New Roman", Times, serif;
-    font-size: 20px;
-    font-weight: bold;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 22px;
+    font-weight: normal;
+    font-style: italic;
     color: var(--heading);
     text-decoration: none;
+    letter-spacing: 0.01em;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0;
     transition: color 0.2s;
   }
-  .site-header .brand:hover { color: var(--link-hover); }
+  .site-header .brand .brand-shiny {
+    font-weight: bold;
+    font-style: italic;
+    font-size: 23px;
+    color: var(--heading);
+    transition: color 0.2s;
+  }
+  .site-header .brand .brand-health {
+    font-weight: normal;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--text-dim);
+    transition: color 0.2s;
+  }
+  .site-header .brand .brand-tools {
+    font-weight: bold;
+    font-style: normal;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-left: 5px;
+    align-self: center;
+    padding-bottom: 1px;
+    border-bottom: 1.5px solid var(--hr);
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .site-header .brand:hover .brand-shiny,
+  .site-header .brand:hover .brand-health { color: var(--link-hover); }
+  .site-header .brand:hover .brand-tools  { color: var(--link-hover); border-bottom-color: var(--link-hover); }
 
   #theme-btn {
     font-family: Arial, sans-serif;
@@ -251,8 +284,8 @@
     width: 195px;
     min-width: 195px;
     position: sticky;
-    top: 50px;
-    height: calc(100vh - 50px);
+    top: 0;
+    height: 100vh;
     overflow-y: auto;
     border-right: 1px solid var(--sidebar-bd);
     background-color: var(--sidebar-bg);
@@ -411,9 +444,8 @@
     display: block;
     height: 0;
     overflow: hidden;
-    /* offset for sticky header */
-    margin-top: -60px;
-    padding-top: 60px;
+    margin-top: 0;
+    padding-top: 0;
   }
 
   /* ── FAQ SECTION ── */
@@ -538,6 +570,57 @@
   .sidebar::-webkit-scrollbar-track { background: transparent; }
   .sidebar::-webkit-scrollbar-thumb { background: var(--sidebar-bd); }
 
+  /* ── SIDEBAR COLLAPSE (desktop) ── */
+  #sidebar-toggle-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background: none;
+    border: none;
+    border-bottom: 1px solid var(--sidebar-bd);
+    padding: 0 10px 8px 12px;
+    margin-bottom: 6px;
+    cursor: pointer;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 13px;
+    font-weight: bold;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    line-height: 1;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  #sidebar-toggle-btn:hover { color: var(--link-hover); }
+  #sidebar-toggle-btn .stb-arrow {
+    font-size: 11px;
+    color: var(--text-dim);
+    transition: transform 0.22s, color 0.2s;
+    font-style: normal;
+    flex-shrink: 0;
+    display: inline-block;
+  }
+  #sidebar-toggle-btn:hover .stb-arrow { color: var(--link-hover); }
+
+  /* collapsed state */
+  .sidebar.collapsed {
+    width: 28px;
+    min-width: 28px;
+    overflow: hidden;
+  }
+  .sidebar.collapsed #sidebar-toggle-btn {
+    padding: 8px 0;
+    justify-content: center;
+    border-bottom-color: transparent;
+  }
+  .sidebar.collapsed #sidebar-toggle-btn .stb-label { display: none; }
+  .sidebar.collapsed #sidebar-toggle-btn .stb-arrow { transform: rotate(180deg); }
+  .sidebar.collapsed nav { display: none; }
+  .sidebar.collapsed .sidebar-title-text { display: none; }
+
+  /* sidebar needs relative positioning for desktop collapse */
+  .sidebar { position: sticky; }
+
   /* ── HAMBURGER BUTTON (mobile only) ── */
   #menu-btn {
     display: none;
@@ -562,6 +645,130 @@
   }
   .sidebar-overlay.open { display: block; }
 
+  /* ── FOOTER BRAND ── */
+  .footer-brand {
+    display: inline-flex;
+    align-items: baseline;
+    text-decoration: none;
+    gap: 0;
+    margin-right: 4px;
+  }
+  .footer-brand .brand-shiny {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--heading);
+    transition: color 0.2s;
+  }
+  .footer-brand .brand-health {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-weight: normal;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--text-dim);
+    transition: color 0.2s;
+  }
+  .footer-brand .brand-tools {
+    font-family: "Times New Roman", Times, serif;
+    font-weight: bold;
+    font-style: normal;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-left: 4px;
+    align-self: center;
+    padding-bottom: 1px;
+    border-bottom: 1px solid var(--hr);
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .footer-brand:hover .brand-shiny,
+  .footer-brand:hover .brand-health { color: var(--link-hover); }
+  .footer-brand:hover .brand-tools   { color: var(--link-hover); border-bottom-color: var(--link-hover); }
+
+  /* ── PRIVACY LINK in footer ── */
+  .footer-privacy {
+    font-size: 13px;
+    color: var(--text-dim);
+    display: inline;
+  }
+  .footer-privacy a {
+    color: var(--text-dim);
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  .footer-privacy a:hover { color: var(--link-hover); }
+
+  /* ── PRIVACY DIALOG ── */
+  #privacy-dialog {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 500;
+    align-items: center;
+    justify-content: center;
+  }
+  #privacy-dialog.open { display: flex; }
+
+  .privacy-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.38);
+  }
+
+  .privacy-box {
+    position: relative;
+    background-color: var(--bg);
+    border: 1px solid var(--sidebar-bd);
+    max-width: 540px;
+    width: calc(100% - 40px);
+    padding: 28px 30px 24px 30px;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 15.5px;
+    line-height: 1.82;
+    color: var(--text-muted);
+    box-shadow: 0 6px 28px rgba(0,0,0,0.18);
+    z-index: 1;
+    transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+  }
+
+  .privacy-box h4 {
+    margin: 0 0 12px 0;
+    font-size: 17px;
+    font-weight: bold;
+    color: var(--heading);
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-style: italic;
+    letter-spacing: 0.01em;
+  }
+
+  .privacy-box ul {
+    margin: 8px 0 0 0;
+    padding-left: 22px;
+  }
+  .privacy-box ul li { margin-bottom: 7px; }
+
+  .privacy-close {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    color: var(--text-dim);
+    font-family: Arial, sans-serif;
+    padding: 2px 5px;
+    transition: color 0.2s;
+  }
+  .privacy-close:hover { color: var(--link-hover); }
+
+  @media (max-width: 480px) {
+    .privacy-box { padding: 22px 18px 18px 18px; font-size: 14px; }
+  }
+
   /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
     body { font-size: 15px; }
@@ -575,9 +782,9 @@
     /* Sidebar slides in from left as drawer on mobile */
     .sidebar {
       position: fixed;
-      top: 50px;
+      top: 0;
       left: 0;
-      height: calc(100vh - 50px);
+      height: 100vh;
       width: 240px;
       min-width: 0;
       z-index: 150;
@@ -609,7 +816,7 @@
 
   @media (max-width: 480px) {
     body { font-size: 14px; }
-    .site-header .brand { font-size: 16px; }
+    .site-header .brand .brand-shiny { font-size: 17px; } .site-header .brand .brand-health { font-size: 16px; } .site-header .brand .brand-tools { font-size: 10px; }
     .page-wrap { padding: 12px 12px 36px 12px; }
     h2 { font-size: 16px; }
     h3 { font-size: 14px; }
@@ -621,7 +828,7 @@
 <!-- SITE HEADER -->
 <header class="site-header">
   <button id="menu-btn" onclick="toggleMenu()" aria-label="Toggle navigation">&#9776;</button>
-  <a class="brand" href="#">ShinyHealthTools</a>
+  <a class="brand" href="https://shinyhealthtools.github.io/apps/"><span class="brand-shiny">Shiny</span><span class="brand-health">Health</span><span class="brand-tools">Tools</span></a>
   <div class="header-right">
     <div id="search-wrap">
       <button id="search-btn" onclick="toggleSearch()" aria-label="Search">&#128269;</button>
@@ -641,13 +848,16 @@
 <div class="layout-wrap">
 
   <!-- LEFT SIDEBAR -->
-  <aside class="sidebar">
-    <div class="sidebar-title">Sections</div>
+  <aside class="sidebar" id="main-sidebar">
+    <button id="sidebar-toggle-btn" onclick="toggleSidebar()" aria-label="Toggle sidebar">
+      <span class="stb-label">Sections</span>
+      <span class="stb-arrow">&#9664;</span>
+    </button>
     <nav>
       <ul>
         <li><a href="#about-resource">About This Website</a></li>
         <li><a href="#categories">Browse by Research Purpose</a></li>
-        <li><a href="#sample-size">Sample Size Calculation &amp; Power Analysis</a></li>
+        <li><a href="#sample-size">Sample Size Calculation, Power Analysis, &amp; Statistical Analysis</a></li>
         <li><a href="#survival">Survival Analysis</a></li>
         <li><a href="#mediation">Mediation &amp; Moderation Analysis</a></li>
         <li><a href="#regression">Regression &amp; Statistical Modeling</a></li>
@@ -656,7 +866,6 @@
         <li><a href="#epidemiology">Epidemiology &amp; Public Health</a></li>
         <li><a href="#data-tools">Data Preparation, Conversion &amp; Sampling</a></li>
         <li><a href="#testimonials">What Researchers Say</a></li>
-        <li><a href="#why-use">Why Use ShinyHealthTools?</a></li>
         <li><a href="#citation">How to Cite ShinyHealthTools</a></li>
         <li><a href="#faq">Frequently Asked Questions</a></li>
         <li><a href="#about">About the Developer</a></li>
@@ -676,7 +885,7 @@
     ShinyHealthTools was built on a single conviction: that advanced statistical analysis should never be locked behind commercial software or require programming expertise. The name reflects its origins, as many of the tools were initially developed as Shiny applications to make complex analyses interactive, intuitive, and user friendly.
   </p>
   <p>
-    As the platform has evolved, practical limitations, particularly those associated with free hosting on shiny.io, have driven a transition toward more scalable solutions. Many tools have been re-engineered into lightweight, browser based HTML applications, with continuous efforts underway to translate the majority of the apps into this format. This ensures improved performance, broader accessibility, and long term sustainability. The name ShinyHealthTools is retained to represent not only its origins, but also its ongoing commitment to clarity, interactivity, and simplicity in data analysis.
+    As the platform has evolved, practical limitations have driven a transition toward more scalable solutions. The Shiny-based tools are hosted on shinyapps.io under a free plan, which means they may occasionally be slow to load, go to sleep after a period of inactivity, or become temporarily unavailable when monthly usage hours are exhausted. To address these constraints, many tools have been re-engineered into lightweight, browser-based HTML applications that run entirely on your device with no server dependency. Continuous efforts are underway to migrate the remaining apps into this format, ensuring improved performance, broader accessibility, and long-term sustainability. The name ShinyHealthTools is retained to represent not only its origins, but also its ongoing commitment to clarity, interactivity, and simplicity in data analysis.
   </p>
   <p>
     These tools are offered freely to academics, clinicians, government researchers, and students worldwide, with no fees, no subscriptions, and no installation required. All applications run directly in any modern web browser. Source code is openly available on GitHub under the MIT License, supporting transparency, collaboration, and reproducibility.
@@ -694,7 +903,7 @@
     <h2>Browse by Research Purpose</h2>
 
     <span class="section-anchor" id="sample-size"></span>
-    <h3>Sample Size Calculation &amp; Power Analysis</h3>
+    <h3>Sample Size Calculation, Power Analysis, &amp; Statistical Analysis</h3>
     <ul>
       <li>
         <b><a href="https://mudassiribrahim2025.shinyapps.io/CalcuStats/" target="_blank">CalcuStats</a></b> (Shiny) /
@@ -841,9 +1050,11 @@
         &nbsp;<a href="https://github.com/shinyhealthtools/systematicsampling" target="_blank">[Source — HTML]</a>
       </li>
       <li>
-        <b><a href="https://mudassiribrahim30.shinyapps.io/Tagselect/" target="_blank">TagSelect</a></b> (Shiny) —
+        <b><a href="https://mudassiribrahim30.shinyapps.io/Tagselect/" target="_blank">TagSelect</a></b> (Shiny) /
+        <b><a href="https://shinyhealthtools.github.io/tagselect/" target="_blank">TagSelect</a></b> (HTML) —
         Participant randomisation and selection tool for research studies and clinical trials with traceable, auditable selection records.
-        &nbsp;<a href="https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/TagSelect.R" target="_blank">[Source]</a>
+        &nbsp;<a href="https://github.com/mudassiribrahim30/R-Shiny-Apps/blob/main/TagSelect.R" target="_blank">[Source — Shiny]</a>
+        &nbsp;<a href="https://github.com/shinyhealthtools/tagselect" target="_blank">[Source — HTML]</a>
       </li>
       <li>
         <b><a href="https://newappstesting.shinyapps.io/APATableGenerator/" target="_blank">APA Table Generator</a></b> (Shiny) —
@@ -890,46 +1101,13 @@
 
     <hr>
 
-    <!-- WHY USE -->
-    <span class="section-anchor" id="why-use"></span>
-    <h3>Why Use ShinyHealthTools?</h3>
-    <ul>
-      <li>
-        <b>Validated for research.</b> All tools are benchmarked against established software and methods.
-        Results are suitable for grant applications, regulatory submissions, and peer-reviewed publications.
-      </li>
-      <li>
-        <b>Fully open source.</b> All source code is publicly available on
-        <a href="https://github.com/mudassiribrahim30/R-Shiny-Apps" target="_blank">GitHub</a>
-        under the MIT License. Built with R 4.3+, tidyverse, survival, psych, and other standard CRAN packages.
-      </li>
-      <li>
-        <b>No installation required.</b> Shiny applications run via shinyapps.io. HTML tools run directly in your browser.
-        Works on any operating system with no administrator rights or R setup required.
-      </li>
-      <li>
-        <b>Permanently free.</b> No license fees, no subscriptions, no institutional access walls.
-        All 27 tools are and will remain free for academic, government, clinical, and non-profit use.
-      </li>
-      <li>
-        <b>No data leaves your machine.</b> HTML-native tools execute entirely client-side. Shiny tools
-        process data in ephemeral sessions. No personal or clinical data is retained on any server.
-      </li>
-      <li>
-        <b>Designed for low-resource settings.</b> Built with health researchers in sub-Saharan Africa
-        and other resource-limited environments in mind. Works on modest hardware and slow internet connections.
-      </li>
-    </ul>
-
-    <hr>
-
     <!-- CITATION -->
     <span class="section-anchor" id="citation"></span>
     <h3>How to Cite ShinyHealthTools</h3>
     <p>If ShinyHealthTools or any of its applications have been useful in your research, please cite as:</p>
 
     <blockquote class="cite-bq">
-      Ibrahim, M. M. (2026). <i>ShinyHealthTools: Free browser-based statistical applications for health research.</i>
+      Ibrahim, M. M. (2026). <i>ShinyHealthTools – Your Free Resource Hub for Statistical Applications.</i>
       Retrieved from <a href="https://shinyhealthtools.github.io/apps/" target="_blank">https://shinyhealthtools.github.io/apps/</a>
     </blockquote>
 
@@ -941,13 +1119,13 @@
 
     <p>Source code may be cited as:</p>
     <blockquote class="cite-bq">
-      Ibrahim, M. M. (2025). <i>R-Shiny-Apps [Source code].</i>
-      GitHub. <a href="https://github.com/mudassiribrahim30/R-Shiny-Apps" target="_blank">https://github.com/mudassiribrahim30/R-Shiny-Apps</a>
+      Ibrahim, M. M. (2026). <i>MedModr: Mediation and Moderation analysis tool [Source code].</i>
+      GitHub. <a href="https://github.com/shinyhealthtools/medmodr" target="_blank">https://github.com/shinyhealthtools/medmodr</a>
     </blockquote>
 
     <hr>
-    
-       <!-- ABOUT -->
+
+    <!-- ABOUT -->
     <span class="section-anchor" id="about"></span>
     <h3>About the Developer</h3>
     <p>
@@ -1045,7 +1223,6 @@
 
     <hr>
 
-
     <!-- CONTACT -->
     <span class="section-anchor" id="contact"></span>
     <h3>Contact &amp; Support</h3>
@@ -1075,12 +1252,19 @@
 <footer class="site-footer">
   <div class="footer-inner">
     <div class="footer-left">
-      <span>ShinyHealthTools &copy; 2025&ndash;<span id="footer-year"></span> &nbsp;&mdash;&nbsp; 100% Free | Open Source (MIT License)</span>
+      <a class="footer-brand" href="https://shinyhealthtools.github.io/apps/" title="ShinyHealthTools home">
+        <span class="brand-shiny">Shiny</span><span class="brand-health">Health</span><span class="brand-tools">Tools</span>
+      </a>
+      <span>&copy; 2025&ndash;<span id="footer-year"></span> &nbsp;&mdash;&nbsp; 100% Free | Open Source (MIT License)</span>
       <a class="footer-github" href="https://github.com/shinyhealthtools/apps" target="_blank" title="Source code on GitHub" aria-label="Source code on GitHub">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
         </svg>
       </a>
+      &nbsp;&bull;&nbsp;
+      <div class="footer-privacy">
+        <a href="#" onclick="openPrivacy(); return false;" aria-haspopup="dialog">Privacy</a>
+      </div>
     </div>
     <div class="footer-right">
       This page was last edited on <span id="footer-lastmod"></span>.
@@ -1089,6 +1273,22 @@
 </footer>
 
 <script>
+  function toggleSidebar() {
+    var sidebar = document.getElementById('main-sidebar');
+    var collapsed = sidebar.classList.toggle('collapsed');
+    try { localStorage.setItem('sht-sidebar', collapsed ? 'collapsed' : 'open'); } catch(e) {}
+  }
+
+  // Restore sidebar state on load
+  (function() {
+    try {
+      if (localStorage.getItem('sht-sidebar') === 'collapsed') {
+        var s = document.getElementById('main-sidebar');
+        if (s) s.classList.add('collapsed');
+      }
+    } catch(e) {}
+  })();
+
   function toggleMenu() {
     var sidebar  = document.querySelector('.sidebar');
     var overlay  = document.getElementById('sidebar-overlay');
@@ -1163,7 +1363,7 @@
     var sections = [
       'about-resource','categories','sample-size','survival','mediation',
       'regression','factor','visualization','epidemiology','data-tools',
-      'testimonials','why-use','citation','faq','about','contact'
+      'testimonials','citation','faq','about','contact'
     ];
     var links = {};
     sections.forEach(function(id) {
@@ -1176,7 +1376,7 @@
       var current = sections[0];
       sections.forEach(function(id) {
         var el = document.getElementById(id);
-        if (el && el.getBoundingClientRect().top + window.scrollY - 80 <= scrollY) {
+        if (el && el.getBoundingClientRect().top + window.scrollY - 20 <= scrollY) {
           current = id;
         }
       });
@@ -1299,7 +1499,7 @@
     closeSearch();
     var el = document.getElementById(anchorId);
     if (el) {
-      var top = el.getBoundingClientRect().top + window.scrollY - 60;
+      var top = el.getBoundingClientRect().top + window.scrollY - 16;
       window.scrollTo({ top: top, behavior: 'smooth' });
     }
   }
@@ -1355,6 +1555,19 @@
     if (wrap && !wrap.contains(e.target)) closeSearch();
   });
 
+  // ── PRIVACY DIALOG ──
+  function openPrivacy() {
+    document.getElementById('privacy-dialog').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closePrivacy() {
+    document.getElementById('privacy-dialog').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closePrivacy();
+  });
+
   // Auto year
   document.getElementById('footer-year').textContent = new Date().getFullYear();
 
@@ -1377,5 +1590,23 @@
     }
   })();
 </script>
+<!-- PRIVACY DIALOG -->
+<div id="privacy-dialog" role="dialog" aria-modal="true" aria-labelledby="privacy-title">
+  <div class="privacy-backdrop" onclick="closePrivacy()"></div>
+  <div class="privacy-box">
+    <button class="privacy-close" onclick="closePrivacy()" aria-label="Close privacy dialog">&times;</button>
+    <h4 id="privacy-title">Privacy &amp; Data Policy</h4>
+    <ul>
+      <li><b>No tracking or analytics.</b> This site does not use Google Analytics, cookies, pixels, fingerprinting, or any tracking scripts of any kind.</li>
+      <li><b>No data collection.</b> No personal information is collected, stored, or shared — not your name, email, IP address, or usage patterns.</li>
+      <li><b>HTML tools are fully local.</b> All browser-based (HTML) tools run entirely on your device. Your data never leaves your browser.</li>
+      <li><b>Shiny tools use ephemeral sessions.</b> Shiny-based tools process data in temporary server sessions that are discarded immediately after your session ends. No data is retained.</li>
+      <li><b>No accounts or login.</b> This site has no user accounts, registration, or login of any kind.</li>
+      <li><b>No advertising.</b> This is a plain, static, ad-free resource. No third-party ad scripts are loaded.</li>
+      <li><b>Open source.</b> All source code is publicly available on GitHub under the MIT License for full transparency.</li>
+    </ul>
+  </div>
+</div>
+
 </body>
 </html>
