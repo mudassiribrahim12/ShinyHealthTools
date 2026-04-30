@@ -268,7 +268,15 @@
     font-style: italic;
   }
 
-
+  /* ── SEARCH RESULT HIGHLIGHT ── */
+  .search-highlight {
+    animation: sht-flash 2s ease forwards;
+  }
+  @keyframes sht-flash {
+    0%   { background-color: #fff176; outline: 2px solid #f9a825; }
+    60%  { background-color: #fff176; outline: 2px solid #f9a825; }
+    100% { background-color: transparent; outline: 2px solid transparent; }
+  }
 
   /* ── LAYOUT: SIDEBAR + CONTENT ── */
   .layout-wrap {
@@ -554,8 +562,6 @@
     vertical-align: middle;
   }
 
-
-
   /* ── SCROLLBAR for sidebar ── */
   .sidebar::-webkit-scrollbar { width: 5px; }
   .sidebar::-webkit-scrollbar-track { background: transparent; }
@@ -755,8 +761,6 @@
     transition: color 0.2s;
   }
   .privacy-close:hover { color: var(--link-hover); }
-
-
 
   /* ── RESPONSIVE ── */
 
@@ -1484,24 +1488,19 @@
     var content = document.querySelector('.page-wrap');
     if (!content) return;
 
-    // Walk every element inside page-wrap
     var allEls = content.querySelectorAll('h2, h3, p, li, blockquote');
     var currentSection = { id: 'about-resource', label: 'About This Resource' };
 
-    // Map anchor IDs to human labels
     var sectionMap = {};
     content.querySelectorAll('.section-anchor[id]').forEach(function(anchor) {
       var id = anchor.id;
-      // find the next sibling heading
       var next = anchor.nextElementSibling;
       while (next && !next.matches('h2,h3')) next = next.nextElementSibling;
       sectionMap[id] = next ? next.textContent.trim() : id;
     });
 
-    // Walk elements, track which section we're in
     var lastAnchorId = 'about-resource';
     allEls.forEach(function(el) {
-      // Check if preceding siblings contain a section-anchor
       var prev = el.previousElementSibling;
       while (prev) {
         if (prev.classList && prev.classList.contains('section-anchor') && prev.id) {
@@ -1529,7 +1528,6 @@
 
   function highlight(text, query) {
     var re = new RegExp('(' + escapeRegex(query) + ')', 'gi');
-    // Show a snippet around first match
     var idx = text.search(re);
     var snippet = text;
     if (text.length > 120) {
@@ -1553,21 +1551,19 @@
 
     searchIndex.forEach(function(entry) {
       if (!re.test(entry.text)) return;
-      // Deduplicate by anchorId + first 60 chars of text
       var key = entry.anchorId + '|' + entry.text.slice(0, 60);
       if (seen[key]) return;
       seen[key] = true;
       hits.push(entry);
     });
 
-    // Sort: headings first, then by section order
     hits.sort(function(a, b) {
       if (a.isHeading && !b.isHeading) return -1;
       if (!a.isHeading && b.isHeading) return 1;
       return 0;
     });
 
-    hits = hits.slice(0, 20); // cap at 20
+    hits = hits.slice(0, 20);
 
     if (hits.length === 0) {
       box.innerHTML = '<div class="sr-none">No results for "' + q + '"</div>';
@@ -1588,6 +1584,25 @@
     if (el) {
       var top = el.getBoundingClientRect().top + window.scrollY - 16;
       window.scrollTo({ top: top, behavior: 'smooth' });
+
+      // Highlight the nearest visible content element after the anchor
+      var target = el.nextElementSibling;
+      while (target && !target.matches('h2, h3, p, ul, .notice-box, blockquote, table, .faq-list')) {
+        target = target.nextElementSibling;
+      }
+      if (target) {
+        // Remove any existing highlight first
+        document.querySelectorAll('.search-highlight').forEach(function(x) {
+          x.classList.remove('search-highlight');
+        });
+        // Small delay so scroll settles before flash triggers
+        setTimeout(function() {
+          target.classList.add('search-highlight');
+          target.addEventListener('animationend', function() {
+            target.classList.remove('search-highlight');
+          }, { once: true });
+        }, 350);
+      }
     }
   }
 
@@ -1658,9 +1673,9 @@
   // Auto year
   document.getElementById('footer-year').textContent = new Date().getFullYear();
 
-  // Last modified — reads the document's last-modified date from the browser
+  // Last modified
   (function() {
-    var lm = document.lastModified; // e.g. "04/26/2026 14:35:00"
+    var lm = document.lastModified;
     try {
       var d = new Date(lm);
       var months = ['January','February','March','April','May','June',
@@ -1677,6 +1692,7 @@
     }
   })();
 </script>
+
 <!-- PRIVACY DIALOG -->
 <div id="privacy-dialog" role="dialog" aria-modal="true" aria-labelledby="privacy-title">
   <div class="privacy-backdrop" onclick="closePrivacy()"></div>
